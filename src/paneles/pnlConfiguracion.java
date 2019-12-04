@@ -5,19 +5,50 @@
  */
 package paneles;
 
+import BD.configurarTicket;
+import Controller.CCTicket;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Najera10
  */
 public class pnlConfiguracion extends javax.swing.JPanel {
 
+    configurarTicket coft = new configurarTicket();
+    
     /**
      * Creates new form pnlConfiguracion
      */
     public pnlConfiguracion() {
         initComponents();
+        CargarModeloTabla();
     }
-
+    
+    public void CargarModeloTabla(){
+      
+       
+       ArrayList<CCTicket>ListarDatos = coft.ObtenerDatos();
+      int numerosUsusarios = ListarDatos.size();
+      
+        for (int i = 0; i < numerosUsusarios; i++) {
+            CCTicket usuarios = ListarDatos.get(i);
+            int idemp = usuarios.getIdempre();
+            String nombre = usuarios.getNombre();
+            String email = usuarios.getCorreo();
+            String direccion = usuarios.getDireccion();
+            String telefono = usuarios.getTelefono();
+            lblid.setText(""+idemp);
+            txtnombre.setText(nombre);
+            txtdireccion.setText(direccion);
+            txtrelefono.setText(telefono);
+            txtcorreo.setText(email);
+    
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,21 +58,108 @@ public class pnlConfiguracion extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtnombre = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtdireccion = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtrelefono = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtcorreo = new javax.swing.JTextField();
+        lblid = new javax.swing.JLabel();
+        btnactualizar = new rojerusan.RSButtonMetro();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 486, Short.MAX_VALUE)
-        );
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Configuracion del ticket");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel2.setText("Nombre");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
+
+        txtnombre.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        txtnombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnombreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 190, -1));
+
+        txtdireccion.setColumns(20);
+        txtdireccion.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        txtdireccion.setRows(5);
+        jScrollPane1.setViewportView(txtdireccion);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 190, 120));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel3.setText("Direccion");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel4.setText("Telefono");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, 20));
+
+        txtrelefono.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jPanel1.add(txtrelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 190, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel5.setText("Correo");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 40, -1));
+
+        txtcorreo.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jPanel1.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 190, -1));
+
+        lblid.setText("jLabel6");
+        jPanel1.add(lblid, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 290, 310));
+
+        btnactualizar.setText("Actualizar Ticket");
+        btnactualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnactualizarActionPerformed(evt);
+            }
+        });
+        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 290, 40));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnombreActionPerformed
+
+    private void btnactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactualizarActionPerformed
+       
+        try {
+            coft.actualizarTicket(lblid.getText(), txtnombre.getText(), txtdireccion.getText(), txtrelefono.getText(), txtcorreo.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlConfiguracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnactualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rojerusan.RSButtonMetro btnactualizar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblid;
+    private javax.swing.JTextField txtcorreo;
+    private javax.swing.JTextArea txtdireccion;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtrelefono;
     // End of variables declaration//GEN-END:variables
 }
