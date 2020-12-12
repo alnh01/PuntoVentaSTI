@@ -6,12 +6,14 @@
 package principal;
 
 import Alerts.Information;
+import BD.login;
 import ds.desktop.notify.DesktopNotify;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.net.ServerSocket;
 
 import javax.swing.JOptionPane;
 
@@ -21,7 +23,9 @@ import javax.swing.JOptionPane;
  */
 public class Session extends javax.swing.JFrame {
 
-int x,y;
+    int x,y;
+    
+    
     public Session() {
         initComponents();
         this.setBackground(new Color(0,0,0,0));
@@ -64,7 +68,6 @@ int x,y;
         jLabel1.setText("LOGIN ");
         jPanelRound1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 90, 60));
 
-        fSButtonMD1.setBackground(new java.awt.Color(0, 205, 248));
         fSButtonMD1.setText("Finish");
         fSButtonMD1.setColorHover(new java.awt.Color(0, 205, 248));
         fSButtonMD1.setColorNormal(new java.awt.Color(211, 134, 233));
@@ -156,7 +159,7 @@ int x,y;
                 .addGroup(fSGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fSGradientPanel1Layout.createSequentialGroup()
                         .addComponent(jEImagePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110))
+                        .addGap(109, 109, 109))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fSGradientPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(109, 109, 109))
@@ -201,29 +204,30 @@ int x,y;
         String Pass = txtcontrasena.getText();
         
             if(Usuario.equals("") || Pass.equals("") ){
-                //JOptionPane.showMessageDialog(null, "Verificar Datos ");
+//////                //JOptionPane.showMessageDialog(null, "Verificar Datos ");
                   Information info  = new Information(new Frame(), true);
                 info.jLabel1.setText("iformacion !!!");
                 info.textos.setText("Verifique los datos");
                 info.setVisible(true);
-            }else{
-                BD.login lo = new BD.login();
-                lo.validar_ingreso(Usuario, Pass);
+           }else{
+                login  lo = new login();
+                 lo.validar_ingreso(Usuario, Pass);
+//        
                 this.setVisible(false);
-               
-                 
-            }        // TODO add your handling code here:
+//////               
+//////                
+           }        // TODO add your handling code here:
     }//GEN-LAST:event_fSButtonMD1ActionPerformed
 
     private void txtcontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontrasenaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtcontrasenaActionPerformed
 
     private void txtcontrasenaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasenaKeyReleased
      if(evt.getKeyCode() == KeyEvent.VK_ENTER){
         String Usuario = txtusuario.getText();
         String Pass = txtcontrasena.getText();
-        
+//        
             if(Usuario.equals("") || Pass.equals("") ){
                 Information info  = new Information(new Frame(), true);
                 info.jLabel1.setText("iformacion !!!");
@@ -250,6 +254,7 @@ int x,y;
  DesktopNotify.showDesktopMessage("Gracias","Hasta Luego", DesktopNotify.INFORMATION, 3000);
  
  this.dispose();
+     System.exit(0);
  
  }else{
  }

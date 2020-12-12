@@ -9,7 +9,6 @@ import BD.Categorias;
 import javax.swing.JOptionPane;
 import Conexion.Conexion;
 import Controller.CCategorias;
-import com.sun.org.apache.xerces.internal.impl.dtd.models.CMBinOp;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -156,7 +155,7 @@ public class pnlReportes extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(null);
 
-        jLabel7.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("REPORTES");

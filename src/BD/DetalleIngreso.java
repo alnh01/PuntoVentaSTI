@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,8 +20,8 @@ import java.sql.SQLException;
  */
 public class DetalleIngreso {
      private Connection userConn;
-    private final String SQL_INSERT = "INSERT INTO detalle_ingreso (idingreso, idarticulo, cantidad,precio_compra) values(?, ?, ? , ? )";
-
+    private final String SQL_INSERT = "INSERT INTO detalle_ingreso values(null,?, ?, ? , ? )";
+    private final String SQL_SELECT = "SELECT * FROM  detalle_ingreso";
     public DetalleIngreso(Connection conn) {
         this.userConn = conn;
     }
@@ -61,4 +62,40 @@ public class DetalleIngreso {
             }
         }
     }
+    
+    
+    public ArrayList<CDetalle_ingresos> ObtenerUsuarios() {
+        ArrayList<CDetalle_ingresos> ListarDetalleIngresos= new ArrayList<CDetalle_ingresos>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int iddetalle = rs.getInt("iddetalle_ingreso");
+                Long idingreso = rs.getLong("idingreso");
+                int idarticulo = rs.getInt("idarticulo");
+                Double cantidad= rs.getDouble("cantidad");
+                Double costo = rs.getDouble("precio_compra");
+               
+             
+                
+                CDetalle_ingresos emp = new CDetalle_ingresos(iddetalle,idingreso,idarticulo,cantidad,costo);
+                ListarDetalleIngresos.add(emp);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+        }
+        return ListarDetalleIngresos;
+    }
+    
+    
+    
 }

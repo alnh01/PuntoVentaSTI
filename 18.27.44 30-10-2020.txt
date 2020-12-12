@@ -1,0 +1,128 @@
+INSERT INTO clientes values(15,'Publico en General',NULL,NULL,'0','0','0');
+INSERT INTO clientes values(16,'aasdasd',NULL,NULL,'asdad','asdad','asda');
+
+INSERT INTO usuario values(5,'alberto122',NULL,NULL,'calle guaymas sin numero','722895458','albertonajeta66@gmail.com'',administrador,admin,'admin','(BLOB) 15.45 KB','1);
+INSERT INTO usuario values(6,'uriel',NULL,NULL,'jhgdjhgdssd','4654645','uriel@gmail.com'',pendejo,uriel,'12345','','1);
+INSERT INTO usuario values(7,'otro',NULL,NULL,'adminsdasd','otro','adad@gmail'',admin,otro,'12345','','1);
+INSERT INTO usuario values(8,'nuevo',NULL,NULL,'adasdasd','7877',''',admin,nuevo,'12345','','1);
+INSERT INTO usuario values(9,'betp',NULL,NULL,'admin','722895','algebt@gmail.com'',admin,beto,'12345','','1);
+
+INSERT INTO proveedores values(10,'Sabritas',NULL,NULL,'--','75445','--');
+
+INSERT INTO articulo values(11,1,1,'5665656','sabrita',10.0,12.0,'9.0','',null,'1');
+INSERT INTO articulo values(12,1,1,'111141','otra',10.0,7.0,'7.0','',null,'1');
+INSERT INTO articulo values(13,1,1,'11441141','nueo',5.0,13.0,'9.0','',null,'1');
+INSERT INTO articulo values(14,1,1,'5665656','sabrita',9.0,12.0,'9.0','',null,'1');
+INSERT INTO articulo values(15,1,1,'111141','otra',10.0,7.0,'7.0','',null,'1');
+INSERT INTO articulo values(16,1,1,'11441141','nueo',5.0,13.0,'9.0','',null,'1');
+
+INSERT INTO categoria values(1,'Producto General',Productos Generales,1);
+INSERT INTO categoria values(11,'djjsd',dkskjd,1);
+
+
+INSERT INTO detalle_venta values(1092,70,14,1.0,12.0);
+
+
+INSERT INTO permiso values(2,Almacen);
+INSERT INTO permiso values(3,Compras);
+INSERT INTO permiso values(4,Ventas);
+INSERT INTO permiso values(5,Acceso);
+INSERT INTO permiso values(6,Reportes);
+
+INSERT INTO unidad_medida values(1,pz);
+
+INSERT INTO venta values(70,15,'2020-10-30 16:36:21.02',12.0,'ACTIVO',5);
+
+INSERT INTO usuario_permiso values(1056,9,'1);
+INSERT INTO usuario_permiso values(1057,9,'2);
+INSERT INTO usuario_permiso values(1058,9,'4);
+INSERT INTO usuario_permiso values(48,7,'1);
+INSERT INTO usuario_permiso values(49,7,'2);
+INSERT INTO usuario_permiso values(50,7,'4);
+INSERT INTO usuario_permiso values(51,7,'5);
+INSERT INTO usuario_permiso values(52,8,'1);
+INSERT INTO usuario_permiso values(1061,6,'1);
+INSERT INTO usuario_permiso values(1067,9,'1);
+INSERT INTO usuario_permiso values(1068,9,'6);
+INSERT INTO usuario_permiso values(1069,10,'1);
+INSERT INTO usuario_permiso values(57,5,'1);
+INSERT INTO usuario_permiso values(58,5,'2);
+INSERT INTO usuario_permiso values(59,5,'3);
+INSERT INTO usuario_permiso values(60,5,'4);
+INSERT INTO usuario_permiso values(61,5,'5);
+INSERT INTO usuario_permiso values(62,5,'6);
+INSERT INTO usuario_permiso values(1070,10,'3);
+INSERT INTO usuario_permiso values(1071,10,'4);
+INSERT INTO usuario_permiso values(1072,11,'4);
+INSERT INTO usuario_permiso values(1073,11,'5);
+INSERT INTO usuario_permiso values(1074,11,'6);
+INSERT INTO usuario_permiso values(1062,6,'2);
+INSERT INTO usuario_permiso values(1063,7,'1);
+INSERT INTO usuario_permiso values(1064,7,'5);
+INSERT INTO usuario_permiso values(1065,8,'4);
+INSERT INTO usuario_permiso values(1066,8,'5);
+INSERT INTO usuario_permiso values(1056,9,'1);
+INSERT INTO usuario_permiso values(1057,9,'2);
+INSERT INTO usuario_permiso values(1058,9,'4);
+INSERT INTO usuario_permiso values(48,7,'1);
+INSERT INTO usuario_permiso values(49,7,'2);
+INSERT INTO usuario_permiso values(50,7,'4);
+INSERT INTO usuario_permiso values(51,7,'5);
+INSERT INTO usuario_permiso values(52,8,'1);
+INSERT INTO usuario_permiso values(1061,6,'1);
+INSERT INTO usuario_permiso values(1067,9,'1);
+INSERT INTO usuario_permiso values(1068,9,'6);
+INSERT INTO usuario_permiso values(1069,10,'1);
+INSERT INTO usuario_permiso values(57,5,'1);
+INSERT INTO usuario_permiso values(58,5,'2);
+INSERT INTO usuario_permiso values(59,5,'3);
+INSERT INTO usuario_permiso values(60,5,'4);
+INSERT INTO usuario_permiso values(61,5,'5);
+INSERT INTO usuario_permiso values(62,5,'6);
+INSERT INTO usuario_permiso values(1070,10,'3);
+INSERT INTO usuario_permiso values(1071,10,'4);
+INSERT INTO usuario_permiso values(1072,11,'4);
+INSERT INTO usuario_permiso values(1073,11,'5);
+INSERT INTO usuario_permiso values(1074,11,'6);
+INSERT INTO usuario_permiso values(1062,6,'2);
+INSERT INTO usuario_permiso values(1063,7,'1);
+INSERT INTO usuario_permiso values(1064,7,'5);
+INSERT INTO usuario_permiso values(1065,8,'4);
+INSERT INTO usuario_permiso values(1066,8,'5);
+INSERT INTO usuario_permiso values(1057,9,'2);
+INSERT INTO usuario_permiso values(1058,9,'4);
+INSERT INTO usuario_permiso values(48,7,'1);
+INSERT INTO usuario_permiso values(49,7,'2);
+INSERT INTO usuario_permiso values(50,7,'4);
+INSERT INTO usuario_permiso values(51,7,'5);
+INSERT INTO usuario_permiso values(52,8,'1);
+INSERT INTO usuario_permiso values(1061,6,'1);
+INSERT INTO usuario_permiso values(1067,9,'1);
+INSERT INTO usuario_permiso values(1068,9,'6);
+INSERT INTO usuario_permiso values(1069,10,'1);
+INSERT INTO usuario_permiso values(57,5,'1);
+INSERT INTO usuario_permiso values(58,5,'2);
+INSERT INTO usuario_permiso values(59,5,'3);
+INSERT INTO usuario_permiso values(60,5,'4);
+INSERT INTO usuario_permiso values(61,5,'5);
+INSERT INTO usuario_permiso values(62,5,'6);
+INSERT INTO usuario_permiso values(1070,10,'3);
+INSERT INTO usuario_permiso values(1071,10,'4);
+INSERT INTO usuario_permiso values(1072,11,'4);
+INSERT INTO usuario_permiso values(1073,11,'5);
+INSERT INTO usuario_permiso values(1074,11,'6);
+INSERT INTO usuario_permiso values(1062,6,'2);
+INSERT INTO usuario_permiso values(1063,7,'1);
+INSERT INTO usuario_permiso values(1064,7,'5);
+INSERT INTO usuario_permiso values(1065,8,'4);
+INSERT INTO usuario_permiso values(1066,8,'5);
+
+
+INSERT INTO cortedia values(1,'2020-08-13 23:31:35.578',5,50.0,'ACTIVO');
+INSERT INTO cortedia values(2,'2020-08-14 12:36:32.209',5,0.0,'ACTIVO');
+INSERT INTO cortedia values(34,'2020-08-14 12:37:20.218',5,25.0,'ACTIVO');
+INSERT INTO cortedia values(66,'2020-08-14 12:38:10.342',5,25.0,'ACTIVO');
+INSERT INTO cortedia values(98,'2020-08-14 12:38:41.169',5,25.0,'ACTIVO');
+INSERT INTO cortedia values(99,'2020-08-13 23:31:35.578',5,50.0,'ACTIVO');
+INSERT INTO cortedia values(131,'2020-08-21 16:52:27.244',5,25.0,'ACTIVO');
+INSERT INTO cortedia values(164,'2020-10-30 18:27:44.376',5,12.0,'ACTIVO');

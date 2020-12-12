@@ -142,7 +142,7 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/maintenance_1.png"))); // NOI18N
@@ -202,6 +202,11 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
         pnlcategorias.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, 30));
 
         txtnombre.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtnombreKeyReleased(evt);
+            }
+        });
         pnlcategorias.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 260, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -366,6 +371,10 @@ tablaCategorias.clearSelection ();        // TODO add your handling code here:
             Logger.getLogger(pnlUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:        // TODO add your handling code here:
     }//GEN-LAST:event_fSButtonMD3ActionPerformed
+
+    private void txtnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyReleased
+    txtnombre.setText(txtnombre.getText().toUpperCase());          // TODO add your handling code here:
+    }//GEN-LAST:event_txtnombreKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

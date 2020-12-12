@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,9 +21,10 @@ import java.sql.SQLException;
 public class DetalleVenta {
   
     private Connection userConn;
-    private final String SQL_INSERT = "INSERT INTO detalle_venta (idventa, idarticulo, cantidad,costo) values(?, ?, ?, ?)";
-
-    public DetalleVenta(Connection conn) {
+    private final String SQL_INSERT = "INSERT INTO detalle_venta values(NULL,?, ?, ?, ?)";
+    private final String SQL_SELECT = "SELECT * FROM  detalle_venta";
+    
+     public DetalleVenta(Connection conn) {
         this.userConn = conn;
     }
 
@@ -58,5 +60,37 @@ public class DetalleVenta {
                 ex.printStackTrace();
             }
         }
+    }
+    
+    public ArrayList<CDetalle_ventas> ObtenerDetalleVentas() {
+        ArrayList<CDetalle_ventas> ListarDetalleVentas= new ArrayList<CDetalle_ventas>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int iddetalle = rs.getInt("iddetalle_venta");
+                Long idventa = rs.getLong("idventa");
+                String idarticulo = rs.getString("idarticulo");
+                Double cantidad= rs.getDouble("cantidad");
+                Double costo = rs.getDouble("costo");
+               
+             
+                
+                CDetalle_ventas emp = new CDetalle_ventas(iddetalle,idventa,idarticulo,cantidad,costo);
+                ListarDetalleVentas.add(emp);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+        }
+        return ListarDetalleVentas;
     }
 }

@@ -23,10 +23,11 @@ public class CProductos {
     private double precioVentaProducto;
     private int idCategoria;
     private String codigo;
-  private String categorra;
+    private String categorra;
     private String unidad;
+    private String  condicion;
 
-    public CProductos(int idProducto, String nomProducto, String descProducto, double stockProducto, File fotoProducto, int idunidadProducto, double precioCompraProducto, double precioVentaProducto, int idCategoria, String codigo, String categorra, String unidad) {
+    public CProductos(int idProducto, String nomProducto, String descProducto, double stockProducto, File fotoProducto, int idunidadProducto, double precioCompraProducto, double precioVentaProducto, int idCategoria, String codigo, String categorra, String unidad, String condicion) {
         this.idProducto = idProducto;
         this.nomProducto = nomProducto;
         this.descProducto = descProducto;
@@ -39,15 +40,18 @@ public class CProductos {
         this.codigo = codigo;
         this.categorra = categorra;
         this.unidad = unidad;
+        this.condicion = condicion;
     }
- 
 
 
+    public String getCondicion() {
+        return condicion;
+    }
 
-   
-    
-
-
+    public void setCondicion(String condicion) {
+        this.condicion = condicion;
+    }
+     
 
     public int getIdProducto() {
         return idProducto;

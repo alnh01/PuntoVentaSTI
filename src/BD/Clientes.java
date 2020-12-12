@@ -7,6 +7,10 @@ package BD;
 
 import Conexion.Conexion;
 import Controller.CClientes;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,10 +26,10 @@ public class Clientes {
         private Connection userConn;
     
     private final String SQL_SELECT = "SELECT * FROM clientes ";
-    private final String SQL_INSERT = "INSERT INTO clientes  values(?,?,?,?,?,?)";
+    private final String SQL_INSERT = "INSERT INTO clientes  values(NULL,?,?,?,?,?,?)";
     private final String SQL_DELETE = "DELETE clientes  WHERE idcliente=?";
     private final String SQL_UPDATE = "UPDATE clientes set nombre=?,direccion=?,telefono=?,email=? WHERE idcliente=?";
-    
+     String RESPALDO = "INSERT INTO clientes values  ";
    
     public Clientes(Connection conn) {
         this.userConn = conn;
@@ -152,6 +156,48 @@ public class Clientes {
         
         return rows; 
      }
-    
-
+     
+     
+      public void separar () throws IOException{
+          
+       ArrayList<CClientes> clientes  =  ObtenerUsuarios();
+      
+       
+       String ruta = "D:\\OneDrive\\Documentos\\Escritorio\\ejemplo.txt";
+           
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+           ;
+          for (int i = 0; i < clientes.size(); i++) {
+          int id =    clientes.get(i).getIdcliente();
+          String nombre = clientes.get(i).getNombre();
+          String tipo_documento = clientes.get(i).getTipo_documento();
+          String num_documento= clientes.get(i).getNum_documento();
+          tipo_documento = "NULL";
+          num_documento ="NULL";
+          
+          
+          String direccion = clientes.get(i).getDireccion();
+          String telefono = clientes.get(i).getTelefono();
+          String email = clientes.get(i).getEmail();
+          
+          String variable = RESPALDO +"("+ id+",'"+nombre+"',"+tipo_documento+","+num_documento+",'"+direccion+"','"+telefono+"','"+email+"')";
+                
+          System.out.println(variable);
+           bw.write(variable);
+           bw.newLine();
+          }
+          
+          
+          
+          
+          bw.close();
+      }
+ 
+     
 }

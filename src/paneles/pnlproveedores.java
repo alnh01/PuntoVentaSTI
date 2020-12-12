@@ -169,7 +169,7 @@ CProveedores  proveedorselecionado = null ;
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 1070, 230));
 
-        jLabel7.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/fundraiser.png"))); // NOI18N

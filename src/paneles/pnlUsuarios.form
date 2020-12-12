@@ -26,7 +26,7 @@
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Roboto" size="48" style="1"/>
+          <Font name="Arial" size="48" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="83" green="80" red="80" type="rgb"/>
@@ -230,6 +230,9 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtnombre">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtnombreKeyReleased"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="210" y="60" width="190" height="30"/>
@@ -349,6 +352,9 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtdireccion">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtdireccionKeyReleased"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="270" y="180" width="340" height="30"/>
@@ -542,7 +548,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Listado de Productos"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
+          <Color id="Default Cursor"/>
         </Property>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>

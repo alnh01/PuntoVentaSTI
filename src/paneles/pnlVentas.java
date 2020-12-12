@@ -9,10 +9,12 @@ import Alerts.Information;
 import Alerts.Success;
 import Alerts.Warning;
 import BD.Clientes;
+import BD.GenerarRespaldo;
 import Controller.CClientes;
 import java.awt.Frame;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -42,16 +44,16 @@ public class pnlVentas extends javax.swing.JPanel {
     };
     Clientes  bdclt = new Clientes();
     CClientes  clienteseleccionado = null ;
-     
+     GenerarRespaldo respl = new GenerarRespaldo();
            
 
        
-    public pnlVentas() {
+    public pnlVentas() throws IOException {
         initComponents();
         cargarColumnas();
         cargarModeloTabla();
 //        btneliminar.setVisible(false);
-        
+
         
     }
 
@@ -262,7 +264,7 @@ public class pnlVentas extends javax.swing.JPanel {
 
         add(jPanelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 450, 270));
 
-        jLabel7.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/customer.png"))); // NOI18N

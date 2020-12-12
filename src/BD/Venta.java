@@ -11,6 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Controller.CVenta;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import jxl.write.DateTime;
 
 /**
  *
@@ -19,10 +23,10 @@ import Controller.CVenta;
 public class Venta {
     
     private Connection userConn;
-    private final String SQL_INSERT = "INSERT INTO venta (idcliente,fecha_hora,total_venta,estado,idusuario) values(?,GETDATE(),?,'ACTIVO',?)";
-    private final String SQL_VALIDAREXISTENCIAS="SELECT *"; 
+    private final String SQL_INSERT = "INSERT INTO venta  values(NULL,?,CURRENT_TIMESTAMP,?,'ACTIVO',?)";
+    private final String SQL_SELECT="SELECT * FROM VENTA"; 
 
- public Venta(Connection conn) {
+    public Venta(Connection conn) {
         this.userConn = conn;
     }
 
@@ -30,6 +34,37 @@ public class Venta {
        
     }
  
+    
+    public ArrayList<CVenta> ObtenerVentas() {
+        ArrayList<CVenta> ListarVentas = new ArrayList<CVenta>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("idventa");
+                int idcliente = rs.getInt("idcliente");
+                Timestamp fecha = rs.getTimestamp("fecha_hora");
+                double total_venta =rs.getDouble("total_venta");
+                String estado = rs.getString("estado");
+                String idusuario= rs.getString("idusuario");
+      
+                CVenta ven = new CVenta(id,idcliente,fecha,total_venta,estado,idusuario);
+                ListarVentas.add(ven);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+        }
+        return ListarVentas;
+    }
  
     
     public Long insertarVenta(CVenta venta) throws SQLException {
@@ -54,11 +89,11 @@ public class Venta {
             
            stmt.close();
            
-            stmt = conn.prepareStatement("SELECT @@IDENTITY  AS ultimo");
+            stmt = conn.prepareStatement("select  top 1 *  from venta  order  by   idventa  desc");
             rs = stmt.executeQuery();
            
             while (rs.next()) {
-              lastVal = rs.getLong("ultimo");
+              lastVal = rs.getLong("IDVENTA");
            }
         } finally {
             Conexion.close(stmt);

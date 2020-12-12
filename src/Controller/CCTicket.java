@@ -16,13 +16,15 @@ public class CCTicket {
     private String direccion;
     private String telefono;
     private String  correo;
+    private String rfc;
 
-    public CCTicket(int idempre, String nombre, String direccion, String telefono, String correo) {
+     public CCTicket(int idempre, String nombre, String direccion, String telefono, String correo, String rfc) {
         this.idempre = idempre;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
+        this.rfc = rfc;
     }
 
     public int getIdempre() {
@@ -64,6 +66,14 @@ public class CCTicket {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
     }
     
     

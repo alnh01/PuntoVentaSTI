@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63e54805-a911-4504-976e-9ce0d43cc6e6">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -34,19 +34,14 @@ where a.idcategoria=$P{id_cate}]]>
 	</background>
 	<title>
 		<band height="70" splitType="Stretch">
-			<image>
-				<reportElement x="275" y="0" width="300" height="64"/>
-				<imageExpression class="java.lang.String"><![CDATA["leaf_banner_gray.png"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement style="Title" x="0" y="13" width="263" height="33"/>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="70f66d9d-d80f-489d-a8c2-20d48411efbf"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Leaf Gray Title]]></text>
+				<text><![CDATA[Productos por]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="117" y="46" width="157" height="22"/>
-				<textElement/>
-				<text><![CDATA[Leaf Gray SubTitle]]></text>
+				<reportElement style="SubTitle" x="117" y="46" width="157" height="22" uuid="4adcbe97-61af-4d1c-bba6-eda22f6ed701"/>
+				<text><![CDATA[Categorias]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -56,39 +51,33 @@ where a.idcategoria=$P{id_cate}]]>
 	<columnHeader>
 		<band height="36" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="a51082e9-a17d-43df-a441-212e8dc71b66"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement style="Column header" x="0" y="19" width="92" height="15"/>
-				<textElement/>
+				<reportElement style="Column header" x="0" y="19" width="92" height="15" uuid="461167aa-7730-49b3-90f2-8d99ddbf97f3"/>
 				<text><![CDATA[idarticulo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="92" y="19" width="92" height="15"/>
-				<textElement/>
+				<reportElement style="Column header" x="92" y="19" width="92" height="15" uuid="d3f994f1-9ace-4ffe-8432-143f47e0b522"/>
 				<text><![CDATA[codigo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="184" y="19" width="92" height="15"/>
-				<textElement/>
+				<reportElement style="Column header" x="184" y="19" width="92" height="15" uuid="267c708a-b3b7-426f-9db9-3b6dc61c37b4"/>
 				<text><![CDATA[nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="276" y="19" width="92" height="15"/>
-				<textElement/>
+				<reportElement style="Column header" x="276" y="19" width="92" height="15" uuid="04becc84-eb67-4373-b5e3-55e3095c175a"/>
 				<text><![CDATA[stock]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="368" y="19" width="92" height="15"/>
-				<textElement/>
+				<reportElement style="Column header" x="368" y="19" width="92" height="15" uuid="559bd71e-57e8-4cb5-8590-54c8d017c36e"/>
 				<text><![CDATA[descripcion]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="460" y="19" width="92" height="15"/>
-				<textElement/>
+				<reportElement style="Column header" x="460" y="19" width="92" height="15" uuid="1a0433df-98b6-4a10-933e-62f9a790405a"/>
 				<text><![CDATA[categoria]]></text>
 			</staticText>
 		</band>
@@ -96,47 +85,41 @@ where a.idcategoria=$P{id_cate}]]>
 	<detail>
 		<band height="16" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="b451cff4-3b24-4824-80f4-4ecea2aee792"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement style="Detail" x="0" y="0" width="92" height="15"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{idarticulo}]]></textFieldExpression>
+				<reportElement style="Detail" x="0" y="0" width="92" height="15" uuid="cdeeeb8a-21de-4e4b-b8e5-1627cef48e52"/>
+				<textFieldExpression><![CDATA[$F{idarticulo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="92" y="0" width="92" height="15"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigo}]]></textFieldExpression>
+				<reportElement style="Detail" x="92" y="0" width="92" height="15" uuid="198c2636-36be-4b16-a4e9-7a9e34c90000"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="184" y="0" width="92" height="15"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
+				<reportElement style="Detail" x="184" y="0" width="92" height="15" uuid="368aace1-f1cd-47d6-bd3c-2644c16b9a1b"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="276" y="0" width="92" height="15"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$F{stock}]]></textFieldExpression>
+				<reportElement style="Detail" x="276" y="0" width="92" height="15" uuid="2d23d3c8-d1bb-457c-9769-ab6d98e1d125"/>
+				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="368" y="0" width="92" height="15"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcion}]]></textFieldExpression>
+				<reportElement style="Detail" x="368" y="0" width="92" height="15" uuid="a98376a6-405d-4319-b848-3c90317bb75d"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="460" y="0" width="92" height="15"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{categoria}]]></textFieldExpression>
+				<reportElement style="Detail" x="460" y="0" width="92" height="15" uuid="cedb5472-43a5-4cc1-952b-2c4713f094e8"/>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="a00d50a4-bc83-48db-b3d1-3cf76b111f1e"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
@@ -146,25 +129,25 @@ where a.idcategoria=$P{id_cate}]]>
 	<pageFooter>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement style="Column header" x="433" y="0" width="80" height="20"/>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="92b67e56-dfad-4946-ae45-c052f994ae6d"/>
 				<textElement textAlignment="Right">
 					<font size="10" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement style="Column header" x="513" y="0" width="40" height="20"/>
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="408546e2-8dfa-4441-856e-401d32dcf406"/>
 				<textElement>
 					<font size="10" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement style="Column header" x="0" y="0" width="197" height="20"/>
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="2ae245e9-e849-4d49-a7c5-9d6cf46bf562"/>
 				<textElement>
 					<font size="10" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

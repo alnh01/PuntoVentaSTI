@@ -18,16 +18,16 @@ public class CDetalle_ingresos {
     private double cantidad;
     private double precioCompra;
 
-
-    public CDetalle_ingresos( Long idingreso, int idarticulo, double cantidad, double precioCompra) {
-      
+    public CDetalle_ingresos(int iddetalle_ingreso, Long idingreso, int idarticulo, double cantidad, double precioCompra) {
+        this.iddetalle_ingreso = iddetalle_ingreso;
         this.idingreso = idingreso;
         this.idarticulo = idarticulo;
         this.cantidad = cantidad;
         this.precioCompra = precioCompra;
-        
     }
 
+
+   
     public int getIddetalle_ingreso() {
         return iddetalle_ingreso;
     }

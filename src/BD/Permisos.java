@@ -7,6 +7,7 @@ package BD;
 
 import Conexion.Conexion;
 import Controller.CPermisos;
+import Controller.CUsuario_Permiso;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +22,8 @@ public class Permisos {
  
     private Connection userConn;
  private final String SQL_SELECT = "SELECT * FROM permiso";
+  private final String SQL_SELECT_USP = "SELECT * FROM usuario_permiso";
+
  
  
  public Permisos(Connection conn) {
@@ -62,6 +65,34 @@ public class Permisos {
     }
     
     
+     
+      public ArrayList<CUsuario_Permiso> ObtenerPermisosGlobal() {
+        ArrayList<CUsuario_Permiso> ListarPermisoUs = new ArrayList<CUsuario_Permiso>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT_USP);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("idusuario_permiso");
+                int idusuario = rs.getInt("idusuario");
+                int idpermiso = rs.getInt("idpermiso");
+                
+                CUsuario_Permiso permi = new CUsuario_Permiso(id, idusuario,idpermiso);
+                ListarPermisoUs.add(permi);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+        }
+        return ListarPermisoUs;
+    }
     
 }
   

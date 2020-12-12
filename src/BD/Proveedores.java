@@ -24,7 +24,7 @@ public class Proveedores {
      private Connection userConn;
     
     private final String SQL_SELECT = "SELECT * FROM proveedores";
-    private final String SQL_INSERT = "INSERT INTO proveedores  values(?,?,?,?,?,?)";
+    private final String SQL_INSERT = "INSERT INTO proveedores  values(NULL,?,?,?,?,?,?)";
     private final String SQL_DELETE = "DELETE proveedores  WHERE idproveedor=?";
     private final String SQL_UPDATE = "UPDATE proveedores set nombre=?,direccion=?,telefono=?,email=? WHERE idproveedor=?";
     

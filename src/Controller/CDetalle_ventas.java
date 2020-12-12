@@ -16,12 +16,15 @@ public class CDetalle_ventas {
     private double cantidadVendida;
     private double costoxp;
 
-    public CDetalle_ventas(Long idVenta, String idProd, double cantidadVendida,double costoxp) {
+    public CDetalle_ventas(int idDetalleVenta, Long idVenta, String idProd, double cantidadVendida, double costoxp) {
+        this.idDetalleVenta = idDetalleVenta;
         this.idVenta = idVenta;
         this.idProd = idProd;
         this.cantidadVendida = cantidadVendida;
         this.costoxp = costoxp;
     }
+
+   
 
     public double getCantidadVendida() {
         return cantidadVendida;

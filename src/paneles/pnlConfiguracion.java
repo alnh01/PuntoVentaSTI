@@ -7,10 +7,19 @@ package paneles;
 
 import BD.configurarTicket;
 import Controller.CCTicket;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.swing.JFrame;
+import modal.CambiarContrasena;
+import modal.CambiarUsuario;
+import modal.ConfigurarTicket;
 
 /**
  *
@@ -18,35 +27,60 @@ import java.util.logging.Logger;
  */
 public class pnlConfiguracion extends javax.swing.JPanel {
 
-    configurarTicket coft = new configurarTicket();
-    
+    //
     /**
      * Creates new form pnlConfiguracion
      */
     public pnlConfiguracion() {
         initComponents();
-        CargarModeloTabla();
+       
+         listarImpresoras();
+        seleccionarImpresoraPredeterminada();
     }
     
-    public void CargarModeloTabla(){
-      
-       
-       ArrayList<CCTicket>ListarDatos = coft.ObtenerDatos();
-      int numerosUsusarios = ListarDatos.size();
-      
-        for (int i = 0; i < numerosUsusarios; i++) {
-            CCTicket usuarios = ListarDatos.get(i);
-            int idemp = usuarios.getIdempre();
-            String nombre = usuarios.getNombre();
-            String email = usuarios.getCorreo();
-            String direccion = usuarios.getDireccion();
-            String telefono = usuarios.getTelefono();
-            lblid.setText(""+idemp);
-            txtnombre.setText(nombre);
-            txtdireccion.setText(direccion);
-            txtrelefono.setText(telefono);
-            txtcorreo.setText(email);
+//
     
+        private void seleccionarImpresoraPredeterminada() {
+        PrintService service = PrintServiceLookup.lookupDefaultPrintService();
+        if (service != null) {
+            String printServiceName = service.getName();
+            comboImpresoras.setSelectedItem(printServiceName);
+            lblImpresora.setText(printServiceName);
+        } else {
+            comboImpresoras.setSelectedItem("Seleccionar impresoras");
+        }
+    }
+
+    private void listarImpresoras() {
+        PrintService[] ps = PrintServiceLookup.lookupPrintServices(null, null);
+        comboImpresoras.addItem("Seleccionar impresoras");
+        for (PrintService p : ps) {
+            comboImpresoras.addItem(p.getName());
+        }
+    }
+
+    private void estableceImpresoraPredeterminada(String printerName) {
+        String cmdLine = String.format("RUNDLL32 PRINTUI.DLL,PrintUIEntry /y /n \"%s\"", printerName);
+        ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", cmdLine);
+        builder.redirectErrorStream(true);
+        Process p = null;
+        try {
+            p = builder.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        String line = new String();
+        while (true) {
+            try {
+                line = r.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (line == null) {
+                break;
+            }
         }
     }
     /**
@@ -58,108 +92,193 @@ public class pnlConfiguracion extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtnombre = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtdireccion = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtrelefono = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtcorreo = new javax.swing.JTextField();
-        lblid = new javax.swing.JLabel();
-        btnactualizar = new rojerusan.RSButtonMetro();
+        jPanel2 = new javax.swing.JPanel();
+        comboImpresoras = new rojerusan.RSComboMetro();
+        jLabel6 = new javax.swing.JLabel();
+        lblImpresora = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        rSButtonMetro1 = new rojerusan.RSButtonMetro();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        rSButtonMetro4 = new rojerusan.RSButtonMetro();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        rSButtonMetro2 = new rojerusan.RSButtonMetro();
+        rSButtonMetro3 = new rojerusan.RSButtonMetro();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Configuracion del ticket");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        comboImpresoras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel2.add(comboImpresoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 310, 50));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel2.setText("Nombre");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setText("Impresora Predeterminada");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(836, 11, 182, 26));
 
-        txtnombre.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        txtnombre.addActionListener(new java.awt.event.ActionListener() {
+        lblImpresora.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblImpresora.setText("Impresora");
+        jPanel2.add(lblImpresora, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, 150, 50));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/impresora.png"))); // NOI18N
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 60, -1, -1));
+
+        rSButtonMetro1.setBorder(new mdlaf.shadows.RoundedCornerBorder());
+        rSButtonMetro1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/printer.png"))); // NOI18N
+        rSButtonMetro1.setText("Establecer");
+        rSButtonMetro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnombreActionPerformed(evt);
+                rSButtonMetro1ActionPerformed(evt);
             }
         });
-        jPanel1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 190, -1));
+        jPanel2.add(rSButtonMetro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 270, 40));
 
-        txtdireccion.setColumns(20);
-        txtdireccion.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        txtdireccion.setRows(5);
-        jScrollPane1.setViewportView(txtdireccion);
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setText("Impresoras");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 70, 20));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 190, 120));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1050, 140));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel3.setText("Direccion");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel4.setText("Telefono");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, 20));
-
-        txtrelefono.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jPanel1.add(txtrelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 190, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel5.setText("Correo");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 40, -1));
-
-        txtcorreo.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jPanel1.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 190, -1));
-
-        lblid.setText("jLabel6");
-        jPanel1.add(lblid, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
-
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 290, 310));
-
-        btnactualizar.setText("Actualizar Ticket");
-        btnactualizar.addActionListener(new java.awt.event.ActionListener() {
+        rSButtonMetro4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/file.png"))); // NOI18N
+        rSButtonMetro4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnactualizarActionPerformed(evt);
+                rSButtonMetro4ActionPerformed(evt);
             }
         });
-        add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 290, 40));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel10.setText("Ticket");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel11.setText("Modificar Ticket");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rSButtonMetro4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
+                .addContainerGap(857, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11))
+                    .addComponent(rSButtonMetro4, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 1050, 140));
+
+        rSButtonMetro2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/rpass.png"))); // NOI18N
+        rSButtonMetro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro2ActionPerformed(evt);
+            }
+        });
+        add(rSButtonMetro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, -1, 90));
+
+        rSButtonMetro3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/user.png"))); // NOI18N
+        rSButtonMetro3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro3ActionPerformed(evt);
+            }
+        });
+        add(rSButtonMetro3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, 90));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel7.setText("Cambiar");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel9.setText("Contraseña");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setText("Usuarios");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 70, 30));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel14.setText("Cambiar");
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel15.setText("Nombre de usuario");
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
+
+        jLabel16.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Configuración");
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 90));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombreActionPerformed
+    private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
+   estableceImpresoraPredeterminada(comboImpresoras.getSelectedItem().toString());
+        seleccionarImpresoraPredeterminada();        // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonMetro1ActionPerformed
 
-    private void btnactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactualizarActionPerformed
-       
-        try {
-            coft.actualizarTicket(lblid.getText(), txtnombre.getText(), txtdireccion.getText(), txtrelefono.getText(), txtcorreo.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlConfiguracion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnactualizarActionPerformed
+    private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
+       new CambiarUsuario(new JFrame(),true).setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonMetro3ActionPerformed
+
+    private void rSButtonMetro4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro4ActionPerformed
+   new ConfigurarTicket(new JFrame(), true).setVisible(true);
+   // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonMetro4ActionPerformed
+
+    private void rSButtonMetro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro2ActionPerformed
+       new CambiarContrasena(new JFrame(),true).setVisible(true);
+ // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonMetro2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rojerusan.RSButtonMetro btnactualizar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblid;
-    private javax.swing.JTextField txtcorreo;
-    private javax.swing.JTextArea txtdireccion;
-    private javax.swing.JTextField txtnombre;
-    private javax.swing.JTextField txtrelefono;
+    private rojerusan.RSComboMetro comboImpresoras;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblImpresora;
+    private rojerusan.RSButtonMetro rSButtonMetro1;
+    private rojerusan.RSButtonMetro rSButtonMetro2;
+    private rojerusan.RSButtonMetro rSButtonMetro3;
+    private rojerusan.RSButtonMetro rSButtonMetro4;
     // End of variables declaration//GEN-END:variables
 }

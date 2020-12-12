@@ -6,23 +6,47 @@
 package Controller;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import jxl.write.DateTime;
 
 /**
  *
  * @author najera10
  */
 public class CVenta {
-     private int idVenta;
-     private int idcliente;
+    private int idVenta;
+    private int idcliente;
+    private Timestamp fecha_hora;
     private double montoVenta;
+    private String estado;
     private String idusuario;
 
-    public CVenta(int idcliente, double montoVenta, String idusuario) {
+    public CVenta(int idVenta, int idcliente, Timestamp fecha_hora, double montoVenta, String estado, String idusuario) {
+        this.idVenta = idVenta;
         this.idcliente = idcliente;
+        this.fecha_hora = fecha_hora;
         this.montoVenta = montoVenta;
+        this.estado = estado;
         this.idusuario = idusuario;
     }
+    
+    public Timestamp getFecha_hora() {
+        return fecha_hora;
+    }
 
+    public void setFecha_hora(Timestamp fecha_hora) {
+        this.fecha_hora = fecha_hora;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+//    }
     public String getIdusuario() {
         return idusuario;
     }

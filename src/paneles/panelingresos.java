@@ -230,7 +230,7 @@ public class panelingresos extends javax.swing.JInternalFrame  {
         jLabel2.setText("Buscar Producto:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/profit_1.png"))); // NOI18N
@@ -437,7 +437,21 @@ public class panelingresos extends javax.swing.JInternalFrame  {
                 double precio_compra = Double.parseDouble(precioC);
                
                 int idarticulo = Integer.parseInt(idProducto);
-                CDetalle_ingresos detalle = new CDetalle_ingresos(idingreso, idarticulo, cantidad,precio_compra);
+                CDetalle_ingresos detalle = new CDetalle_ingresos(0,idingreso, idarticulo, cantidad,precio_compra);
+               ArrayList<Double> Stocks =  producto.Obtener_stock(idProducto);
+               
+                for (int j = 0; j < Stocks.size(); j++) {
+                    
+                   String cadena = Stocks.get(j).toString();
+                   Double stk =  Double.parseDouble(cadena);
+                   
+                   double canTotal = stk + cantidad;
+                    System.out.println(canTotal+"dsfsdf");
+                   producto.Rest_Stock(idProducto, canTotal);
+                   
+                }
+               
+               
                 dingreso.insertarDetalleIngreso(detalle);
                 
                 detalles.add(detalle);

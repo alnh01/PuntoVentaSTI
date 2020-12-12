@@ -24,9 +24,10 @@ import principal.Session;
 public class login {
     public int id_usuario;
     
-    Usuarios usr = new Usuarios();
+  Usuarios usr = new Usuarios();
     private Connection userConn;
      Principal prin;
+     
      public login() {
 
     }
@@ -36,6 +37,7 @@ public class login {
     }
     
        public int  validar_ingreso(String usuario, String pass) {
+         
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -64,7 +66,7 @@ public class login {
                
                   prin.txtusuario.setText("" +usuarios.getNombre());
                   prin.txtcodigo.setText(" " + usuarios.getId_usuario());
-               
+                  pnlPunto.txtbuscar.requestFocus();
                  int idusuario=id_usuario;
         //obtener permisos
               
@@ -101,16 +103,16 @@ public class login {
                         prin.cinco.setEnabled(false);
               }
                      if(listarPermisos.contains(6)){
-                    prin.seis.setEnabled(true);
+                    prin.siete.setEnabled(true);
               }else{
                        
-                        prin.seis.setEnabled(false);
+                        prin.siete.setEnabled(false);
               }
                             
                
                  
                 prin.setVisible(true);    
-                //->
+                
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
@@ -120,9 +122,6 @@ public class login {
             Conexion.close(conn);
         }
         return id_usuario;
-    }
        
-       
-
-      
+       }
 }

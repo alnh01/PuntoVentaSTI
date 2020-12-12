@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class configurarTicket {
  private Connection userConn;
  private final String SQL_SELECT = "SELECT * FROM empresa";
-private  final String SQL_UPDATE  ="UPDATE empresa  SET nombre = ? ,direccion = ?, telefono = ? , correo = ? WHERE idempresa = ? ";
+private  final String SQL_UPDATE  ="UPDATE empresa  SET nombre = ? ,direccion = ?, telefono = ? , correo = ?,rfc = ?  WHERE idempresa = ? ";
     public configurarTicket(Connection conn) {
         this.userConn = conn;
     }
@@ -46,10 +46,10 @@ private  final String SQL_UPDATE  ="UPDATE empresa  SET nombre = ? ,direccion = 
                 String direccion = rs.getString("direccion");
                 String telefono = rs.getString("telefono");
                 String correo= rs.getString("correo");
-         
+                String rfc = rs.getString("rfc");
       
                 
-                CCTicket cate = new CCTicket(idempre,nombre, direccion,telefono,correo);
+                CCTicket cate = new CCTicket(idempre,nombre, direccion,telefono,correo,rfc);
                 Listardatos.add(cate);
             
 
@@ -62,7 +62,7 @@ private  final String SQL_UPDATE  ="UPDATE empresa  SET nombre = ? ,direccion = 
         return Listardatos;
     }
     
-     public int actualizarTicket(String idemp,String nombre, String direccion,String telefono , String correo) throws SQLException{
+     public int actualizarTicket(String idemp,String nombre, String direccion,String telefono , String correo ,String rfc) throws SQLException{
         
           Connection conn = null;
         PreparedStatement stmt = null;
@@ -76,7 +76,8 @@ private  final String SQL_UPDATE  ="UPDATE empresa  SET nombre = ? ,direccion = 
             stmt.setString(2,direccion);
             stmt.setString(3,telefono);
             stmt.setString(4,correo);
-            stmt.setString(5,idemp);
+            stmt.setString(5, rfc);
+            stmt.setString(6,idemp);
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizados:" + rows);
         } finally {

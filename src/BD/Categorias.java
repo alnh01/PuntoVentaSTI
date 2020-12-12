@@ -15,7 +15,7 @@ public class Categorias {
     
 private Connection userConn;
  private final String SQL_SELECT = "SELECT * FROM categoria";
- private final String SQL_INSERT = "INSERT INTO categoria values(?,?,1)";
+ private final String SQL_INSERT = "INSERT INTO categoria values(NULL,?,?,1)";
  private final String SQL_UPDATE = "UPDATE categoria SET nombre = ? , descripcion=?  where idcategoria=?";
  private final String SQL_DELETE = "DELETE categoria WHERE idcategoria=?";
     pnlCategorias pnlCategorias;

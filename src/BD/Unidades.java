@@ -17,7 +17,7 @@ public class Unidades {
     
     private Connection userConn;
     private final String SQL_SELECT = "SELECT * FROM unidad_medida";
-     private final String SQL_INSERT = "INSERT INTO unidad_medida values(?)";
+     private final String SQL_INSERT = "INSERT INTO unidad_medida values(NULL,?)";
     
     public Unidades(Connection conn) {
         this.userConn = conn;

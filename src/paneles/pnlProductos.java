@@ -46,6 +46,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import modal.Verexcel;
 
 /**
  *
@@ -238,6 +239,8 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         btneliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnImportar = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -295,12 +298,12 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, -1, 34));
 
-        jLabel12.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(128, 128, 131));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/taxes.png"))); // NOI18N
         jLabel12.setText("Articulos");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 550, 130));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 550, 130));
 
         jPanelRound1.setBackground(new java.awt.Color(255, 255, 255));
         jPanelRound1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
@@ -354,6 +357,12 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nombre del Articulo *");
         jPanelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 170, 30));
+
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtnombreKeyReleased(evt);
+            }
+        });
         jPanelRound1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 310, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -383,7 +392,7 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Foto");
-        jPanelRound1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, 20));
+        jPanelRound1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 130, 20));
 
         cmbunidades.setModel(modeloUnidades);
         jPanelRound1.add(cmbunidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 130, 30));
@@ -419,11 +428,22 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Descripcion *");
         jPanelRound1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 110, 30));
+
+        txtdescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtdescripcionKeyReleased(evt);
+            }
+        });
         jPanelRound1.add(txtdescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 270, 30));
 
         txtcodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcodigoActionPerformed(evt);
+            }
+        });
+        txtcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtcodigoKeyReleased(evt);
             }
         });
         jPanelRound1.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 150, 30));
@@ -469,6 +489,23 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jPanelRound1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 130, 40));
 
         jPanel3.add(jPanelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 490, 540));
+
+        btnImportar.setBackground(new java.awt.Color(153, 255, 102));
+        btnImportar.setText("Importar");
+        btnImportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnImportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, 30));
+
+        jButton3.setText("Borrar Registros");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(413, 240, 120, 30));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1080, 560));
 
@@ -581,7 +618,7 @@ public class pnlProductos extends javax.swing.JInternalFrame {
           if (imgArticleFile == null){
             JOptionPane.showMessageDialog(null, "No haseleccionada una imagen");
             File file = new File(System.getProperty("user.dir")+"/src/img1/nimages.png");
-            CProductos productos = new CProductos( 0,  nombre, descripcion,  stock, file ,unidad.getIdunidad(),  precio_compra, precio_compra,idcategoria,codigo,"","");
+            CProductos productos = new CProductos( 0,  nombre, descripcion,  stock, file ,unidad.getIdunidad(),  precio_compra, previo_venta,idcategoria,codigo,"","","");
             product.insertar(productos);
            // JOptionPane.showMessageDialog(null, "Registro realizado");
                     Success suc = new Success(new JFrame(),true );
@@ -594,7 +631,7 @@ public class pnlProductos extends javax.swing.JInternalFrame {
             limpiar();
             CargarModeloTabla();
             }else{
-            CProductos productos = new CProductos( 0,  nombre, descripcion,  stock,  imgArticleFile,unidad.getIdunidad(),  precio_compra, precio_compra,idcategoria,codigo,"","");
+            CProductos productos = new CProductos( 0,  nombre, descripcion,  stock,  imgArticleFile,unidad.getIdunidad(),  precio_compra, previo_venta,idcategoria,codigo,"","","");
             product.insertar(productos);
             //JOptionPane.showMessageDialog(null, "Registro realizado");
             limpiar();
@@ -817,15 +854,66 @@ public void  limpiarProveedor(){
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarActionPerformed
+    Excel ab = new Excel();
+    ab.abrir();  
+    
+    Verexcel ver = new Verexcel(new JFrame(),true);
+   boolean  validar = ver.correcto;
+        System.out.println(validar);
+   if(validar){
+     
+       CargarModeloTabla();
+   }
+   
+   
+    }//GEN-LAST:event_btnImportarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+int ventanaYesNotCancel = JOptionPane.showConfirmDialog(null, "¿Quieres borrar todos los registros?", "Javadesde0.com", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+			//0=yes, 1=no, 2=cancel		
+        if(ventanaYesNotCancel == 0) {		
+    	   try {
+            
+            product.LimpiarTabla();
+            limpiarTabla();
+            JOptionPane.showMessageDialog(rootPane, "Datos Borrados");
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }			
+        }else if(ventanaYesNotCancel == 1){		
+         System.out.println("Has pulsado No");			
+         }else if(ventanaYesNotCancel == 2){
+         System.out.println("Has pulsado Cancel");	
+            } 
+
+
+       
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyReleased
+    txtnombre.setText(txtnombre.getText().toUpperCase());          // TODO add your handling code here:
+    }//GEN-LAST:event_txtnombreKeyReleased
+
+    private void txtdescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyReleased
+    txtdescripcion.setText(txtdescripcion.getText().toUpperCase());          // TODO add your handling code here:
+    }//GEN-LAST:event_txtdescripcionKeyReleased
+
+    private void txtcodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyReleased
+ txtcodigo.setText(txtcodigo.getText().toUpperCase());          // TODO add your handling code here:
+    }//GEN-LAST:event_txtcodigoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Ncategoria;
     private javax.swing.JButton Nunidad;
+    private javax.swing.JButton btnImportar;
     private javax.swing.JButton btneliminar;
     private javax.swing.JComboBox cmbcategorias;
     private javax.swing.JComboBox cmbunidades;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

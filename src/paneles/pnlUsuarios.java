@@ -176,7 +176,7 @@ public class pnlUsuarios extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/group.png"))); // NOI18N
@@ -300,6 +300,12 @@ public class pnlUsuarios extends javax.swing.JPanel {
         jLabel2.setText("Nombre:");
         jPanelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 60, 30));
         jPanelRound1.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 190, 30));
+
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtnombreKeyReleased(evt);
+            }
+        });
         jPanelRound1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 190, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -341,6 +347,12 @@ public class pnlUsuarios extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Dirección:");
         jPanelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 80, 30));
+
+        txtdireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtdireccionKeyReleased(evt);
+            }
+        });
         jPanelRound1.add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 340, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -554,17 +566,23 @@ public class pnlUsuarios extends javax.swing.JPanel {
                 warning.jLabel1.setText("Advertencia!!!");
                 warning.textos.setText("Esta seguro que deseas eliminar ?");
                 warning.setVisible(true);
+                
+                
                      String dato = warning.valor.toString();
-                      System.out.println(dato);  
-                        if (dato.equals("Aceptar")) {
+                      
+                 if (dato.equals("Aceptar")) {
                 bdusr.eliminarusuario(usuarioseleccionado);
                 limpiar();
                 CargarModeloTabla();
-            }
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Usuario Eliminado");
-                info.setVisible(true);
+               
+                Information inf = new Information(new Frame(), true);
+                inf.textos.setText("Usuario Eliminado");
+                inf.setVisible(true);
+                
+            }else{
+               warning.dispose();
+               }
+              
            
             }
         } catch (SQLException ex) {
@@ -577,6 +595,14 @@ limpiar();
 tablaUsuario.clearSelection ();
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyReleased
+txtnombre.setText(txtnombre.getText().toUpperCase());          // TODO add your handling code here:
+    }//GEN-LAST:event_txtnombreKeyReleased
+
+    private void txtdireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdireccionKeyReleased
+txtdireccion.setText(txtdireccion.getText().toUpperCase());         // TODO add your handling code here:
+    }//GEN-LAST:event_txtdireccionKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

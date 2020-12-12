@@ -6,18 +6,32 @@
 package modal;
 
 import BD.Categorias;
+import BD.CorteDia;
 import BD.CortedelDia;
+import BD.GenerarRespaldo;
 import Controller.CCategorias;
+import Controller.CCorte;
 import Controller.CCortedia;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import principal.Principal;
 import rsbuttom.AWTUtilities;
 
 /**
@@ -31,6 +45,9 @@ public class Cortedia extends javax.swing.JDialog {
     int i = 32;
       Categorias bdcat = new Categorias();
       CortedelDia corte = new CortedelDia();
+      
+      CorteDia cdia = new CorteDia();
+      
         DefaultTableModel modelocorte = new DefaultTableModel(){
     public boolean isCellEditable(int filas, int columnas){
             if(columnas==3){
@@ -49,6 +66,7 @@ public class Cortedia extends javax.swing.JDialog {
         initComponents();
         CargarColunmas();
         CargarModeloTabla();
+        addEventKey();
         
     }
   
@@ -58,6 +76,46 @@ public class Cortedia extends javax.swing.JDialog {
         modelocorte.addColumn("Costo");
         
     }
+     
+     
+       private void addEventKey() {
+           
+         KeyStroke ESC = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+         Action ESCAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                
+                cerrar();
+            
+            }
+        };  
+        
+      
+        jLabel5.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(ESC, "ESC");
+        jLabel5.getActionMap().put("ESC", ESCAction);
+
+           
+        
+    }
+       
+       
+       public void cerrar(){
+            task = new TimerTask() {
+            @Override
+            public void run() {
+                if (i == 0) {
+                    Cerrar();
+                } else {
+                    Ubicar(i);
+                    i -= 32;
+                    Trasparencia((float) i / 352);
+                }
+            }
+        };
+        timer = new Timer();
+        timer.schedule(task, 0, 2);
+           
+       }
+    
 //          private void cargarModelotabla(){
 //        CortedelDia cortdd = new CortedelDia();     
 //        ArrayList<CCortedia>ListarCorte = cortdd.ObtenerCorte();
@@ -97,12 +155,12 @@ public class Cortedia extends javax.swing.JDialog {
              
             
             modelocorte.setValueAt(nombre, i, 0);
-            modelocorte.setValueAt(descripcion+""+cantidad, i, 1);
+            modelocorte.setValueAt(descripcion+" "+"Cant:  "+cantidad, i, 1);
             modelocorte.setValueAt(costo, i, 2);
             totalE = totalE + Double.parseDouble(modelocorte.getValueAt(i, 2).toString());
             System.out.println(totalE);
         }
-         jTextField1.setText(""+totalE);
+         txtTotal.setText(""+totalE);
     }
          
   
@@ -138,8 +196,6 @@ public class Cortedia extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        jDialog1 = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -148,22 +204,9 @@ public class Cortedia extends javax.swing.JDialog {
         tblcorte = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
+        fSButtonMD1 = new LIB.FSButtonMD();
         jPanel3 = new javax.swing.JPanel();
-
-        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        jFrame1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
 
         setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -203,19 +246,31 @@ public class Cortedia extends javax.swing.JDialog {
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 580, 210));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        jLabel1.setText("Entradas");
+        jLabel1.setText("Productos");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel2.setText("TOTAL  :");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 80, 40));
 
-        jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField1.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setBorder(null);
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 120, 40));
+        txtTotal.setEditable(false);
+        txtTotal.setBackground(new java.awt.Color(204, 204, 204));
+        txtTotal.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        txtTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTotal.setBorder(null);
+        jPanel2.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 120, 40));
+
+        fSButtonMD1.setBackground(new java.awt.Color(102, 255, 102));
+        fSButtonMD1.setForeground(new java.awt.Color(0, 0, 0));
+        fSButtonMD1.setText("CORTE");
+        fSButtonMD1.setColorNormal(new java.awt.Color(102, 102, 255));
+        fSButtonMD1.setColorPressed(new java.awt.Color(204, 204, 255));
+        fSButtonMD1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fSButtonMD1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(fSButtonMD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 320, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 660, 340));
 
@@ -265,9 +320,28 @@ public class Cortedia extends javax.swing.JDialog {
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
 
+    private void fSButtonMD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fSButtonMD1ActionPerformed
+ try {
+          String id = Principal.txtcodigo.getText();
+          String idc = id.replace(" ","");
+          int idusuario = Integer.parseInt(idc);
+          double total = Double.parseDouble(txtTotal.getText());
+          CCorte cortardia = new CCorte(0,null,idusuario,total,"");
+          cdia.insert(cortardia);
+          GenerarRespaldo  respaldo = new GenerarRespaldo();
+          respaldo.Resp_Clientes();
+          this.dispose();
+      } catch (SQLException ex) {
+          Logger.getLogger(Cortedia.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (IOException ex) {
+          Logger.getLogger(Cortedia.class.getName()).log(Level.SEVERE, null, ex);
+      }        // TODO add your handling code here:
+    }//GEN-LAST:event_fSButtonMD1ActionPerformed
+
 
     
     
+     
     /**
      * @param args the command line arguments
      */
@@ -311,8 +385,7 @@ public class Cortedia extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JFrame jFrame1;
+    private LIB.FSButtonMD fSButtonMD1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -321,8 +394,8 @@ public class Cortedia extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     public javax.swing.JTable tblcorte;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 private void Cerrar() {
         this.dispose();

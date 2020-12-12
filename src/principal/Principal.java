@@ -7,8 +7,10 @@ package principal;
 
 import BD.Usuarios;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -16,10 +18,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import modal.Respaldos;
 import paneles.CambiaPanel;
+import paneles.pnlPunto;
+import paneles.pnlRespaldos;
 
 /**
  *
@@ -33,6 +39,7 @@ public class Principal extends javax.swing.JFrame  {
 //    String hora, minutos, segundos;
 //    Thread hilo;
    int x, y;
+  
     /**
      * Creates new form Principal
      */
@@ -42,13 +49,17 @@ public class Principal extends javax.swing.JFrame  {
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setLocationRelativeTo(this);
         this.uno.setSelected(true);
-       
+         Animacion.Animacion.mover_izquierda(0, -264, 2, 2, pnlMenu);
+         
+         pnlRespaldos.ventana(this);
+
+      
        setIconImage(new ImageIcon(getClass().getResource("/img1/chip.png")).getImage());
         
         new CambiaPanel(pnlPrincipal, new paneles.pnlPunto());
-//        btnsalir.setOpaque(false);
-//        btnsalir.setContentAreaFilled(false);
-//        btnsalir.setBorderPainted(false);
+         btnsalir.setOpaque(false);
+         btnsalir.setContentAreaFilled(false);
+         btnsalir.setBorderPainted(false);
          btnsalir.setToolTipText("Salir");
          btnsalir.setOpaque(false); 
          btnsalir.setFocusPainted(false); 
@@ -71,18 +82,19 @@ public class Principal extends javax.swing.JFrame  {
 
         jPanel1 = new javax.swing.JPanel();
         pnlMenu = new javax.swing.JPanel();
-        uno = new rsbuttom.RSButtonMetro();
-        tres = new rsbuttom.RSButtonMetro();
-        dos = new rsbuttom.RSButtonMetro();
-        cinco = new rsbuttom.RSButtonMetro();
-        seis = new rsbuttom.RSButtonMetro();
-        cuatro = new rsbuttom.RSButtonMetro();
         txtusuario = new javax.swing.JTextField();
         txtcodigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnsalir = new javax.swing.JButton();
+        uno = new rsbuttom.RSButtonMetro();
+        dos = new rsbuttom.RSButtonMetro();
+        tres = new rsbuttom.RSButtonMetro();
+        cuatro = new rsbuttom.RSButtonMetro();
+        cinco = new rsbuttom.RSButtonMetro();
         siete = new rsbuttom.RSButtonMetro();
+        seis = new rsbuttom.RSButtonMetro();
+        ocho = new rsbuttom.RSButtonMetro();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -97,6 +109,39 @@ public class Principal extends javax.swing.JFrame  {
 
         pnlMenu.setBackground(new java.awt.Color(239, 238, 244));
         pnlMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 5, 0, 0, new java.awt.Color(239, 238, 244)));
+        pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtusuario.setEditable(false);
+        txtusuario.setBackground(new java.awt.Color(239, 238, 244));
+        txtusuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtusuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtusuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(102, 153, 255)));
+        txtusuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtusuario.setPreferredSize(new java.awt.Dimension(100, 24));
+        pnlMenu.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 150, -1));
+
+        txtcodigo.setEditable(false);
+        txtcodigo.setBackground(new java.awt.Color(239, 238, 244));
+        txtcodigo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtcodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtcodigo.setToolTipText("");
+        txtcodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(102, 153, 255)));
+        txtcodigo.setPreferredSize(new java.awt.Dimension(100, 24));
+        pnlMenu.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 150, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/login.png"))); // NOI18N
+        pnlMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/id-card (2).png"))); // NOI18N
+        pnlMenu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/exit.png"))); // NOI18N
+        btnsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalirActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 40, -1));
 
         uno.setForeground(new java.awt.Color(128, 128, 131));
         uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/house.png"))); // NOI18N
@@ -120,30 +165,7 @@ public class Principal extends javax.swing.JFrame  {
                 unoActionPerformed(evt);
             }
         });
-
-        tres.setBackground(new java.awt.Color(239, 238, 244));
-        tres.setForeground(new java.awt.Color(128, 128, 131));
-        tres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/shopping (1).png"))); // NOI18N
-        tres.setText("Compras");
-        tres.setColorHover(new java.awt.Color(204, 204, 204));
-        tres.setColorNormal(new java.awt.Color(239, 238, 244));
-        tres.setColorPressed(new java.awt.Color(204, 204, 204));
-        tres.setColorTextHover(new java.awt.Color(128, 128, 131));
-        tres.setColorTextNormal(new java.awt.Color(128, 128, 131));
-        tres.setColorTextPressed(new java.awt.Color(128, 128, 131));
-        tres.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        tres.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        tres.setIconTextGap(19);
-        tres.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tresMousePressed(evt);
-            }
-        });
-        tres.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tresActionPerformed(evt);
-            }
-        });
+        pnlMenu.add(uno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 230, -1));
 
         dos.setBackground(new java.awt.Color(239, 238, 244));
         dos.setForeground(new java.awt.Color(128, 128, 131));
@@ -168,55 +190,32 @@ public class Principal extends javax.swing.JFrame  {
                 dosActionPerformed(evt);
             }
         });
+        pnlMenu.add(dos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 230, -1));
 
-        cinco.setBackground(new java.awt.Color(239, 238, 244));
-        cinco.setForeground(new java.awt.Color(128, 128, 131));
-        cinco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/login.png"))); // NOI18N
-        cinco.setText("Acceso");
-        cinco.setColorHover(new java.awt.Color(204, 204, 204));
-        cinco.setColorNormal(new java.awt.Color(239, 238, 244));
-        cinco.setColorPressed(new java.awt.Color(204, 204, 204));
-        cinco.setColorTextHover(new java.awt.Color(128, 128, 131));
-        cinco.setColorTextNormal(new java.awt.Color(128, 128, 131));
-        cinco.setColorTextPressed(new java.awt.Color(128, 128, 131));
-        cinco.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cinco.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        cinco.setIconTextGap(19);
-        cinco.addMouseListener(new java.awt.event.MouseAdapter() {
+        tres.setBackground(new java.awt.Color(239, 238, 244));
+        tres.setForeground(new java.awt.Color(128, 128, 131));
+        tres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/shopping (1).png"))); // NOI18N
+        tres.setText("Compras");
+        tres.setColorHover(new java.awt.Color(204, 204, 204));
+        tres.setColorNormal(new java.awt.Color(239, 238, 244));
+        tres.setColorPressed(new java.awt.Color(204, 204, 204));
+        tres.setColorTextHover(new java.awt.Color(128, 128, 131));
+        tres.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        tres.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        tres.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        tres.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        tres.setIconTextGap(19);
+        tres.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                cincoMousePressed(evt);
+                tresMousePressed(evt);
             }
         });
-        cinco.addActionListener(new java.awt.event.ActionListener() {
+        tres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cincoActionPerformed(evt);
+                tresActionPerformed(evt);
             }
         });
-
-        seis.setBackground(new java.awt.Color(239, 238, 244));
-        seis.setForeground(new java.awt.Color(128, 128, 131));
-        seis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/newspaper (1).png"))); // NOI18N
-        seis.setText("Reportes");
-        seis.setToolTipText("");
-        seis.setColorHover(new java.awt.Color(204, 204, 204));
-        seis.setColorNormal(new java.awt.Color(239, 238, 244));
-        seis.setColorPressed(new java.awt.Color(204, 204, 204));
-        seis.setColorTextHover(new java.awt.Color(128, 128, 131));
-        seis.setColorTextNormal(new java.awt.Color(128, 128, 131));
-        seis.setColorTextPressed(new java.awt.Color(128, 128, 131));
-        seis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        seis.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        seis.setIconTextGap(19);
-        seis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                seisMousePressed(evt);
-            }
-        });
-        seis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                seisActionPerformed(evt);
-            }
-        });
+        pnlMenu.add(tres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 230, -1));
 
         cuatro.setBackground(new java.awt.Color(239, 238, 244));
         cuatro.setForeground(new java.awt.Color(128, 128, 131));
@@ -241,35 +240,37 @@ public class Principal extends javax.swing.JFrame  {
                 cuatroActionPerformed(evt);
             }
         });
+        pnlMenu.add(cuatro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 230, -1));
 
-        txtusuario.setEditable(false);
-        txtusuario.setBackground(new java.awt.Color(239, 238, 244));
-        txtusuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtusuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtusuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(102, 153, 255)));
-        txtusuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        txtcodigo.setEditable(false);
-        txtcodigo.setBackground(new java.awt.Color(239, 238, 244));
-        txtcodigo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtcodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtcodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(102, 153, 255)));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/login.png"))); // NOI18N
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/id-card (2).png"))); // NOI18N
-
-        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/exit.png"))); // NOI18N
-        btnsalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsalirActionPerformed(evt);
+        cinco.setBackground(new java.awt.Color(239, 238, 244));
+        cinco.setForeground(new java.awt.Color(128, 128, 131));
+        cinco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/login.png"))); // NOI18N
+        cinco.setText("Acceso");
+        cinco.setColorHover(new java.awt.Color(204, 204, 204));
+        cinco.setColorNormal(new java.awt.Color(239, 238, 244));
+        cinco.setColorPressed(new java.awt.Color(204, 204, 204));
+        cinco.setColorTextHover(new java.awt.Color(128, 128, 131));
+        cinco.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        cinco.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        cinco.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        cinco.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        cinco.setIconTextGap(19);
+        cinco.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cincoMousePressed(evt);
             }
         });
+        cinco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cincoActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(cinco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 230, -1));
 
         siete.setBackground(new java.awt.Color(239, 238, 244));
         siete.setForeground(new java.awt.Color(128, 128, 131));
         siete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/condiguracion.png"))); // NOI18N
-        siete.setText("Configracion");
+        siete.setText("Congifuracion");
         siete.setColorHover(new java.awt.Color(204, 204, 204));
         siete.setColorNormal(new java.awt.Color(239, 238, 244));
         siete.setColorPressed(new java.awt.Color(204, 204, 204));
@@ -279,79 +280,62 @@ public class Principal extends javax.swing.JFrame  {
         siete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         siete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         siete.setIconTextGap(19);
-        siete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                sieteMousePressed(evt);
-            }
-        });
         siete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sieteActionPerformed(evt);
             }
         });
+        pnlMenu.add(siete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 230, -1));
 
-        javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
-        pnlMenu.setLayout(pnlMenuLayout);
-        pnlMenuLayout.setHorizontalGroup(
-            pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(uno, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(tres, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(cuatro, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(cinco, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(seis, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(dos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlMenuLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnlMenuLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtcodigo))
-                            .addGroup(pnlMenuLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(siete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlMenuLayout.setVerticalGroup(
-            pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlMenuLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlMenuLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(uno, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(dos, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tres, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(cinco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(seis, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(siete, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(124, 124, 124))
-        );
+        seis.setBackground(new java.awt.Color(239, 238, 244));
+        seis.setForeground(new java.awt.Color(128, 128, 131));
+        seis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/newspaper (1).png"))); // NOI18N
+        seis.setText("Reportes");
+        seis.setColorHover(new java.awt.Color(204, 204, 204));
+        seis.setColorNormal(new java.awt.Color(239, 238, 244));
+        seis.setColorPressed(new java.awt.Color(204, 204, 204));
+        seis.setColorTextHover(new java.awt.Color(128, 128, 131));
+        seis.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        seis.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        seis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        seis.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        seis.setIconTextGap(19);
+        seis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                seisMousePressed(evt);
+            }
+        });
+        seis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seisActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(seis, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 230, -1));
 
-        pnlMenuLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cinco, cuatro, dos, seis, tres, uno});
+        ocho.setBackground(new java.awt.Color(239, 238, 244));
+        ocho.setForeground(new java.awt.Color(128, 128, 131));
+        ocho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/base-de-datos (1).png"))); // NOI18N
+        ocho.setText("Utileria");
+        ocho.setColorHover(new java.awt.Color(204, 204, 204));
+        ocho.setColorNormal(new java.awt.Color(239, 238, 244));
+        ocho.setColorPressed(new java.awt.Color(204, 204, 204));
+        ocho.setColorTextHover(new java.awt.Color(128, 128, 131));
+        ocho.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        ocho.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        ocho.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ocho.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ocho.setIconTextGap(19);
+        ocho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ochoMousePressed(evt);
+            }
+        });
+        ocho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ochoActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(ocho, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 230, -1));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -363,7 +347,7 @@ public class Principal extends javax.swing.JFrame  {
         jPanel1.add(pnlMenu, gridBagConstraints);
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel2MouseDragged(evt);
@@ -379,7 +363,7 @@ public class Principal extends javax.swing.JFrame  {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menu.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -421,6 +405,7 @@ public class Principal extends javax.swing.JFrame  {
         jPanel1.add(jPanel2, gridBagConstraints);
 
         pnlCentro.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCentro.setLayout(new java.awt.GridBagLayout());
 
         jScrollPane1.setBorder(null);
 
@@ -428,16 +413,16 @@ public class Principal extends javax.swing.JFrame  {
         pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane1.setViewportView(pnlPrincipal);
 
-        javax.swing.GroupLayout pnlCentroLayout = new javax.swing.GroupLayout(pnlCentro);
-        pnlCentro.setLayout(pnlCentroLayout);
-        pnlCentroLayout.setHorizontalGroup(
-            pnlCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
-        );
-        pnlCentroLayout.setVerticalGroup(
-            pnlCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 842;
+        gridBagConstraints.ipady = 739;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        pnlCentro.add(jScrollPane1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -462,8 +447,48 @@ public class Principal extends javax.swing.JFrame  {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int posicion = pnlMenu.getX();
+        if(posicion > -1){
+            Animacion.Animacion.mover_izquierda(0, -264, 2, 2, pnlMenu);
+        }else{
+            Animacion.Animacion.mover_derecha(-264, 0, 2, 2, pnlMenu);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jPanel2MousePressed
+
+    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
+        Point mueve = MouseInfo.getPointerInfo().getLocation();
+        this.setLocation(mueve.x - x, mueve.y - y);
+    }//GEN-LAST:event_jPanel2MouseDragged
+
+    private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
+        Session lo = new Session();
+        this.hide();
+        lo.show();
+    }//GEN-LAST:event_btnsalirActionPerformed
+
+    private void unoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unoMousePressed
+        if(evt.getSource()==uno){
+            if(!uno.isEnabled()){
+                JOptionPane.showMessageDialog(rootPane,"No tienes Permisos para Acceder a esta opción");
+            }
+           }
+        this.uno.setSelected(true);
+        this.dos.setSelected(false);
+        this.tres.setSelected(false);
+        this.cuatro.setSelected(false);
+        this.cinco.setSelected(false);
+       
+        this.seis.setSelected(false);
+    }//GEN-LAST:event_unoMousePressed
+
     private void unoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unoActionPerformed
-        new CambiaPanel(pnlPrincipal, new paneles.pnlPunto());
+         new CambiaPanel(pnlPrincipal, new paneles.pnlPunto());
         if(this.uno.isSelected()){
             this.uno.setColorNormal(new Color(204,204,204));
             this.uno.setColorHover(new Color(204,204,204));
@@ -490,10 +515,6 @@ public class Principal extends javax.swing.JFrame  {
             this.seis.setColorNormal(new Color(239,238,244));
             this.seis.setColorHover(new Color(204,204,204));
             this.seis.setColorPressed(new Color(204,204,204));
-            
-            this.siete.setColorNormal(new Color(239,238,244));
-            this.siete.setColorHover(new Color(204,204,204));
-            this.siete.setColorPressed(new Color(204,204,204));
         }else{
             this.uno.setColorNormal(new Color(239,238,244));
             this.uno.setColorHover(new Color(204,204,204));
@@ -501,21 +522,20 @@ public class Principal extends javax.swing.JFrame  {
         }
     }//GEN-LAST:event_unoActionPerformed
 
-    private void unoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unoMousePressed
-
-           if(evt.getSource()==uno){
-            if(!uno.isEnabled()){
+    private void tresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tresMousePressed
+        if(evt.getSource()==tres){
+            if(!tres.isEnabled()){
                 JOptionPane.showMessageDialog(rootPane,"No tienes Permisos para Acceder a esta opción");
             }
            }
-        this.uno.setSelected(true);
+        this.uno.setSelected(false);
         this.dos.setSelected(false);
-        this.tres.setSelected(false);
+        this.tres.setSelected(true);
         this.cuatro.setSelected(false);
         this.cinco.setSelected(false);
+     
         this.seis.setSelected(false);
-        this.siete.setSelected(false);
-    }//GEN-LAST:event_unoMousePressed
+    }//GEN-LAST:event_tresMousePressed
 
     private void tresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tresActionPerformed
         new CambiaPanel(pnlPrincipal, new paneles.pnlCompras());
@@ -539,14 +559,12 @@ public class Principal extends javax.swing.JFrame  {
             this.cinco.setColorNormal(new Color(239,238,244));
             this.cinco.setColorHover(new Color(204,204,204));
             this.cinco.setColorPressed(new Color(204,204,204));
-           
+            
+      
+            
             this.seis.setColorNormal(new Color(239,238,244));
             this.seis.setColorHover(new Color(204,204,204));
             this.seis.setColorPressed(new Color(204,204,204));
-            
-            this.siete.setColorNormal(new Color(239,238,244));
-            this.siete.setColorHover(new Color(204,204,204));
-            this.siete.setColorPressed(new Color(204,204,204));
         }else{
             this.tres.setColorNormal(new Color(239,238,244));
             this.tres.setColorHover(new Color(204,204,204));
@@ -554,147 +572,8 @@ public class Principal extends javax.swing.JFrame  {
         }
     }//GEN-LAST:event_tresActionPerformed
 
-    private void tresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tresMousePressed
- if(evt.getSource()==tres){
-            if(!tres.isEnabled()){
-                JOptionPane.showMessageDialog(rootPane,"No tienes Permisos para Acceder a esta opción");
-            }
-           }
-        this.uno.setSelected(false);
-        this.dos.setSelected(false);
-        this.tres.setSelected(true);
-        this.cuatro.setSelected(false);
-        this.cinco.setSelected(false);
-        this.seis.setSelected(false);
-        this.siete.setSelected(false);
-
-    }//GEN-LAST:event_tresMousePressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int posicion = pnlMenu.getX();
-        if(posicion > -1){
-            Animacion.Animacion.mover_izquierda(0, -264, 2, 2, pnlMenu);
-        }else{
-            Animacion.Animacion.mover_derecha(-264, 0, 2, 2, pnlMenu);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void seisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seisMousePressed
-        if(evt.getSource()==seis){
-            if(!seis.isEnabled()){
-                JOptionPane.showMessageDialog(rootPane,"No tienes Permisos para Acceder a esta opción");
-            }
-           }
-        
-        this.uno.setSelected(false);
-        this.dos.setSelected(false);
-        this.tres.setSelected(false);
-        this.cuatro.setSelected(false);
-        this.cinco.setSelected(false);
-        this.siete.setSelected(false);
-
-      
-        this.seis.setSelected(true);
-    }//GEN-LAST:event_seisMousePressed
-
-    private void seisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seisActionPerformed
-
-        
-        new CambiaPanel(pnlPrincipal, new paneles.pnlReportes());
-        if(this.seis.isSelected()){
-            this.uno.setColorNormal(new Color(239,238,244));
-            this.uno.setColorHover(new Color(204,204,204));
-            this.uno.setColorPressed(new Color(204,204,204));
-            
-            this.dos.setColorNormal(new Color(239,238,244));
-            this.dos.setColorHover(new Color(204,204,204));
-            this.dos.setColorPressed(new Color(204,204,204));
-            
-            this.tres.setColorNormal(new Color(239,238,244));
-            this.tres.setColorHover(new Color(204,204,204));
-            this.tres.setColorPressed(new Color(204,204,204));
-            
-            this.cuatro.setColorNormal(new Color(239,238,244));
-            this.cuatro.setColorHover(new Color(204,204,204));
-            this.cuatro.setColorPressed(new Color(204,204,204));
-            
-            this.cinco.setColorNormal(new Color(239,238,244));
-            this.cinco.setColorHover(new Color(204,204,204));
-            this.cinco.setColorPressed(new Color(204,204,204));
-            
-
-            
-            this.seis.setColorNormal(new Color(204,204,204));
-            this.seis.setColorHover(new Color(204,204,204));
-            this.seis.setColorPressed(new Color(204,204,204));
-            
-            this.siete.setColorNormal(new Color(239,238,244));
-            this.siete.setColorHover(new Color(204,204,204));
-            this.siete.setColorPressed(new Color(204,204,204));
-        }else{
-            this.seis.setColorNormal(new Color(239,238,244));
-            this.seis.setColorHover(new Color(204,204,204));
-            this.seis.setColorPressed(new Color(204,204,204));
-        }
-    }//GEN-LAST:event_seisActionPerformed
-
-    private void cincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cincoActionPerformed
-     
-        new CambiaPanel(pnlPrincipal, new paneles.pnlUsuarios());
-        if(this.cinco.isSelected()){
-            this.uno.setColorNormal(new Color(239,238,244));
-            this.uno.setColorHover(new Color(204,204,204));
-            this.uno.setColorPressed(new Color(204,204,204));
-            
-            this.dos.setColorNormal(new Color(239,238,244));
-            this.dos.setColorHover(new Color(204,204,204));
-            this.dos.setColorPressed(new Color(204,204,204));
-            
-            this.tres.setColorNormal(new Color(239,238,244));
-            this.tres.setColorHover(new Color(204,204,204));
-            this.tres.setColorPressed(new Color(204,204,204));
-            
-            this.cuatro.setColorNormal(new Color(239,238,244));
-            this.cuatro.setColorHover(new Color(204,204,204));
-            this.cuatro.setColorPressed(new Color(204,204,204));
-            
-            this.cinco.setColorNormal(new Color(204,204,204));
-            this.cinco.setColorHover(new Color(204,204,204));
-            this.cinco.setColorPressed(new Color(204,204,204));
-            
-          
-            
-            this.seis.setColorNormal(new Color(239,238,244));
-            this.seis.setColorHover(new Color(204,204,204));
-            this.seis.setColorPressed(new Color(204,204,204));
-        }else{
-            this.cinco.setColorNormal(new Color(239,238,244));
-            this.cinco.setColorHover(new Color(204,204,204));
-            this.cinco.setColorPressed(new Color(204,204,204));
-        }
-    }//GEN-LAST:event_cincoActionPerformed
-
-    private void cincoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cincoMousePressed
-
-        if(evt.getSource()==cinco){
-            if(!cinco.isEnabled()){
-                JOptionPane.showMessageDialog(rootPane,"No tienes Permisos para Acceder a esta opción");
-            }
-
-    } 
-        this.uno.setSelected(false);
-        this.dos.setSelected(false);
-        this.tres.setSelected(false);
-        this.cuatro.setSelected(false);
-        this.cinco.setSelected(true);
-        this.seis.setSelected(false);
-        this.siete.setSelected(false);
-
-        
-    }//GEN-LAST:event_cincoMousePressed
-
     private void cuatroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cuatroMousePressed
-          if(evt.getSource()==cuatro){
+        if(evt.getSource()==cuatro){
             if(!cuatro.isEnabled()){
                 JOptionPane.showMessageDialog(rootPane,"No tienes Permisos para Acceder a esta opción");
             }
@@ -704,13 +583,16 @@ public class Principal extends javax.swing.JFrame  {
         this.tres.setSelected(false);
         this.cuatro.setSelected(true);
         this.cinco.setSelected(false);
+       
         this.seis.setSelected(false);
-        this.siete.setSelected(false);
-
     }//GEN-LAST:event_cuatroMousePressed
 
     private void cuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuatroActionPerformed
-        new CambiaPanel(pnlPrincipal, new paneles.pnlVentas());
+        try {
+            new CambiaPanel(pnlPrincipal, new paneles.pnlVentas());
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(this.cuatro.isSelected()){
             this.uno.setColorNormal(new Color(239,238,244));
             this.uno.setColorHover(new Color(204,204,204));
@@ -744,15 +626,76 @@ public class Principal extends javax.swing.JFrame  {
         }
     }//GEN-LAST:event_cuatroActionPerformed
 
-    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-        x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_jPanel2MousePressed
+    private void cincoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cincoMousePressed
 
-    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
-        Point mueve = MouseInfo.getPointerInfo().getLocation();
-        this.setLocation(mueve.x - x, mueve.y - y);
-    }//GEN-LAST:event_jPanel2MouseDragged
+      
+        if(evt.getSource()==cinco){
+            if(!cinco.isEnabled()){
+                JOptionPane.showMessageDialog(rootPane,"No tienes Permisos para Acceder a esta opción");
+            }
+
+    } 
+        this.uno.setSelected(false);
+        this.dos.setSelected(false);
+        this.tres.setSelected(false);
+        this.cuatro.setSelected(false);
+        this.cinco.setSelected(true);
+        
+        this.seis.setSelected(false);
+    }//GEN-LAST:event_cincoMousePressed
+
+    private void cincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cincoActionPerformed
+
+         new CambiaPanel(pnlPrincipal, new paneles.pnlUsuarios());
+        if(this.cinco.isSelected()){
+            this.uno.setColorNormal(new Color(239,238,244));
+            this.uno.setColorHover(new Color(204,204,204));
+            this.uno.setColorPressed(new Color(204,204,204));
+            
+            this.dos.setColorNormal(new Color(239,238,244));
+            this.dos.setColorHover(new Color(204,204,204));
+            this.dos.setColorPressed(new Color(204,204,204));
+            
+            this.tres.setColorNormal(new Color(239,238,244));
+            this.tres.setColorHover(new Color(204,204,204));
+            this.tres.setColorPressed(new Color(204,204,204));
+            
+            this.cuatro.setColorNormal(new Color(239,238,244));
+            this.cuatro.setColorHover(new Color(204,204,204));
+            this.cuatro.setColorPressed(new Color(204,204,204));
+            
+            this.cinco.setColorNormal(new Color(204,204,204));
+            this.cinco.setColorHover(new Color(204,204,204));
+            this.cinco.setColorPressed(new Color(204,204,204));
+            
+          
+            
+            this.seis.setColorNormal(new Color(239,238,244));
+            this.seis.setColorHover(new Color(204,204,204));
+            this.seis.setColorPressed(new Color(204,204,204));
+        }else{
+            this.cinco.setColorNormal(new Color(239,238,244));
+            this.cinco.setColorHover(new Color(204,204,204));
+            this.cinco.setColorPressed(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_cincoActionPerformed
+
+    private void sieteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seisMousePressed
+        if(evt.getSource()==siete){
+            if(!siete.isEnabled()){
+                JOptionPane.showMessageDialog(rootPane,"No tienes Permisos para Acceder a esta opción");
+            }
+        }
+
+        this.uno.setSelected(false);
+        this.dos.setSelected(false);
+        this.tres.setSelected(false);
+        this.cuatro.setSelected(false);
+        this.cinco.setSelected(false);
+        this.seis.setSelected(false);
+
+        this.siete.setSelected(true);
+    }//GEN-LAST:event_seisMousePressed
 
     private void dosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosActionPerformed
         new CambiaPanel(pnlPrincipal, new paneles.pnlAlmacen());
@@ -777,7 +720,6 @@ public class Principal extends javax.swing.JFrame  {
             this.cinco.setColorHover(new Color(204,204,204));
             this.cinco.setColorPressed(new Color(204,204,204));
 
-
             this.seis.setColorNormal(new Color(239,238,244));
             this.seis.setColorHover(new Color(204,204,204));
             this.seis.setColorPressed(new Color(204,204,204));
@@ -789,76 +731,165 @@ public class Principal extends javax.swing.JFrame  {
     }//GEN-LAST:event_dosActionPerformed
 
     private void dosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dosMousePressed
- if(evt.getSource()==dos){
+        if(evt.getSource()==dos){
             if(!dos.isEnabled()){
-                JOptionPane.showMessageDialog(rootPane,"No tienes Permisos para Acceder a esta opción");
+                JOptionPane.showMessageDialog(rootPane,"Fue bloqueado");
             }
-           }
-        
+        }
+
         this.uno.setSelected(false);
         this.dos.setSelected(true);
         this.tres.setSelected(false);
         this.cuatro.setSelected(false);
         this.cinco.setSelected(false);
         this.seis.setSelected(false);
-        this.siete.setSelected(false);
-
     }//GEN-LAST:event_dosMousePressed
 
-    private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-       Session lo = new Session();
-        this.hide();
-        lo.show();
-    }//GEN-LAST:event_btnsalirActionPerformed
+    private void seisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seis1MousePressed
+        if(evt.getSource()==seis){
+            if(!seis.isEnabled()){
+                JOptionPane.showMessageDialog(rootPane,"No tienes Permisos para Acceder a esta opción");
+            }
+        }
+
+        this.uno.setSelected(false);
+        this.dos.setSelected(false);
+        this.tres.setSelected(false);
+        this.cuatro.setSelected(false);
+        this.cinco.setSelected(false);
+
+        this.seis.setSelected(true);// TODO add your handling code here:
+    }//GEN-LAST:event_seis1MousePressed
+
+    private void seisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seisActionPerformed
+
+        new CambiaPanel(pnlPrincipal, new paneles.pnlReportes());
+        if(this.seis.isSelected()){
+            this.uno.setColorNormal(new Color(239,238,244));
+            this.uno.setColorHover(new Color(204,204,204));
+            this.uno.setColorPressed(new Color(204,204,204));
+
+            this.dos.setColorNormal(new Color(239,238,244));
+            this.dos.setColorHover(new Color(204,204,204));
+            this.dos.setColorPressed(new Color(204,204,204));
+
+            this.tres.setColorNormal(new Color(239,238,244));
+            this.tres.setColorHover(new Color(204,204,204));
+            this.tres.setColorPressed(new Color(204,204,204));
+
+            this.cuatro.setColorNormal(new Color(239,238,244));
+            this.cuatro.setColorHover(new Color(204,204,204));
+            this.cuatro.setColorPressed(new Color(204,204,204));
+
+            this.cinco.setColorNormal(new Color(239,238,244));
+            this.cinco.setColorHover(new Color(204,204,204));
+            this.cinco.setColorPressed(new Color(204,204,204));
+
+              this.siete.setColorNormal(new Color(239,238,244));
+            this.siete.setColorHover(new Color(204,204,204));
+            this.siete.setColorPressed(new Color(204,204,204));
+            
+            this.seis.setColorNormal(new Color(204,204,204));
+            this.seis.setColorHover(new Color(204,204,204));
+            this.seis.setColorPressed(new Color(204,204,204));
+        }else{
+            this.seis.setColorNormal(new Color(239,238,244));
+            this.seis.setColorHover(new Color(204,204,204));
+            this.seis.setColorPressed(new Color(204,204,204));
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_seisActionPerformed
 
     private void sieteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sieteActionPerformed
-new CambiaPanel(pnlPrincipal, new paneles.pnlConfiguracion());
+
+        new CambiaPanel(pnlPrincipal, new paneles.pnlConfiguracion());
         if(this.siete.isSelected()){
             this.uno.setColorNormal(new Color(239,238,244));
             this.uno.setColorHover(new Color(204,204,204));
             this.uno.setColorPressed(new Color(204,204,204));
-            
+
             this.dos.setColorNormal(new Color(239,238,244));
             this.dos.setColorHover(new Color(204,204,204));
             this.dos.setColorPressed(new Color(204,204,204));
-            
+
             this.tres.setColorNormal(new Color(239,238,244));
             this.tres.setColorHover(new Color(204,204,204));
             this.tres.setColorPressed(new Color(204,204,204));
-            
+
             this.cuatro.setColorNormal(new Color(239,238,244));
             this.cuatro.setColorHover(new Color(204,204,204));
             this.cuatro.setColorPressed(new Color(204,204,204));
+
+            this.cinco.setColorNormal(new Color(239,238,244));
+            this.cinco.setColorHover(new Color(204,204,204));
+            this.cinco.setColorPressed(new Color(204,204,204));
             
             this.cinco.setColorNormal(new Color(239,238,244));
             this.cinco.setColorHover(new Color(204,204,204));
             this.cinco.setColorPressed(new Color(204,204,204));
             
-
-            
-            this.seis.setColorNormal(new Color(239,238,244));
-            this.seis.setColorHover(new Color(204,204,204));
-            this.seis.setColorPressed(new Color(204,204,204));
-            
-             this.siete.setColorNormal(new Color(204,204,204));
+            this.siete.setColorNormal(new Color(204,204,204));
             this.siete.setColorHover(new Color(204,204,204));
             this.siete.setColorPressed(new Color(204,204,204));
         }else{
             this.siete.setColorNormal(new Color(239,238,244));
             this.siete.setColorHover(new Color(204,204,204));
             this.siete.setColorPressed(new Color(204,204,204));
-        }        // TODO add your handling code here:
+        }
     }//GEN-LAST:event_sieteActionPerformed
 
-    private void sieteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sieteMousePressed
-        this.uno.setSelected(false);
+    private void ochoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ochoActionPerformed
+        
+         new CambiaPanel(pnlPrincipal, new paneles.pnlRespaldos());
+        if(this.siete.isSelected()){
+            this.uno.setColorNormal(new Color(239,238,244));
+            this.uno.setColorHover(new Color(204,204,204));
+            this.uno.setColorPressed(new Color(204,204,204));
+
+            this.dos.setColorNormal(new Color(239,238,244));
+            this.dos.setColorHover(new Color(204,204,204));
+            this.dos.setColorPressed(new Color(204,204,204));
+
+            this.tres.setColorNormal(new Color(239,238,244));
+            this.tres.setColorHover(new Color(204,204,204));
+            this.tres.setColorPressed(new Color(204,204,204));
+
+            this.cuatro.setColorNormal(new Color(239,238,244));
+            this.cuatro.setColorHover(new Color(204,204,204));
+            this.cuatro.setColorPressed(new Color(204,204,204));
+
+            this.siete.setColorNormal(new Color(239,238,244));
+            this.siete.setColorHover(new Color(204,204,204));
+            this.siete.setColorPressed(new Color(204,204,204));
+
+            this.ocho.setColorNormal(new Color(204,204,204));
+            this.ocho.setColorHover(new Color(204,204,204));
+            this.ocho.setColorPressed(new Color(204,204,204));
+        }else{
+            this.ocho.setColorNormal(new Color(239,238,244));
+            this.ocho.setColorHover(new Color(204,204,204));
+            this.ocho.setColorPressed(new Color(204,204,204));
+        }
+        
+    }//GEN-LAST:event_ochoActionPerformed
+
+    private void ochoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ochoMousePressed
+      this.uno.setSelected(false);
         this.dos.setSelected(false);
         this.tres.setSelected(false);
         this.cuatro.setSelected(false);
         this.cinco.setSelected(false);
         this.seis.setSelected(false);
-        this.siete.setSelected(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_sieteMousePressed
+        this.siete.setSelected(false);
+
+
+        this.ocho.setSelected(true);  // TODO add your handling code here:
+    }//GEN-LAST:event_ochoMousePressed
+
+                                  
+
+                              
+
+                                      
 
     /**
      * @param args the command line arguments
@@ -912,11 +943,12 @@ new CambiaPanel(pnlPrincipal, new paneles.pnlConfiguracion());
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    public rsbuttom.RSButtonMetro ocho;
     private javax.swing.JPanel pnlCentro;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlPrincipal;
     public rsbuttom.RSButtonMetro seis;
-    private rsbuttom.RSButtonMetro siete;
+    public rsbuttom.RSButtonMetro siete;
     public rsbuttom.RSButtonMetro tres;
     public static javax.swing.JTextField txtcodigo;
     public static javax.swing.JTextField txtusuario;

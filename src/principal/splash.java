@@ -6,9 +6,10 @@
 package principal;
 
 import rsbuttom.CargarSplash;
-import com.sun.awt.AWTUtilities;
+
 import java.awt.Color;
 import rojerusan.componentes.RSProgressBarSinText;
+import rsbuttom.AWTUtilities;
 
 /**
  *
@@ -21,7 +22,7 @@ public class splash extends javax.swing.JFrame {
      */
     public splash() {
         initComponents();
-       AWTUtilities.setWindowOpaque(this, rootPaneCheckingEnabled);
+       AWTUtilities.setOpaque(this, rootPaneCheckingEnabled);
         this.setLocationRelativeTo(this);
         this.barraProgress.setValue(0);
         this.lblProgress.setText("0%");

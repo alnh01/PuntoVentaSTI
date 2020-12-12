@@ -19,7 +19,7 @@ import java.util.Date;
 
 public class CortedelDia {
      private Connection userConn;
-    private final String SQL_SELECT = "select ar.nombre as articulo , ar.descripcion , dv.cantidad,dv.costo  from detalle_venta dv INNER JOIN venta v  ON dv.idventa = v.idventa INNER JOIN articulo ar on dv.idarticulo = ar.idarticulo	 where CONVERT(date,v.fecha_hora)=Convert(date,GETDATE())";
+    private final String SQL_SELECT = "select ar.nombre as articulo , ar.descripcion , dv.cantidad,dv.costo  from detalle_venta dv INNER JOIN venta v  ON dv.idventa = v.idventa INNER JOIN articulo ar on dv.idarticulo = ar.idarticulo	 where   FORMATDATETIME(v.fecha_hora,'yyyy-MM-dd')= CURRENT_DATE";
 
     public CortedelDia(Connection conn) {
         this.userConn = conn;

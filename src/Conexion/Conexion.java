@@ -13,17 +13,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Conexion {
     
- 
-   private static String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+   public static Connection conect = null;
+   public static String JDBC_DRIVER = "org.h2.Driver";
     //El puerto es opcional
-    private static String JDBC_URL = "jdbc:sqlserver://localhost:1433;databaseName=PuntoVenta";
-    private static String JDBC_USER = "sa";
-    private static String JDBC_PASS = "admin";
-    private static Driver driver = null;
+//    private static String JDBC_URL = "jdbc:h2:file:./base/PuntoVenta";
+    public static String JDBC_URL = "jdbc:h2:file:./base/PuntoVenta";
+
+   
+    public static String JDBC_USER = "sa";
+    public static String JDBC_PASS = "admin";
+    public static Driver driver = null;
 
 	//Para que no haya problemas al obtener la conexion de
     //manera concurrente, se usa la palabra synchronized
@@ -41,7 +46,7 @@ public class Conexion {
                 e.printStackTrace();
             }
         }
-        return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
+        return conect = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
     }
 
     //Cierre del resultSet
@@ -76,4 +81,13 @@ public class Conexion {
             sqle.printStackTrace();
         }
     }
+     public static  void desconectar() {
+    
+       try {
+           conect.close();
+       } catch (SQLException ex) {
+           Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+       }
+    }
+     
 }
