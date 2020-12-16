@@ -40,8 +40,13 @@ import modal.CargandoRestore;
 import necesario.RSFileChooser;
 import principal.Principal;
 import Alerts.Backup;
+import BD.LimpiarTablas;
+import BD.Producto;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import modal.Verexcel;
 import org.h2.jdbcx.JdbcDataSource;
 import org.h2.tools.Restore;
 
@@ -53,7 +58,7 @@ import principal.Session;
  */
 public class pnlRespaldos extends javax.swing.JPanel {
 
- 
+   Producto product = new Producto();
        
        
     public pnlRespaldos() {
@@ -76,9 +81,20 @@ public class pnlRespaldos extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel16 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        btnBackup = new rojeru_san.rsbutton.RSButtonMetro();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
@@ -91,88 +107,132 @@ public class pnlRespaldos extends javax.swing.JPanel {
         jLabel16.setText("Utileria");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 70));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/descargar.png"))); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/descargar.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 80, 70));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("Crear Respaldo");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel4.setText("Base de Datos");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setText("Restaurar");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel8.setText("Base de Datos");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, -1, -1));
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/subir-archivo.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 80, -1));
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1080, 120));
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Borrar Registros");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel3.setText("tabla productos");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setText("Cargar Datos");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel6.setText("tabla productos");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, -1, -1));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/clean (1).png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 80, 70));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 80, 80));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/subir-archivo.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/excel_1.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 70, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 80, 80));
 
-        btnBackup.setBackground(new java.awt.Color(69, 87, 252));
-        btnBackup.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackupActionPerformed(evt);
-            }
-        });
-        add(btnBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 1080, 120));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            
-       GeneraBackup();
-               
-          
-          
-        
-       
-
-    }//GEN-LAST:event_jButton1ActionPerformed
     public static File existe = null;
     public static File destino = new File("_/");
     
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    GeneraBackup();       // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+RestoreBackup();
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+int ventanaYesNotCancel = JOptionPane.showConfirmDialog(null, "¿Quieres borrar todos los registros?", "Javadesde0.com", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+			//0=yes, 1=no, 2=cancel		
+        if(ventanaYesNotCancel == 0) {		
+    	   try {
+            
+            product.LimpiarTabla();
+            
+            JOptionPane.showMessageDialog(null, "Datos Borrados");
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }			
+        }else if(ventanaYesNotCancel == 1){		
+         System.out.println("Has pulsado No");			
+         }else if(ventanaYesNotCancel == 2){
+         System.out.println("Has pulsado Cancel");	
+            } 
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      Connection conn = null;
-      Statement stmt = null;
-
-      try
-      {
-          
-         System.out.println("Restoring test");
-         Restore.execute("D:\\Archivos\\STI\\RespaldoDefinitivo\\Dashboard_1\\respaldos\\sdasa_11-12-2020.zip", "file:./base/", "PuntoVenta");
-
-         JdbcDataSource datasource = new JdbcDataSource();
-         datasource.setUrl("jdbc:h2:file:./base/PuntoVenta;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
-         conn = datasource.getConnection("sa", "admin");
-         stmt = conn.createStatement();
-
-        
-      } catch (SQLException ex) {     
-            Logger.getLogger(pnlRespaldos.class.getName()).log(Level.SEVERE, null, ex);
-        }     
-
-        
-               
-//              
-//           try {
-//               RestoreBackup();
-//           } catch (SQLException ex) {
-//               Logger.getLogger(pnlRespaldos.class.getName()).log(Level.SEVERE, null, ex);
-//           }
-//           
-        
-
+Excel ab = new Excel();
+    ab.abrir();  
+    
+    Verexcel ver = new Verexcel(new JFrame(),true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void btnBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackupActionPerformed
-         GeneraBackup();
-        
-    }//GEN-LAST:event_btnBackupActionPerformed
+    
 
-
-    private void RestoreBackup() throws SQLException {  
+    private void RestoreBackup() {
              
      try {
                    
-                  String path = System.getProperty("user.dir")+"\\respaldos";
+                  String path = System.getProperty("user.home")+"\\respaldos";
                    File ruta = new File(path);
                RSFileChooser fileChooser = new RSFileChooser();
         fileChooser.setCurrentDirectory(ruta);
@@ -238,9 +298,20 @@ public class pnlRespaldos extends javax.swing.JPanel {
     }
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rojeru_san.rsbutton.RSButtonMetro btnBackup;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

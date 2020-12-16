@@ -239,8 +239,6 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         btneliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        btnImportar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -489,23 +487,6 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jPanelRound1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 130, 40));
 
         jPanel3.add(jPanelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 490, 540));
-
-        btnImportar.setBackground(new java.awt.Color(153, 255, 102));
-        btnImportar.setText("Importar");
-        btnImportar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImportarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnImportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, 30));
-
-        jButton3.setText("Borrar Registros");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(413, 240, 120, 30));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1080, 560));
 
@@ -854,43 +835,6 @@ public void  limpiarProveedor(){
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void btnImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarActionPerformed
-    Excel ab = new Excel();
-    ab.abrir();  
-    
-    Verexcel ver = new Verexcel(new JFrame(),true);
-   boolean  validar = ver.correcto;
-        System.out.println(validar);
-   if(validar){
-     
-       CargarModeloTabla();
-   }
-   
-   
-    }//GEN-LAST:event_btnImportarActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-int ventanaYesNotCancel = JOptionPane.showConfirmDialog(null, "¿Quieres borrar todos los registros?", "Javadesde0.com", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-			//0=yes, 1=no, 2=cancel		
-        if(ventanaYesNotCancel == 0) {		
-    	   try {
-            
-            product.LimpiarTabla();
-            limpiarTabla();
-            JOptionPane.showMessageDialog(rootPane, "Datos Borrados");
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlProductos.class.getName()).log(Level.SEVERE, null, ex);
-        }			
-        }else if(ventanaYesNotCancel == 1){		
-         System.out.println("Has pulsado No");			
-         }else if(ventanaYesNotCancel == 2){
-         System.out.println("Has pulsado Cancel");	
-            } 
-
-
-       
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void txtnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyReleased
     txtnombre.setText(txtnombre.getText().toUpperCase());          // TODO add your handling code here:
     }//GEN-LAST:event_txtnombreKeyReleased
@@ -907,13 +851,11 @@ int ventanaYesNotCancel = JOptionPane.showConfirmDialog(null, "¿Quieres borrar 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Ncategoria;
     private javax.swing.JButton Nunidad;
-    private javax.swing.JButton btnImportar;
     private javax.swing.JButton btneliminar;
     private javax.swing.JComboBox cmbcategorias;
     private javax.swing.JComboBox cmbunidades;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

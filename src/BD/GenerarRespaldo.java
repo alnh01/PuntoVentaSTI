@@ -64,10 +64,9 @@ public class GenerarRespaldo {
     }
     
     
-    public void  Resp_Clientes() throws IOException{
+    public void  Resp_Clientes(File ruta) throws IOException{
         
        
-        
       ArrayList<CClientes> clientes  =  cl.ObtenerUsuarios();
       ArrayList<CUsuarios> usuarios  =  usr.ObtenerUsuarios();
       ArrayList<CProveedores> proveedor  =  prov.ObtenerProveedores();
@@ -89,9 +88,11 @@ public class GenerarRespaldo {
         DateFormat hourdateFormat = new SimpleDateFormat("HH.mm.ss dd-MM-yyyy");
         String historial = hourdateFormat.format(date);
 
-      String ruta = ""+historial+".txt";
+    
         
-            File file = new File(ruta);
+            File file = ruta;
+            
+//        System.out.println(file);
             // Si el archivo no existe es creado
             if (!file.exists()) {
                 file.createNewFile();
@@ -113,6 +114,7 @@ public class GenerarRespaldo {
            
            bw.write(variable);
            bw.newLine();
+         
           }
           
           bw.newLine();
@@ -135,7 +137,7 @@ public class GenerarRespaldo {
    
 
         
-         String variable = this.Remplazar("usuario") +"("+ id+",'"+nombre+"',"+tipo_documento+","+num_documento+",'"+direccion+"','"+telefono+"','"+email+"'"+"',"+cargo+","+login+",'"+clave+"','"+imagen+"','"+condicion+");";
+         String variable = this.Remplazar("usuario") +"("+ id+",'"+nombre+"','"+tipo_documento+"','"+num_documento+"','"+direccion+"','"+telefono+"','"+email+"'"+",'"+cargo+"','"+login+"','"+clave+"','"+imagen+"','"+condicion+"');";
          bw.write(variable);
          bw.newLine();
          }
@@ -185,12 +187,11 @@ public class GenerarRespaldo {
           String descripcion = categoria.get(i).getDescripcion();
           int condicion= categoria.get(i).getEstado();
           
-         String variable = this.Remplazar("categoria") +"("+id+",'"+nombre+"',"+descripcion+","+condicion+");";
+         String variable = this.Remplazar("categoria") +"("+id+",'"+nombre+"','"+descripcion+"',"+condicion+");";
          bw.write(variable);
          bw.newLine();
          }
-              
-//         detalle_ingreso
+         
          bw.newLine();
          for (int i = 0; i < detalle_ingreso.size(); i++) {
              
@@ -243,7 +244,7 @@ public class GenerarRespaldo {
           String nombre =permisos.get(i).getNombre();
           
           
-         String variable = this.Remplazar("permiso") +"("+idpermiso+","+nombre+");";
+         String variable = this.Remplazar("permiso") +"("+idpermiso+",'"+nombre+"');";
          bw.write(variable);
          bw.newLine();
          }
@@ -253,7 +254,7 @@ public class GenerarRespaldo {
              
           int idunidad =unidades.get(i).getIdunidad();
           String nombre =unidades.get(i).getNombre();
-         String variable = this.Remplazar("unidad_medida") +"("+idunidad+","+nombre+");";
+         String variable = this.Remplazar("unidad_medida") +"("+idunidad+",'"+nombre+"');";
          bw.write(variable);
          bw.newLine();
          }
@@ -282,7 +283,7 @@ public class GenerarRespaldo {
              
              
              
-        String variable = this.Remplazar("usuario_permiso") +"("+iddetallep+","+idusuario+",'"+permiso+");";
+        String variable = this.Remplazar("usuario_permiso") +"("+iddetallep+","+idusuario+",'"+permiso+"');";
         bw.write(variable);
         bw.newLine();
          }

@@ -1,9 +1,13 @@
 package modal;
 
+import BD.LimpiarTablas;
 import Conexion.Conexion;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -27,31 +31,36 @@ public class Restore {
 
  
     
-    public static boolean restoreDB(String source) {
+    public static boolean restoreDB(String source) throws FileNotFoundException {
         
-       
+     boolean bandera = new LimpiarTablas().ObtenerTablas();
 
-        File origen = new File(source);
-        File destino = new File("base/PuntoVenta.mv.db");
-
-        try {
+     if(bandera){
          
-            InputStream in = new FileInputStream(origen);
-            OutputStream out = new FileOutputStream(destino);
-
-            byte[] buf = new byte[(int) destino.length()];
-            int len;
-
-            while ((len = in.read(buf)) > 0) {
-                out.write(buf, 0, len);
+          try {
+     
+            File origen = new File(source);
+            
+            String cadena;
+            FileReader f = new FileReader(source);
+            BufferedReader b = new BufferedReader(f);
+            while((cadena = b.readLine())!=null) {
+               new LimpiarTablas().insert(cadena);
             }
-            in.close();
-            out.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+            b.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Restore.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+         
+     }
+       
+        return true;
     }
 
+
+        
+    }
+    
+        
    
-}
+

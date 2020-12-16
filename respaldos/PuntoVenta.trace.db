@@ -1,0 +1,4 @@
+2020-12-12 11:15:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT TABLE_NAME, TABLE_TYPE FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = TABLE[*]"; se esperaba "identifier"
+Syntax error in SQL statement "SELECT TABLE_NAME, TABLE_TYPE FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = TABLE[*]"; expected "identifier"; SQL statement:
+select table_name, table_type from  information_schema.tables where table_type = TABLE [42001-200]

@@ -112,7 +112,13 @@ public class pnlPunto extends javax.swing.JPanel {
         modeloTabla.addColumn("Importe");
         tblventas.setModel(modeloTabla);
         cargarListenerModeloTabla();
-       cmbclientes.setSelectedIndex(0);
+        if(cmbclientes.getItemCount() != 0){
+            
+            cmbclientes.setSelectedIndex(0);
+
+        }else{
+            System.out.println("no tiene datos");
+        }
          TableColumnModel columna=tblventas.getColumnModel();
       
       columna.getColumn(1).setPreferredWidth(700);

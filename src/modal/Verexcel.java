@@ -223,7 +223,7 @@ if(cont  == 0){
            }
                 }
             };
-                    time = new javax.swing.Timer(10,sc);
+                    time = new javax.swing.Timer(1,sc);
                     time.start();
        
 }        

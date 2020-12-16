@@ -5,6 +5,7 @@
  */
 package modal;
 
+import Alerts.Backup;
 import BD.Categorias;
 import BD.CorteDia;
 import BD.CortedelDia;
@@ -15,11 +16,14 @@ import Controller.CCortedia;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -329,16 +333,27 @@ public class Cortedia extends javax.swing.JDialog {
           CCorte cortardia = new CCorte(0,null,idusuario,total,"");
           cdia.insert(cortardia);
           GenerarRespaldo  respaldo = new GenerarRespaldo();
-          respaldo.Resp_Clientes();
+          String path = System.getProperty("user.home")+"\\respaldos/corte_" + obtenerFecha() + ".txt";
+          File directorio = new File(path);
+          respaldo.Resp_Clientes(directorio);
           this.dispose();
-      } catch (SQLException ex) {
+      }catch (SQLException ex) {
           Logger.getLogger(Cortedia.class.getName()).log(Level.SEVERE, null, ex);
       } catch (IOException ex) {
           Logger.getLogger(Cortedia.class.getName()).log(Level.SEVERE, null, ex);
-      }        // TODO add your handling code here:
+      }
+      // TODO add your handling code here:
+              // TODO add your handling code here:
     }//GEN-LAST:event_fSButtonMD1ActionPerformed
 
-
+   public String obtenerFecha() {
+        Calendar fecha = new GregorianCalendar();
+        int año = fecha.get(Calendar.YEAR);
+        int mes = fecha.get(Calendar.MONTH);
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        String Fehca = dia + "-" + (mes + 1) + "-" + año;
+        return Fehca;
+    }
     
     
      

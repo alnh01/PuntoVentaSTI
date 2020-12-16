@@ -6,6 +6,7 @@
 package modal;
 //
 import Alerts.Backup;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -42,7 +43,11 @@ public class CargandoRestore extends javax.swing.JDialog {
             @Override
             public void run() {
                
+                try {
                     new Restore().restoreDB(pnlRespaldos.existe.getAbsolutePath());
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(CargandoRestore.class.getName()).log(Level.SEVERE, null, ex);
+                }
              
                                    
                 
