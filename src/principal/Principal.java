@@ -22,9 +22,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import modal.CambiarContrasena;
+import modal.CambiarUsuario;
 import modal.Respaldos;
 import paneles.CambiaPanel;
-import paneles.pnlPunto;
 import paneles.pnlRespaldos;
 
 /**
@@ -52,6 +53,9 @@ public class Principal extends javax.swing.JFrame  {
          Animacion.Animacion.mover_izquierda(0, -264, 2, 2, pnlMenu);
          
          pnlRespaldos.ventana(this);
+         CambiarContrasena.ventana(this);
+         CambiarUsuario.ventana(this);
+
 
       
        setIconImage(new ImageIcon(getClass().getResource("/img1/chip.png")).getImage());
@@ -135,13 +139,13 @@ public class Principal extends javax.swing.JFrame  {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/id-card (2).png"))); // NOI18N
         pnlMenu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/exit.png"))); // NOI18N
+        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/icons8-multiplicar-50.png"))); // NOI18N
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 40, -1));
+        pnlMenu.add(btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 40, 40));
 
         uno.setForeground(new java.awt.Color(128, 128, 131));
         uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/house.png"))); // NOI18N
@@ -320,7 +324,7 @@ public class Principal extends javax.swing.JFrame  {
         ocho.setBackground(new java.awt.Color(239, 238, 244));
         ocho.setForeground(new java.awt.Color(128, 128, 131));
         ocho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/base-de-datos (1).png"))); // NOI18N
-        ocho.setText("Utileria");
+        ocho.setText("Utilerias");
         ocho.setColorHover(new java.awt.Color(204, 204, 204));
         ocho.setColorNormal(new java.awt.Color(239, 238, 244));
         ocho.setColorPressed(new java.awt.Color(204, 204, 204));
@@ -377,7 +381,7 @@ public class Principal extends javax.swing.JFrame  {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Punto de Venta STI");
+        jLabel2.setText("Easy Store POS");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -388,7 +392,7 @@ public class Principal extends javax.swing.JFrame  {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addContainerGap(889, Short.MAX_VALUE))
+                .addContainerGap(923, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

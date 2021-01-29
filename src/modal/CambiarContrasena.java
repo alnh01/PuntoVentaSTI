@@ -27,6 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import principal.Principal;
+import principal.Session;
 import rsbuttom.AWTUtilities;
 
 /**
@@ -165,11 +166,19 @@ public class CambiarContrasena extends javax.swing.JDialog {
 String idprin=Principal.txtcodigo.getText();;
          
       try {
+           if (txtnewpass.getText().equals("")) {
+              System.out.println("esta vacio");
+          }else{
           usr.cambiarcontraseña(txtnewpass.getText(),idprin);
-            Success suc = new Success(new JFrame(),true );
+        Success suc = new Success(new JFrame(),true );
         suc.titulos.setText("!HECHO¡");
         suc.textos.setText("SE HAN GUARDADO LOS CAMBIOS");
         suc.setVisible(true);
+        this.dispose();  
+        pr.dispose();
+        new Session().setVisible(true);
+       
+           }
       } catch (SQLException ex) {
           Logger.getLogger(CambiarContrasena.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -177,7 +186,11 @@ String idprin=Principal.txtcodigo.getText();;
     }//GEN-LAST:event_btnactualizarActionPerformed
 
 
-    
+       public static Principal pr = null;
+
+    public static void ventana(Principal p) {
+        pr = p;
+    }
     
     /**
      * @param args the command line arguments

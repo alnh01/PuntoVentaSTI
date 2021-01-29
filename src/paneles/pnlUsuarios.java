@@ -5,9 +5,12 @@
  */
 package paneles;
 
+import Alerts.ErrorAlert;
 import Alerts.Information;
 import Alerts.Success;
+import Alerts.SuccessAlert;
 import Alerts.Warning;
+import Alerts.WarningAlert;
 import BD.Usuarios;
 import Controller.CPermisos;
 import Controller.CUsuarios;
@@ -118,7 +121,6 @@ public class pnlUsuarios extends javax.swing.JPanel {
          txtusuario.setText("");
          txttelefono.setText("");
          txtcorreo.setText("");
-         txtcargo.setText("");
          txtnombre.setText("");
          txtcontrasena.setText("");
          txtdireccion.setText("");
@@ -142,25 +144,14 @@ public class pnlUsuarios extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuario = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        txtbusuario = new javax.swing.JTextField();
         jPanelRound1 = new LIB.JPanelRound();
         jLabel12 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtcorreo = new javax.swing.JTextField();
-        txtnombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txttelefono = new javax.swing.JTextField();
-        txtcargo = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtcontrasena = new javax.swing.JPasswordField();
-        txtusuario = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtdireccion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jcpv = new javax.swing.JCheckBox();
         jcal = new javax.swing.JCheckBox();
@@ -171,7 +162,14 @@ public class pnlUsuarios extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         btneliminar1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        txtnombre = new rojeru_san.rsfield.RSTextFull();
+        txtcorreo = new rojeru_san.rsfield.RSTextFull();
+        txttelefono = new rojeru_san.rsfield.RSTextFull();
+        txtusuario = new rojeru_san.rsfield.RSTextFull();
+        txtcontrasena = new rojeru_san.rsfield.RSPassword();
+        txtdireccion = new rojeru_san.rsfield.RSTextFull();
         jLabel13 = new javax.swing.JLabel();
+        txtbusuario = new rojeru_san.rsfield.RSTextFull();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -260,16 +258,6 @@ public class pnlUsuarios extends javax.swing.JPanel {
         jLabel1.setText("Buscar:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
-        txtbusuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtbusuarioKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtbusuarioKeyTyped(evt);
-            }
-        });
-        add(txtbusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 220, 29));
-
         jPanelRound1.setBackground(new java.awt.Color(255, 255, 255));
         jPanelRound1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
         jPanelRound1.setOpaque(true);
@@ -277,117 +265,65 @@ public class pnlUsuarios extends javax.swing.JPanel {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel12.setText("Datos de Usuario");
-        jPanelRound1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
-
-        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/usuarioimagen.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, Short.MAX_VALUE)
-        );
-
-        jPanelRound1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
+        jPanelRound1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nombre:");
-        jPanelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 60, 30));
-        jPanelRound1.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 190, 30));
-
-        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtnombreKeyReleased(evt);
-            }
-        });
-        jPanelRound1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 190, 30));
+        jPanelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 60, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Telefono:");
-        jPanelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 70, 30));
-        jPanelRound1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 130, 30));
-        jPanelRound1.add(txtcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 130, 30));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Cargo:");
-        jPanelRound1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 50, 30));
+        jPanelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 70, 30));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Contraseña:");
-        jPanelRound1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 90, 30));
-
-        txtcontrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcontrasenaActionPerformed(evt);
-            }
-        });
-        jPanelRound1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 130, 30));
-
-        txtusuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtusuarioActionPerformed(evt);
-            }
-        });
-        jPanelRound1.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 140, 30));
+        jPanelRound1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 80, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Usuario:");
-        jPanelRound1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 60, 30));
+        jPanelRound1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 60, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Email:");
-        jPanelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 60, 30));
+        jPanelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 60, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Dirección:");
-        jPanelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 80, 30));
-
-        txtdireccion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtdireccionKeyReleased(evt);
-            }
-        });
-        jPanelRound1.add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 340, 30));
+        jPanelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 70, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setText("Permisos.");
-        jPanelRound1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, -1, -1));
+        jPanelRound1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
 
         jcpv.setBackground(new java.awt.Color(255, 255, 255));
         jcpv.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         jcpv.setText("Punto de Venta");
-        jPanelRound1.add(jcpv, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, -1, -1));
+        jPanelRound1.add(jcpv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
 
         jcal.setBackground(new java.awt.Color(255, 255, 255));
         jcal.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         jcal.setText("Almacen");
-        jPanelRound1.add(jcal, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, -1, -1));
+        jPanelRound1.add(jcal, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
 
         jcac.setBackground(new java.awt.Color(255, 255, 255));
         jcac.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         jcac.setText("Acceso");
-        jPanelRound1.add(jcac, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
+        jPanelRound1.add(jcac, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, -1, -1));
 
         jcre.setBackground(new java.awt.Color(255, 255, 255));
         jcre.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         jcre.setText("Reportes");
-        jPanelRound1.add(jcre, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, -1, -1));
+        jPanelRound1.add(jcre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
 
         jcco.setBackground(new java.awt.Color(255, 255, 255));
         jcco.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         jcco.setText("Compras");
-        jPanelRound1.add(jcco, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, -1, -1));
+        jPanelRound1.add(jcco, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
 
         jccl.setBackground(new java.awt.Color(255, 255, 255));
         jccl.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         jccl.setText("Clientes");
-        jPanelRound1.add(jccl, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, -1, -1));
+        jPanelRound1.add(jccl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(102, 166, 54));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -399,7 +335,7 @@ public class pnlUsuarios extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanelRound1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 160, 40));
+        jPanelRound1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 160, 40));
 
         btneliminar1.setBackground(new java.awt.Color(247, 94, 24));
         btneliminar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -411,7 +347,7 @@ public class pnlUsuarios extends javax.swing.JPanel {
                 btneliminar1ActionPerformed(evt);
             }
         });
-        jPanelRound1.add(btneliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 160, 40));
+        jPanelRound1.add(btneliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 160, 40));
 
         jButton2.setBackground(new java.awt.Color(81, 161, 194));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -423,37 +359,70 @@ public class pnlUsuarios extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanelRound1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 160, 40));
+        jPanelRound1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, 160, 40));
 
-        add(jPanelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 630, 300));
+        txtnombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtnombre.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtnombre.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtnombre.setMayusculas(true);
+        txtnombre.setPlaceholder("Nombre");
+        jPanelRound1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 530, -1));
+
+        txtcorreo.setForeground(new java.awt.Color(0, 0, 0));
+        txtcorreo.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtcorreo.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtcorreo.setMayusculas(true);
+        txtcorreo.setPlaceholder("Email");
+        jPanelRound1.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        txttelefono.setForeground(new java.awt.Color(0, 0, 0));
+        txttelefono.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txttelefono.setBotonColor(new java.awt.Color(255, 102, 102));
+        txttelefono.setPlaceholder("Telefono");
+        txttelefono.setSoloNumeros(true);
+        jPanelRound1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 190, -1));
+
+        txtusuario.setForeground(new java.awt.Color(0, 0, 0));
+        txtusuario.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtusuario.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtusuario.setMayusculas(true);
+        txtusuario.setPlaceholder("Usuario");
+        jPanelRound1.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+
+        txtcontrasena.setForeground(new java.awt.Color(0, 0, 0));
+        txtcontrasena.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        jPanelRound1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 190, -1));
+
+        txtdireccion.setForeground(new java.awt.Color(0, 0, 0));
+        txtdireccion.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtdireccion.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtdireccion.setMayusculas(true);
+        txtdireccion.setPlaceholder("Direccion");
+        jPanelRound1.add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 530, 40));
+
+        add(jPanelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 630, 360));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel13.setText("Listado de Productos");
         jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, 34));
-    }// </editor-fold>//GEN-END:initComponents
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, 34));
 
-    private void txtbusuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusuarioKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbusuarioKeyReleased
-
-    private void txtbusuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusuarioKeyTyped
-             txtbusuario.addKeyListener(new KeyAdapter() {
-            public void keyReleased(final KeyEvent e) {
-                String cadena = (txtbusuario.getText());
-                txtbusuario.setText(cadena);
-                repaint();
-                filtroBusqueda(txtbusuario);
+        txtbusuario.setForeground(new java.awt.Color(0, 0, 0));
+        txtbusuario.setMayusculas(true);
+        txtbusuario.setPlaceholder("Buscar");
+        txtbusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbusuarioActionPerformed(evt);
             }
         });
-        trsFiltro = new TableRowSorter(tablaUsuario.getModel());
-        tablaUsuario.setRowSorter(trsFiltro);
-    }//GEN-LAST:event_txtbusuarioKeyTyped
-
-    private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtusuarioActionPerformed
+        txtbusuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbusuarioKeyReleased(evt);
+            }
+        });
+        add(txtbusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, -1, -1));
+    }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -498,7 +467,7 @@ public class pnlUsuarios extends javax.swing.JPanel {
             String nombre = txtnombre.getText();
             String telefono = txttelefono.getText();
             String email = txtcorreo.getText();
-            String cargo =txtcargo.getText();
+            String cargo ="USER";
             String usuario = txtusuario.getText();
             String contraseña = txtcontrasena.getText();
             String  direccion = txtdireccion.getText();
@@ -514,20 +483,22 @@ public class pnlUsuarios extends javax.swing.JPanel {
         
        bdusr.eliminarPermisos(usuarioseleccionado);
        bdusr.actualizarPermisos(ListarCheck, usuarioseleccionado);
-        Success suc = new Success(new JFrame(),true );
-        suc.titulos.setText("!HECHO¡");
-        suc.textos.setText("SE HAN ACTUALIZADO LOS DATOS");
-        suc.setVisible(true);
+         SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN ACTUALIZADO LOS DATOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
         limpiar();
         CargarModeloTabla();
         } else if (cuentaFilasSeleccionadas == 0 ) { 
         CUsuarios usuarios  = new CUsuarios(0,nombre,"","",direccion,telefono,email,cargo,usuario,contraseña,"", "1");
         Long iduser = bdusr.insert(usuarios);  
         bdusr.guardarPermisos(ListarCheck,iduser);
-        Success suc = new Success(new JFrame(),true );
-        suc.titulos.setText("!HECHO¡");
-        suc.textos.setText("SE HAN GUARDADO LOS CAMBIOS");
-        suc.setVisible(true);
+         SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN GUARDADO LOS CAMBIOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
         //new RSNotifyFade("!Alerta!", "Usuario Registrado", 5, RSNotifyFade.PositionNotify.TopRight, RSNotifyFade.TypeNotify.SUCCESS).setVisible(true);
         CargarModeloTabla();
         limpiar();
@@ -537,51 +508,48 @@ public class pnlUsuarios extends javax.swing.JPanel {
         }   
         }else{
           // JOptionPane.showMessageDialog(null,"No hay ningun Permiso marcado");
-           Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("No hay ningun permiso marcado");
-                info.setVisible(true);
+            ErrorAlert e = new ErrorAlert(new JFrame(), true);
+            e.msj1.setText("HAY UN PLOBLEMA ");
+            e.msj2.setText("NO HAY NINGUN PERMISO MARCADO");
+            e.msj3.setText("");
+            e.setVisible(true);
+
     }
        
     
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txtcontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcontrasenaActionPerformed
-
     private void btneliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminar1ActionPerformed
          try {
             
              int cuentaFilasSeleccionadas = tablaUsuario.getSelectedRowCount();
             if (cuentaFilasSeleccionadas == 0) {
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Debe seleccionar alguna fila");
-                info.setVisible(true);
-                //new RSNotifyFade("!Alerta!", "Debe serleccionar alguna fila", 7, RSNotifyFade.PositionNotify.TopLef, RSNotifyFade.TypeNotify.WARNING).setVisible(true);
+                ErrorAlert e = new ErrorAlert(new JFrame(), true);
+                e.msj1.setText("HAY UN PLOBLEMA ");
+                e.msj2.setText("DEBE SELECCIONAR UN FILA");
+                e.msj3.setText("");
+                e.setVisible(true);
+               
             }else{
-                  Warning warning = new Warning(new Frame(),true);
-                warning.jLabel1.setText("Advertencia!!!");
-                warning.textos.setText("Esta seguro que deseas eliminar ?");
-                warning.setVisible(true);
-                
-                
-                     String dato = warning.valor.toString();
+                  WarningAlert w = new WarningAlert(new JFrame(), true);
+                w.msj1.setText("ESTAS SEGURO°°°");
+                w.msj2.setText("¡DESEAS ELIMINARLO?");
+                w.msj3.setText("");
+                w.setVisible(true);
                       
-                 if (dato.equals("Aceptar")) {
+                 if (w.hecho) {
                 bdusr.eliminarusuario(usuarioseleccionado);
                 limpiar();
                 CargarModeloTabla();
                
-                Information inf = new Information(new Frame(), true);
-                inf.textos.setText("Usuario Eliminado");
-                inf.setVisible(true);
+                  SuccessAlert succ  = new SuccessAlert(new Frame(), true);
+                succ.msj1.setText("CORRECTO !!!");
+                succ.msj2.setText("SE HA ELIMINADO EL USUARIO");
+                succ.msj3.setText("");
+                succ.setVisible(true);
                 
-            }else{
-               warning.dispose();
-               }
+            }
               
            
             }
@@ -596,13 +564,35 @@ tablaUsuario.clearSelection ();
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txtnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyReleased
-txtnombre.setText(txtnombre.getText().toUpperCase());          // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombreKeyReleased
+    private void txtbusuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusuarioKeyReleased
+        limpiarTabla();
+            String criterio = txtbusuario.getText();
+            
+       ArrayList<CUsuarios>ListarUsuarios = bdusr.ObtenerUsuariospotCriterio(criterio);
+      int numerosUsusarios = ListarUsuarios.size();
+      modeloTabla.setNumRows(numerosUsusarios);
+        for (int i = 0; i < numerosUsusarios; i++) {
+            CUsuarios usuarios = ListarUsuarios.get(i);
+            String nombre = usuarios.getNombre();
+            String email = usuarios.getEmail();
+            String usuario = usuarios.getLogin();
+            String estatus = usuarios.getCodicion();
+            
+            if(estatus.equals("1")){
+                estatus = "ACTIVO";
+            }else{
+                estatus = "INACTIVO";
+            }
+            modeloTabla.setValueAt(usuarios, i, 0);
+            modeloTabla.setValueAt(email, i, 1);
+            modeloTabla.setValueAt(usuario, i, 2);
+            modeloTabla.setValueAt(estatus, i, 3);
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_txtbusuarioKeyReleased
 
-    private void txtdireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdireccionKeyReleased
-txtdireccion.setText(txtdireccion.getText().toUpperCase());         // TODO add your handling code here:
-    }//GEN-LAST:event_txtdireccionKeyReleased
+    private void txtbusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbusuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -610,7 +600,6 @@ txtdireccion.setText(txtdireccion.getText().toUpperCase());         // TODO add 
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -618,11 +607,9 @@ txtdireccion.setText(txtdireccion.getText().toUpperCase());         // TODO add 
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
     private LIB.JPanelRound jPanelRound1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jcac;
@@ -632,14 +619,13 @@ txtdireccion.setText(txtdireccion.getText().toUpperCase());         // TODO add 
     private javax.swing.JCheckBox jcpv;
     private javax.swing.JCheckBox jcre;
     public javax.swing.JTable tablaUsuario;
-    private javax.swing.JTextField txtbusuario;
-    private javax.swing.JTextField txtcargo;
-    private javax.swing.JPasswordField txtcontrasena;
-    private javax.swing.JTextField txtcorreo;
-    private javax.swing.JTextField txtdireccion;
-    private javax.swing.JTextField txtnombre;
-    private javax.swing.JTextField txttelefono;
-    private javax.swing.JTextField txtusuario;
+    private rojeru_san.rsfield.RSTextFull txtbusuario;
+    private rojeru_san.rsfield.RSPassword txtcontrasena;
+    private rojeru_san.rsfield.RSTextFull txtcorreo;
+    private rojeru_san.rsfield.RSTextFull txtdireccion;
+    private rojeru_san.rsfield.RSTextFull txtnombre;
+    private rojeru_san.rsfield.RSTextFull txttelefono;
+    private rojeru_san.rsfield.RSTextFull txtusuario;
     // End of variables declaration//GEN-END:variables
 
    

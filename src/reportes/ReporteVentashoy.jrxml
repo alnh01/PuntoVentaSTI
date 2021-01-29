@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7bc0fb14-c72d-4df7-bf83-4ca401fe7112">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="244"/>
+	<property name="ireport.y" value="214"/>
 	<parameter name="fechahoy" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT v.idventa,v.fecha_hora,v.idcliente,p.nombre as cliente,v.total_venta,v.estado FROM venta v INNER JOIN clientes p ON v.idcliente=p.idcliente WHERE CONVERT(date,v.fecha_hora)=$P{fechahoy}]]>
+		<![CDATA[SELECT v.idventa,v.fecha_hora,v.idcliente,p.nombre as cliente,v.total_venta,v.estado FROM venta v INNER JOIN clientes p ON v.idcliente=p.idcliente WHERE  FORMATDATETIME(v.fecha_hora,'yyyy-MM-dd')=$P{fechahoy}]]>
 	</queryString>
-	<field name="idventa" class="java.lang.Integer"/>
-	<field name="fecha_hora" class="java.sql.Timestamp"/>
-	<field name="idcliente" class="java.lang.Integer"/>
-	<field name="cliente" class="java.lang.String"/>
-	<field name="total_venta" class="java.math.BigDecimal"/>
-	<field name="estado" class="java.lang.String"/>
+	<field name="IDVENTA" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FECHA_HORA" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IDCLIENTE" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CLIENTE" class="java.lang.String"/>
+	<field name="TOTAL_VENTA" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ESTADO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<variable name="sumaTotal" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{total_venta}]]></variableExpression>
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_VENTA_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTAL_VENTA}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -24,7 +37,7 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="79"/>
+				<reportElement x="0" y="0" width="555" height="79" uuid="e88b0bfd-07b8-4c37-9947-dae70e5e5fb5"/>
 				<textElement textAlignment="Center">
 					<font size="60"/>
 				</textElement>
@@ -33,12 +46,23 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="393" y="15" width="162" height="20" uuid="14b872b4-87bc-410b-b03d-900eb7dcaa40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss").format($F{FECHA_HORA})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="457" y="0" width="34" height="15" backcolor="#FFFFFF" uuid="3d8fc0fe-3d84-4749-a1d4-cc379a7444ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[hoy a:]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="62" splitType="Stretch">
+		<band height="42" splitType="Stretch">
 			<staticText>
-				<reportElement isPrintRepeatedValues="false" mode="Opaque" x="0" y="21" width="72" height="20" isPrintInFirstWholeBand="true" backcolor="#CCCCCC">
+				<reportElement isPrintRepeatedValues="false" mode="Opaque" x="0" y="21" width="72" height="20" isPrintInFirstWholeBand="true" backcolor="#CCCCCC" uuid="ee865a22-997d-4a31-bc44-64d5f4b7230f">
 					<property name="net.sf.jasperreports.export.pdf.tag.h1" value="end"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
@@ -48,27 +72,22 @@
 				<text><![CDATA[Codigo Cliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="72" y="21" width="94" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="72" y="21" width="174" height="20" backcolor="#CCCCCC" uuid="0f06a072-2388-4e08-9367-8b36a2c32c9f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Nombre Cliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="166" y="21" width="94" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="246" y="21" width="94" height="20" backcolor="#CCCCCC" uuid="5294a8bb-305f-445f-9876-f3d5ac5efbfe"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Codigo Venta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="260" y="21" width="98" height="20" backcolor="#CCCCCC"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Fecha - Hora]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="358" y="21" width="80" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="340" y="21" width="98" height="20" backcolor="#CCCCCC" uuid="59b288d9-6777-484d-ab61-2bce6fdf9ea3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Total Venta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="438" y="21" width="100" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="438" y="21" width="100" height="20" backcolor="#CCCCCC" uuid="737d032b-085b-4592-acaa-d3d928f2f508"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Estatus]]></text>
 			</staticText>
@@ -77,76 +96,69 @@
 	<detail>
 		<band height="42" splitType="Stretch">
 			<textField>
-				<reportElement x="358" y="0" width="80" height="20"/>
+				<reportElement x="340" y="0" width="98" height="20" uuid="91070167-6326-463a-8bd9-5c5d95882c49"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{total_venta}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TOTAL_VENTA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="166" y="0" width="94" height="20"/>
+				<reportElement x="72" y="0" width="174" height="20" uuid="83bee0da-4496-426b-b2b1-0ad28f42ef87"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{idventa}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{CLIENTE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="260" y="0" width="98" height="20"/>
+				<reportElement x="0" y="0" width="72" height="20" uuid="5d194257-f25c-4986-b3df-7180c3ae92e7"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss").format($F{fecha_hora})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{IDCLIENTE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="72" y="0" width="94" height="20"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="0" width="72" height="20"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{idcliente}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="438" y="1" width="100" height="20"/>
+				<reportElement x="438" y="1" width="100" height="20" uuid="c5fe3e29-9383-4e8a-8150-330500e63b9e"/>
 				<textElement textAlignment="Center" verticalAlignment="Top"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{estado}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ESTADO}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="20" width="538" height="1"/>
+				<reportElement x="0" y="20" width="538" height="1" uuid="6aa2cce8-74fc-4081-8fa0-eca232d482ef"/>
 			</line>
+			<textField>
+				<reportElement x="246" y="1" width="94" height="20" uuid="a5c58e40-64ff-4e46-bd26-6ec17eaf30de"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{IDVENTA}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="246" y="0" width="92" height="20" uuid="bc9c3df5-6a5d-4fa9-b981-36c8e4a2c5f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Total Vendido :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="338" y="0" width="100" height="20" uuid="706bd45f-c4db-474c-9eb7-f501d54438b7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_VENTA_1}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<line>
-				<reportElement x="0" y="11" width="555" height="2"/>
+				<reportElement x="0" y="11" width="555" height="2" uuid="7e1222e4-73b6-49e1-9828-f10c36ad3b5b"/>
 			</line>
 			<textField evaluationTime="Report">
-				<reportElement x="534" y="19" width="15" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				<reportElement x="534" y="19" width="15" height="20" uuid="13080d13-fcfd-4a69-bb5d-e195372fcd46"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="14" width="223" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<reportElement x="0" y="14" width="223" height="20" uuid="c1137ed6-360a-4920-a582-7bc28d9e3eca"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch">
-			<textField>
-				<reportElement x="358" y="0" width="80" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true" isItalic="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{sumaTotal}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="279" y="0" width="79" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Total Vendido]]></text>
-			</staticText>
-		</band>
+		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>

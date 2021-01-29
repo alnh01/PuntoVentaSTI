@@ -5,7 +5,10 @@
  */
 package paneles;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyListener;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
 public class pnlCompras extends javax.swing.JPanel  {
@@ -27,9 +30,15 @@ public class pnlCompras extends javax.swing.JPanel  {
     private void initComponents() {
 
         jLabel7 = new javax.swing.JLabel();
-        contenedorModulos = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/img1/valores.png"));
+        Image image =icon.getImage();
+        contenedorModulos = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){ g.drawImage(image,250,50,this);
+            }
+        };
         fSButtonMD1 = new LIB.FSButtonMD();
         fSButtonMD2 = new LIB.FSButtonMD();
+        rSButtonMetro1 = new rojerusan.RSButtonMetro();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(null);
@@ -40,6 +49,8 @@ public class pnlCompras extends javax.swing.JPanel  {
         jLabel7.setText("COMPRAS");
         add(jLabel7);
         jLabel7.setBounds(0, 0, 260, 51);
+
+        contenedorModulos.setBackground(new java.awt.Color(244, 244, 244));
 
         javax.swing.GroupLayout contenedorModulosLayout = new javax.swing.GroupLayout(contenedorModulos);
         contenedorModulos.setLayout(contenedorModulosLayout);
@@ -74,7 +85,7 @@ public class pnlCompras extends javax.swing.JPanel  {
         fSButtonMD2.setBackground(new java.awt.Color(144, 209, 0));
         fSButtonMD2.setForeground(new java.awt.Color(0, 0, 0));
         fSButtonMD2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/product.png"))); // NOI18N
-        fSButtonMD2.setText("Ingresos");
+        fSButtonMD2.setText("Compras");
         fSButtonMD2.setColorNormal(new java.awt.Color(144, 209, 0));
         fSButtonMD2.setColorPressed(new java.awt.Color(144, 209, 0));
         fSButtonMD2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -85,8 +96,19 @@ public class pnlCompras extends javax.swing.JPanel  {
         });
         add(fSButtonMD2);
         fSButtonMD2.setBounds(460, 0, 170, 50);
+
+        rSButtonMetro1.setBackground(new java.awt.Color(153, 255, 153));
+        rSButtonMetro1.setForeground(new java.awt.Color(0, 0, 0));
+        rSButtonMetro1.setText("Cancelacion Compras");
+        rSButtonMetro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro1ActionPerformed(evt);
+            }
+        });
+        add(rSButtonMetro1);
+        rSButtonMetro1.setBounds(630, 0, 160, 50);
     }// </editor-fold>//GEN-END:initComponents
-panelingresos  pnlingreso;pnlproveedores panleprov;
+panelingresos  pnlingreso; pnlproveedores panleprov; pnlCancelacionCompra pnlcancomp;
     private void fSButtonMD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fSButtonMD2ActionPerformed
        if(pnlingreso==null){
             pnlingreso = new panelingresos();
@@ -114,11 +136,25 @@ panelingresos  pnlingreso;pnlproveedores panleprov;
         }        // TODO add your handling code here:
     }//GEN-LAST:event_fSButtonMD1ActionPerformed
 
+    private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
+        if(pnlcancomp==null){
+            pnlcancomp = new pnlCancelacionCompra();
+            contenedorModulos.add(pnlcancomp);
+            contenedorModulos.getDesktopManager().maximizeFrame(pnlcancomp);
+            pnlcancomp.setVisible(true);
+            
+        }
+        else{
+            contenedorModulos.getDesktopManager().maximizeFrame(pnlcancomp);
+        }     // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonMetro1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane contenedorModulos;
     private LIB.FSButtonMD fSButtonMD1;
     private LIB.FSButtonMD fSButtonMD2;
     private javax.swing.JLabel jLabel7;
+    private rojerusan.RSButtonMetro rSButtonMetro1;
     // End of variables declaration//GEN-END:variables
 }

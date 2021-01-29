@@ -150,4 +150,43 @@ public class Proveedores {
         
         return rows;
     }  
+    
+    
+        public ArrayList<CProveedores> ObtenerProveedoresporCriterio(String criterio) {
+        ArrayList<CProveedores> ListarProveedores = new ArrayList<CProveedores>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            
+            stmt = conn.prepareStatement("SELECT  * FROM proveedores WHERE idproveedor LIKE '%"+criterio+"%' OR nombre LIKE '%"+criterio+"%' OR direccion LIKE '%"+criterio+"%'");
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("idproveedor");
+                String nombre = rs.getString("nombre");
+                String tipo_documento = rs.getString("tipo_documento");
+                String num_documento= rs.getString("num_documento");
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("telefono");
+                String email = rs.getString("email");
+               
+         
+                
+            CProveedores emp = new CProveedores(id, nombre,tipo_documento,num_documento,direccion,telefono,email);
+            ListarProveedores.add(emp);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+        }
+        return ListarProveedores;
+    }
+    
+    
 }

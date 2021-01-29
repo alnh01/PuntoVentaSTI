@@ -116,6 +116,7 @@
         </Component>
         <Component class="rojeru_san.RSMTextFull" name="txtnuevouser">
           <Properties>
+            <Property name="mayusculas" type="boolean" value="true"/>
             <Property name="placeholder" type="java.lang.String" value="Nuevo Nombre"/>
           </Properties>
           <Constraints>

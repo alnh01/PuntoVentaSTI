@@ -377,4 +377,42 @@ public class Usuarios {
         
        
      }
+       
+       
+        public ArrayList<CUsuarios> ObtenerUsuariospotCriterio(String criterio) {
+        ArrayList<CUsuarios> ListarUsuarios = new ArrayList<CUsuarios>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM usuario WHERE idusuario LIKE '%"+criterio+"%' OR nombre LIKE '%"+criterio+"%'OR login LIKE '%"+criterio+"%'");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("idusuario");
+                String nombre = rs.getString("nombre");
+                String tipo_documento = rs.getString("tipo_documento");
+                String num_documento= rs.getString("num_documento");
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("telefono");
+                String email = rs.getString("email");
+                String cargo = rs.getString("cargo");
+                String usuario = rs.getString("login");
+                String clave = rs.getString("clave");
+                String imagen  = rs.getString("imagen");
+                String condicion = rs.getString("condicion");
+                
+                CUsuarios emp = new CUsuarios(id, nombre,tipo_documento,num_documento,direccion,telefono,email,cargo, usuario,clave,imagen,condicion);
+                ListarUsuarios.add(emp);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+        }
+        return ListarUsuarios;
+    }
 }

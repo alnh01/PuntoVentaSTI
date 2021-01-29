@@ -199,5 +199,40 @@ public class Clientes {
           bw.close();
       }
  
+      
+       public ArrayList<CClientes> ObtenerClientesporCriterio(String criterio) {
+        ArrayList<CClientes> ListarClientes = new ArrayList<CClientes>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            stmt = conn.prepareStatement("SELECT  * FROM clientes WHERE idcliente LIKE '%"+criterio+"%' OR nombre LIKE '%"+criterio+"%' OR direccion LIKE '%"+criterio+"%'");
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("idcliente");
+                String nombre = rs.getString("nombre");
+                String tipo_documento = rs.getString("tipo_documento");
+                String num_documento= rs.getString("num_documento");
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("telefono");
+                String email = rs.getString("email");
+
+      
+                
+                CClientes clien = new CClientes(id, nombre,tipo_documento,num_documento,direccion,telefono,email);
+                ListarClientes.add(clien);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+        }
+        return ListarClientes;
+    } 
      
 }

@@ -7,7 +7,9 @@ package paneles;
 
 import Alerts.Information;
 import Alerts.Success;
+import Alerts.SuccessAlert;
 import Alerts.Warning;
+import Alerts.WarningAlert;
 import BD.Categorias;
 import Controller.CCategorias;
 import java.awt.Frame;
@@ -125,16 +127,15 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
         tablaCategorias = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtbuscarcategoria = new javax.swing.JTextField();
         pnlcategorias = new LIB.JPanelRound();
         jLabel1 = new javax.swing.JLabel();
-        txtnombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtdescripcion = new javax.swing.JTextArea();
         fSButtonMD1 = new LIB.FSButtonMD();
         fSButtonMD2 = new LIB.FSButtonMD();
         fSButtonMD3 = new LIB.FSButtonMD();
+        txtnombre = new rojerusan.RSMetroTextFullPlaceHolder();
+        txtdescripcion = new rojeru_san.rsfield.RSTextFull();
+        txtbuscarcategoria = new rojeru_san.rsfield.RSTextFull();
 
         setPreferredSize(new java.awt.Dimension(900, 429));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -176,19 +177,11 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Listado de Categorias");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, 240, 30));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 240, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Buscar:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, 30));
-
-        txtbuscarcategoria.setBackground(new java.awt.Color(240, 240, 240));
-        txtbuscarcategoria.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtbuscarcategoriaKeyTyped(evt);
-            }
-        });
-        jPanel2.add(txtbuscarcategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 200, 30));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, 30));
 
         pnlcategorias.setBackground(new java.awt.Color(255, 255, 255));
         pnlcategorias.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
@@ -199,26 +192,11 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Nombre *");
-        pnlcategorias.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, 30));
-
-        txtnombre.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtnombreKeyReleased(evt);
-            }
-        });
-        pnlcategorias.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 260, 30));
+        pnlcategorias.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Descripcion*");
         pnlcategorias.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
-
-        txtdescripcion.setColumns(20);
-        txtdescripcion.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtdescripcion.setRows(5);
-        jScrollPane2.setViewportView(txtdescripcion);
-
-        pnlcategorias.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 270, 110));
 
         fSButtonMD1.setBackground(new java.awt.Color(102, 166, 54));
         fSButtonMD1.setForeground(new java.awt.Color(0, 0, 0));
@@ -235,7 +213,7 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
                 fSButtonMD1ActionPerformed(evt);
             }
         });
-        pnlcategorias.add(fSButtonMD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 130, -1));
+        pnlcategorias.add(fSButtonMD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 130, -1));
 
         fSButtonMD2.setBackground(new java.awt.Color(81, 161, 194));
         fSButtonMD2.setForeground(new java.awt.Color(0, 0, 0));
@@ -248,7 +226,7 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
                 fSButtonMD2ActionPerformed(evt);
             }
         });
-        pnlcategorias.add(fSButtonMD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 130, -1));
+        pnlcategorias.add(fSButtonMD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 130, -1));
 
         fSButtonMD3.setBackground(new java.awt.Color(255, 102, 51));
         fSButtonMD3.setForeground(new java.awt.Color(0, 0, 0));
@@ -261,27 +239,44 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
                 fSButtonMD3ActionPerformed(evt);
             }
         });
-        pnlcategorias.add(fSButtonMD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 130, -1));
+        pnlcategorias.add(fSButtonMD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 130, -1));
+
+        txtnombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtnombre.setActionCommand("<Not Set>");
+        txtnombre.setBorderColor(new java.awt.Color(153, 153, 255));
+        txtnombre.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtnombre.setMayusculas(true);
+        txtnombre.setPhColor(new java.awt.Color(0, 0, 0));
+        txtnombre.setPlaceholder("Categoria");
+        pnlcategorias.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        txtdescripcion.setForeground(new java.awt.Color(0, 0, 0));
+        txtdescripcion.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtdescripcion.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtdescripcion.setMayusculas(true);
+        txtdescripcion.setPlaceholder("Descripcion");
+        txtdescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtdescripcionActionPerformed(evt);
+            }
+        });
+        pnlcategorias.add(txtdescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 420, -1));
 
         jPanel2.add(pnlcategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 460, 280));
+
+        txtbuscarcategoria.setMayusculas(true);
+        txtbuscarcategoria.setPlaceholder("Buscar");
+        txtbuscarcategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbuscarcategoriaKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtbuscarcategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtbuscarcategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarcategoriaKeyTyped
-        txtbuscarcategoria.addKeyListener(new KeyAdapter() {
-            public void keyReleased(final KeyEvent e) {
-                String cadena = (txtbuscarcategoria.getText());
-                txtbuscarcategoria.setText(cadena);
-                repaint();
-                filtroBusqueda(txtbuscarcategoria);
-            }
-        });
-        trsFiltro = new TableRowSorter(tablaCategorias.getModel());
-        tablaCategorias.setRowSorter(trsFiltro);
-    }//GEN-LAST:event_txtbuscarcategoriaKeyTyped
 
     private void fSButtonMD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fSButtonMD1ActionPerformed
   try {
@@ -291,11 +286,11 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
             if (nombre.equals("") || descripcion.equals("")) {
             
                 //JOptionPane.showMessageDialog(null, "Verifique los datos");
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Verifique los datos");
-                info.setVisible(true);
-            
+            WarningAlert w = new WarningAlert(new JFrame(), true);
+            w.msj1.setText("ALGO PASO");
+            w.msj2.setText("VERIFIQUE SUS DATOS");
+            w.msj3.setText("");
+            w.setVisible(true);
             }else{
                 
         int cuentaFilasSeleccionadas = tablaCategorias.getSelectedRowCount();
@@ -303,10 +298,11 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
             bdcat.actualizarCategoria(catrgoriaselecionado, nombre, descripcion);
             CargarModeloTabla();
              limpiar();
-                Success suc = new Success(new JFrame(),true );
-                  suc.titulos.setText("!HECHO¡");
-                  suc.textos.setText("SE HAN ACTUALIZADO LOS DATOS");
-                 suc.setVisible(true);
+                       SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN ACTUALIZADO LOS DATOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
             
         }else if(cuentaFilasSeleccionadas == 0){
             CCategorias cate = new CCategorias("0",nombre,descripcion,1);
@@ -314,10 +310,11 @@ public class pnlCategorias extends javax.swing.JInternalFrame {
              CargarModeloTabla();
             limpiar();
            if(actulizar >=1){
-                   Success suc = new Success(new JFrame(),true );
-                       suc.titulos.setText("!HECHO¡");
-                       suc.textos.setText("SE HAN GUARDADO LOS CAMBIOS");
-                      suc.setVisible(true);
+                 SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN GUARDADO LOS CAMBIOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
            } 
          
         
@@ -339,20 +336,19 @@ tablaCategorias.clearSelection ();        // TODO add your handling code here:
             if (cuentaFilasSeleccionadas == 0) {
                // JOptionPane.showMessageDialog(null, "Debe serleccionar alguna fila");
             //new RSNotifyFade("!Alerta!", "Debe serleccionar alguna fila", 7, RSNotifyFade.PositionNotify.TopLef, RSNotifyFade.TypeNotify.WARNING).setVisible(true);
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Debe seleccionar alguna fila");
-                info.setVisible(true);
+            WarningAlert w = new WarningAlert(new JFrame(), true);
+            w.msj1.setText("ALGO OCURRIO ");
+            w.msj2.setText("DEBE SELECCIONAR UNA FILA..");
+            w.msj3.setText("");
+            w.setVisible(true);
             }else{
-              
-    
-                  Warning warning = new Warning(new Frame(),true);
-                warning.jLabel1.setText("Advertencia!!!");
-                warning.textos.setText("Esta seguro que deseas eliminar ?");
-                warning.setVisible(true);
-                     String dato = warning.valor.toString();
-                      System.out.println(dato);  
-                        if (dato.equals("Aceptar")) {
+                WarningAlert w = new WarningAlert(new JFrame(), true);
+                w.msj1.setText("ESTAS SEGURO°°°");
+                w.msj2.setText("¡DESEAS ELIMINARLO?");
+                w.msj3.setText("");
+                w.setVisible(true);
+                      
+                 if (w.hecho) {
                 bdcat.eliminarCatedoria(catrgoriaselecionado);
                 //JOptionPane.showMessageDialog(null, "Categoria  eliminada");
             //new RSNotifyFade("!Alerta!", "Categoria eliminada", 7, RSNotifyFade.PositionNotify.TopLef, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
@@ -360,10 +356,11 @@ tablaCategorias.clearSelection ();        // TODO add your handling code here:
                 CargarModeloTabla();
           
         }
-                 Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Categoria Eliminada");
-                info.setVisible(true);
+                SuccessAlert succ  = new SuccessAlert(new Frame(), true);
+                succ.msj1.setText("CORRECTO !!!");
+                succ.msj2.setText("SE HA ELIMINADO");
+                succ.msj3.setText("");
+                succ.setVisible(true);
         }
             
           
@@ -372,9 +369,36 @@ tablaCategorias.clearSelection ();        // TODO add your handling code here:
         }        // TODO add your handling code here:        // TODO add your handling code here:
     }//GEN-LAST:event_fSButtonMD3ActionPerformed
 
-    private void txtnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyReleased
-    txtnombre.setText(txtnombre.getText().toUpperCase());          // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombreKeyReleased
+    private void txtdescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtdescripcionActionPerformed
+
+    private void txtbuscarcategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarcategoriaKeyReleased
+     limpiarTabla();    
+    String cadena  = txtbuscarcategoria.getText();
+    
+    ArrayList<CCategorias> ListarCategorias = bdcat.ObtenerCategoriasporCriterio(cadena);
+    int numeroCategorias = ListarCategorias.size();
+    modeloTablaCategorias.setNumRows(numeroCategorias);
+    
+        for (int i = 0; i < numeroCategorias; i++) {
+            CCategorias categoria = ListarCategorias.get(i);
+            String nombre = categoria.getNombre();
+            String descripcion = categoria.getDescripcion();
+            int condicion = categoria.getEstado();
+            String estado = "";        
+            if (condicion == 1){
+                        estado = "Activo";
+                    }else{
+                        estado = "Inactivo";
+                    }  
+            
+            modeloTablaCategorias.setValueAt(categoria, i, 0);
+            modeloTablaCategorias.setValueAt(descripcion, i, 1);
+            modeloTablaCategorias.setValueAt(estado, i, 2);
+            
+        }   // TODO add your handling code here:
+    }//GEN-LAST:event_txtbuscarcategoriaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -388,11 +412,10 @@ tablaCategorias.clearSelection ();        // TODO add your handling code here:
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private LIB.JPanelRound pnlcategorias;
     public static javax.swing.JTable tablaCategorias;
-    private javax.swing.JTextField txtbuscarcategoria;
-    private javax.swing.JTextArea txtdescripcion;
-    private javax.swing.JTextField txtnombre;
+    private rojeru_san.rsfield.RSTextFull txtbuscarcategoria;
+    private rojeru_san.rsfield.RSTextFull txtdescripcion;
+    private rojerusan.RSMetroTextFullPlaceHolder txtnombre;
     // End of variables declaration//GEN-END:variables
 }

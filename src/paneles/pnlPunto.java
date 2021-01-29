@@ -5,6 +5,7 @@
  */
 package paneles;
 
+import Alerts.ErrorAlert;
 import Alerts.Information;
 import BD.Clientes;
 import BD.CorteDia;
@@ -19,9 +20,11 @@ import Conexion.Conexion;
 import Controller.CClientes;
 import Controller.CCortedia;
 import Controller.CDetalle_ventas;
+import Controller.CItem;
 import Controller.CProductos;
 import Controller.CUsuarios;
 import Controller.CVenta;
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -57,6 +60,13 @@ import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
+import javax.print.Doc;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import javax.print.PrintException;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.SimpleDoc;
 import javax.swing.*;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.border.Border;
@@ -105,7 +115,8 @@ public class pnlPunto extends javax.swing.JPanel {
             }
     }
         };
-        modeloTabla.addColumn("Codigo");
+        modeloTabla.addColumn("");
+        modeloTabla.addColumn("Cod Barras");
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Precio Venta");
         modeloTabla.addColumn("Cantidad");
@@ -120,8 +131,11 @@ public class pnlPunto extends javax.swing.JPanel {
             System.out.println("no tiene datos");
         }
          TableColumnModel columna=tblventas.getColumnModel();
-      
-      columna.getColumn(1).setPreferredWidth(700);
+      columna.getColumn(0).setPreferredWidth(-2);
+      columna.getColumn(0).setMaxWidth(-2);
+      columna.getColumn(0).setMinWidth(-2);
+
+      columna.getColumn(2).setPreferredWidth(700);
        addEventKey();
     }
     
@@ -146,6 +160,7 @@ public class pnlPunto extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 
                 txtbuscar.requestFocus();
+                txtpago.setBackground(Color.white);
                 
             }
         };  
@@ -185,18 +200,20 @@ public class pnlPunto extends javax.swing.JPanel {
                   CorteDia cot  = new CorteDia();
       boolean  exist =   cot.ValidaExist();
        if(exist == true){
-           Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("YA HA REALIZADO EL CORTE");
-                info.setVisible(true);
+          
+           ErrorAlert err = new ErrorAlert(new JFrame(),true);
+            
+            err.msj1.setText("HAY UN PLOBLEMA ");
+            err.msj2.setText("YA REALIZO UN CORTE");
+            err.msj3.setText("");
+            err.setVisible(true);
+            
        }else{
            if(txtpago.getText().equals("")){
+               txtpago.setBackground(Color.CYAN);
                txtpago.requestFocus();
-               
-               
-           
            }else{
-              ventaGuardar(); 
+               ventaGuardar(); 
            }
            
        }
@@ -269,7 +286,7 @@ public class pnlPunto extends javax.swing.JPanel {
              int numFilas = modeloTabla.getRowCount();
              double sumatoria  = 0;
                 for (int i = 0; i < numFilas; i++) {
-                    String importe = (String) modeloTabla.getValueAt(i, 4);
+                    String importe = (String) modeloTabla.getValueAt(i, 5);
                     sumatoria += Double.parseDouble(importe);
                 }
                 lblsumatoria.setText(String.valueOf(sumatoria));
@@ -293,7 +310,6 @@ public class pnlPunto extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblventas = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        txtbuscar = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         lblsumatoria = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -307,6 +323,7 @@ public class pnlPunto extends javax.swing.JPanel {
         cmbclientes = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        txtbuscar = new rojerusan.RSMetroTextFullPlaceHolder();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1231, 529));
@@ -328,7 +345,11 @@ public class pnlPunto extends javax.swing.JPanel {
 
             }
         ));
-        tblventas.setColumnSelectionAllowed(true);
+        tblventas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblventasMouseClicked(evt);
+            }
+        });
         tblventas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tblventasKeyReleased(evt);
@@ -342,22 +363,6 @@ public class pnlPunto extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Buscar Producto");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 120, 29));
-
-        txtbuscar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtbuscarActionPerformed(evt);
-            }
-        });
-        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtbuscarKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtbuscarKeyReleased(evt);
-            }
-        });
-        add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 294, 40));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -373,9 +378,14 @@ public class pnlPunto extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("PAGO CON:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 90, 60));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 90, 40));
 
-        txtpago.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtpago.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        txtpago.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtpagoMouseClicked(evt);
+            }
+        });
         txtpago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtpagoActionPerformed(evt);
@@ -389,7 +399,7 @@ public class pnlPunto extends javax.swing.JPanel {
                 txtpagoKeyTyped(evt);
             }
         });
-        jPanel1.add(txtpago, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 210, 40));
+        jPanel1.add(txtpago, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 210, 60));
 
         rSLabelFecha1.setForeground(new java.awt.Color(0, 0, 0));
         rSLabelFecha1.setFont(new java.awt.Font("Roboto Bold", 1, 18)); // NOI18N
@@ -434,6 +444,23 @@ public class pnlPunto extends javax.swing.JPanel {
             }
         });
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, -1, -1));
+
+        txtbuscar.setBorderColor(new java.awt.Color(102, 102, 255));
+        txtbuscar.setBotonColor(new java.awt.Color(102, 0, 255));
+        txtbuscar.setMayusculas(true);
+        txtbuscar.setPhColor(new java.awt.Color(0, 0, 0));
+        txtbuscar.setPlaceholder("Buscar producto...");
+        txtbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtbuscarMouseClicked(evt);
+            }
+        });
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyPressed(evt);
+            }
+        });
+        add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 540, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtpagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpagoActionPerformed
@@ -454,11 +481,11 @@ public class pnlPunto extends javax.swing.JPanel {
         cantidad = cantidad;        
         }
             System.out.println("Code to do something if the user push OK");  
-            String precioVenta = (String) modeloTabla.getValueAt(filaSeleccionada, 2);
+            String precioVenta = (String) modeloTabla.getValueAt(filaSeleccionada, 3);
             double importe = Double.parseDouble(cantidad) * Double.parseDouble(precioVenta);
             String importeString = String.valueOf(importe);
-            modeloTabla.setValueAt(cantidad, filaSeleccionada, 3);
-            modeloTabla.setValueAt(importeString, filaSeleccionada, 4);
+            modeloTabla.setValueAt(cantidad, filaSeleccionada, 4);
+            modeloTabla.setValueAt(importeString, filaSeleccionada, 5);
          
             }else{
             
@@ -468,9 +495,7 @@ public class pnlPunto extends javax.swing.JPanel {
        
            
         }
-     if(evt.getKeyCode()==KeyEvent.VK_F3){
-             quitarproducto(); 
-        }
+  
     }//GEN-LAST:event_tblventasKeyReleased
 
     private void CancelarVenta(){
@@ -489,10 +514,12 @@ public class pnlPunto extends javax.swing.JPanel {
         }     
         }
        }else{
-            Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("NO HAY NINIGUN PRODUCTO");
-                info.setVisible(true);
+              ErrorAlert err = new ErrorAlert(new JFrame(),true);
+            
+            err.msj1.setText("HAY UN PLOBLEMA ");
+            err.msj2.setText("NO HAY UN PRODUCTO SELECCIONADO");
+            err.msj3.setText("");
+            err.setVisible(true);
         }
     }
     
@@ -501,34 +528,49 @@ public class pnlPunto extends javax.swing.JPanel {
 
 if(this.tblventas.getRowCount()==0 && this.tblventas.getSelectedRow()==-1){
 //JOptionPane.showMessageDialog(null, "NO AGREGO NINGUN PRODUCTO");  
-Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("NO AGREGO NINGUN PRODUCTO");
-                info.setVisible(true);
+  ErrorAlert err = new ErrorAlert(new JFrame(),true);
+            
+            err.msj1.setText("HAY UN PLOBLEMA ");
+            err.msj2.setText("NO AGREGO ALGUN PRODUCTO");
+            err.msj3.setText("");
+            err.setVisible(true);
 }else if (opcion ==-1){
 //JOptionPane.showMessageDialog(null, "NO HA SELECCIONADO UN CLIENTE");
-Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("NO HA SELECCIONADO UN CLIENTE");
-                info.setVisible(true);
+  ErrorAlert err = new ErrorAlert(new JFrame(),true);
+            
+            err.msj1.setText("HAY UN PLOBLEMA ");
+            err.msj2.setText("NO HA SELECCIONADO UN CLIENTE");
+            err.msj3.setText("");
+            err.setVisible(true);
 }else if (txtpago.getText().equals("")){
 //JOptionPane.showMessageDialog(null, "Porfavor agrege la cantidad de pago");
-Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("NO AGREGO CANTIDAD DE PAGO");
-                info.setVisible(true);
+              ErrorAlert err = new ErrorAlert(new JFrame(),true);
+            
+            err.msj1.setText("HAY UN PLOBLEMA ");
+            err.msj2.setText("NO AGREGO CANTIDAD DE PAGO");
+            err.msj3.setText("");
+            err.setVisible(true);
 }else{
 double sumat = Double.parseDouble(lblsumatoria.getText());
 double pago = Double.parseDouble(txtpago.getText());
    if(pago < sumat ){
          //  JOptionPane.showMessageDialog(null, "La catidad con la que pago no puede ser menor");
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("LA CANTIDAD NO ES VALIDA");
-                info.setVisible(true);
+               ErrorAlert err = new ErrorAlert(new JFrame(),true);
+            
+            err.msj1.setText("HAY UN PLOBLEMA ");
+            err.msj2.setText("LA CANTIDAD DE PAGO ES INCORRECTA");
+            err.msj3.setText("");
+            err.setVisible(true);
    }else{
     try {  
-        guardarventa();
+         
+        long   id = guardarventa();
+        imprimirTicket( (int)id );
+
+              
+
+                
+    
     } catch (JRException ex) {
         Logger.getLogger(pnlPunto.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -552,34 +594,44 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
       int opcion = cmbclientes.getSelectedIndex();
        
     if(this.tblventas.getRowCount()==0 && this.tblventas.getSelectedRow()==-1){
-Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("NO AGREGO NINGUN PRODUCTO");
-                info.setVisible(true);
+  ErrorAlert err = new ErrorAlert(new JFrame(),true);
+            
+            err.msj1.setText("HAY UN PLOBLEMA ");
+            err.msj2.setText("NO AGREGO NINGUN PRODUCTO");
+            err.msj3.setText("");
+            err.setVisible(true);
 }else if (opcion ==-1){
-Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("NO HA SELECCIONADO UN CLIENTE");
-                info.setVisible(true);
+  ErrorAlert err = new ErrorAlert(new JFrame(),true);
+            
+            err.msj1.setText("HAY UN PLOBLEMA ");
+            err.msj2.setText("NO AGREGO NINGUN PRODUCTO");
+            err.msj3.setText("");
+            err.setVisible(true);
 }else if (txtpago.getText().equals("")){
-Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("NO AGREGO CANTIDAD DE PAGO");
-                info.setVisible(true);
+  ErrorAlert err = new ErrorAlert(new JFrame(),true);
+            
+            err.msj1.setText("HAY UN PLOBLEMA ");
+            err.msj2.setText("NO AGREGO CANTIDAD DE PAGO");
+            err.msj3.setText("");
+            err.setVisible(true);
 
 }else{
     
 double sumat = Double.parseDouble(lblsumatoria.getText());
 double pago = Double.parseDouble(txtpago.getText());
    if(pago < sumat){
-            Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("La catidad con la que pago no puede ser menor");
-                info.setVisible(true);
+             ErrorAlert err = new ErrorAlert(new JFrame(),true);
+            
+            err.msj1.setText("HAY UN PLOBLEMA ");
+            err.msj2.setText("LA CANTIDAD DE PAGO ES ERRONEA");
+            err.msj3.setText("");
+            err.setVisible(true);
  
    }else{
     try {  
-        guardarventa();
+   long id =  guardarventa();
+        imprimirTicket((int)id);
+        txtpago.setBackground(Color.white);
     } catch (JRException ex) {
         Logger.getLogger(pnlPunto.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -619,7 +671,7 @@ private void nuevoCliente(){
         
    
       try {
-          CClientes cli = new CClientes(0,nombre.getText(),"","",direccion.getText(),telefono.getText(),email.getText());
+          CClientes cli = new CClientes(0,nombre.getText().toUpperCase(),"","",direccion.getText().toUpperCase(),telefono.getText(),email.getText().toUpperCase());
           cliente.insert(cli);
           cmbclientes.removeAllItems();
           cargarModeloCli();
@@ -633,8 +685,13 @@ private void nuevoCliente(){
     }    
       
 }                    
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+      Ayuda ay = new Ayuda (new JFrame(),true);
+      ay.setVisible(true);
+    }//GEN-LAST:event_jLabel6MouseClicked
+
     private void txtbuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
             
             if(txtbuscar.getText().equals("")){
             
@@ -661,16 +718,16 @@ private void nuevoCliente(){
                 CProductos prod = producto.obtenerporCodigoProdcuto(cadenabusqueda);
                 
                 
-                if(prod == null){
-                
-                JOptionPane.showMessageDialog(null, "El Codigo No Existe", "", JOptionPane.ERROR_MESSAGE);
-                txtbuscar.setText("");
-
-                }else{
+//                if(prod == null){
+//                
+//                JOptionPane.showMessageDialog(null, "El Codigo No Existe", "", JOptionPane.ERROR_MESSAGE);
+//                txtbuscar.setText("");
+//
+//                }else{
                   
                 anadirProductoAVenta(prod);
                 txtbuscar.setText("");
-                }
+//                }
                 
             } catch (SQLException ex) {
                 Logger.getLogger(pnlPunto.class.getName()).log(Level.SEVERE, null, ex);
@@ -681,29 +738,27 @@ private void nuevoCliente(){
             
            
             
-        }
-        
-        
-         
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_txtbuscarKeyPressed
 
-    private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbuscarActionPerformed
+    private void txtpagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtpagoMouseClicked
+txtpago.setBackground(Color.CYAN);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpagoMouseClicked
 
-    private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
-txtbuscar.setText(txtbuscar.getText().toUpperCase());        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbuscarKeyReleased
+    private void txtbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbuscarMouseClicked
+  txtpago.setBackground(Color.white);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbuscarMouseClicked
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-      Ayuda ay = new Ayuda (new JFrame(),true);
-      ay.setVisible(true);
-    }//GEN-LAST:event_jLabel6MouseClicked
+    private void tblventasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblventasMouseClicked
+     txtpago.setBackground(Color.white);        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_tblventasMouseClicked
 
     
        public void anadirProductoAVenta(CProductos prod){
        ArrayList Lista = new ArrayList();
         String claveProd =Integer.toString(prod.getIdProducto());
+        String barras = prod.getCodigo();
         String nombreProd = prod.getNomProducto();
         String precioVenta = String.valueOf(prod.getPrecioVentaProducto());
         String cantidad = "1";
@@ -712,7 +767,7 @@ txtbuscar.setText(txtbuscar.getText().toUpperCase());        // TODO add your ha
        
          if(tblventas.getRowCount() ==0){
              
-        String [] datosProducto = {claveProd, nombreProd, precioVenta,cantidad,importe};
+        String [] datosProducto = {claveProd,barras, nombreProd, precioVenta,cantidad,importe};
         modeloTabla.addRow(datosProducto);
     
              
@@ -728,7 +783,7 @@ txtbuscar.setText(txtbuscar.getText().toUpperCase());        // TODO add your ha
 
                     if( Lista.get(i).equals(claveProd)){
                          encontrado  =true ;
-                         cantidadEXT  =  pnlPunto.tblventas.getValueAt(i, 3).toString();
+                         cantidadEXT  =  pnlPunto.tblventas.getValueAt(i, 4).toString();
                         index = i;
                         break;
 
@@ -742,17 +797,17 @@ txtbuscar.setText(txtbuscar.getText().toUpperCase());        // TODO add your ha
                     double cnt = Double.valueOf(cantidadEXT);
                     double cantAct = num + cnt ;
                     String cantidadActualizada = String.valueOf(cantAct);
-                     modeloTabla.setValueAt(cantidadActualizada, index, 3);
+                     modeloTabla.setValueAt(cantidadActualizada, index, 4);
 
-                    String pv = modeloTabla.getValueAt(index, 2).toString();
+                    String pv = modeloTabla.getValueAt(index, 3).toString();
                     double importeEXT = Double.parseDouble(cantidadActualizada) * Double.parseDouble(pv);
                     String importeString = String.valueOf(importeEXT);
                     //            modeloTablaPunto.setValueAt(cantidad, index, 3);
-                    modeloTabla.setValueAt(importeString, index, 4);
+                    modeloTabla.setValueAt(importeString, index, 5);
 
                 }else{
                
-          String [] datosProducto = {claveProd, nombreProd, precioVenta,cantidad,importe};
+          String [] datosProducto = {claveProd, barras,nombreProd, precioVenta,cantidad,importe};
         modeloTabla.addRow(datosProducto);
     
                 }
@@ -792,7 +847,8 @@ txtbuscar.setText(txtbuscar.getText().toUpperCase());        // TODO add your ha
         modeloListaProductos.clear();
     }
     
-    public void guardarventa() throws JRException{
+    public long guardarventa() throws JRException{
+         Long idVenta = null;
         try {
             ArrayList<CDetalle_ventas> detalles = new ArrayList<CDetalle_ventas>();    
             //Obtenemos la sumatoria de la venta
@@ -816,14 +872,14 @@ txtbuscar.setText(txtbuscar.getText().toUpperCase());        // TODO add your ha
             String idprin=Principal.txtcodigo.getText();
             CVenta venta = new CVenta(0,idcliente,null,montoVenta," ",idprin);
            
-            Long idVenta = ventas.insertarVenta(venta);
+             idVenta = ventas.insertarVenta(venta);
             System.out.println("id dela ultima venta: "+idVenta);
             int numRows = modeloTabla.getRowCount();
             
             for (int i = 0; i < numRows; i++) {
                 String idProducto = (String) modeloTabla.getValueAt(i, 0);
-                String cantidadStr = (String) modeloTabla.getValueAt(i, 3);
-                String costoxpStr = (String) modeloTabla.getValueAt(i, 2);
+                String cantidadStr = (String) modeloTabla.getValueAt(i, 4);
+                String costoxpStr = (String) modeloTabla.getValueAt(i, 3);
                 double cantidad = Double.parseDouble(cantidadStr);
                 double costoxp = Double.parseDouble(costoxpStr);
                 double costototalx = cantidad * costoxp;
@@ -862,6 +918,8 @@ txtbuscar.setText(txtbuscar.getText().toUpperCase());        // TODO add your ha
         } catch (SQLException ex) {
             Logger.getLogger(pnlPunto.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return idVenta;
     }
     
     private void quitarproducto(){
@@ -903,6 +961,80 @@ txtbuscar.setText(txtbuscar.getText().toUpperCase());        // TODO add your ha
         }
     }
     
+     public void imprimirTicket( int idventa){
+    
+        Calendar cal = Calendar.getInstance();
+         int año = cal.get(Calendar.YEAR);
+         int mes = cal.get(Calendar.MONTH);
+         int dia = cal.get(Calendar.DAY_OF_MONTH);
+         int hora = cal.get(Calendar.HOUR_OF_DAY);
+         int minuto = cal.get(Calendar.MINUTE);
+         int segundo = cal.get(Calendar.SECOND);
+         String fechaActual = dia +"/"+(mes+1)+"/"+año;
+         String horaActual = hora+":"+minuto+":"+segundo;
+         String cadena = "";
+
+
+
+              ArrayList<String>ListarEncabezado = ventas.ObtenerHeader();
+                   cadena += ""
+                    + " "+ListarEncabezado.get(1)+"\n"
+                       +"\n"
+                    + "==============================\n"
+                    + "direccion\n"
+                    + ""+ListarEncabezado.get(2)+"\n"
+                    + "===============================\n"
+                    + "Telefono: "+ListarEncabezado.get(3)+" \n \n"
+                    + ""+fechaActual+"              "+horaActual+"\n"
+                     +"================================\n"
+                    + "Descripcion              Importe\n"
+                    + "===============================\n";       
+                 ArrayList<CItem>ListarDetalles = ventas.ObtenerDetalles(idventa);    
+                 int numeroDetalles = ListarDetalles.size();
+
+                 for (int i = 0; i < numeroDetalles; i++) {
+                     CItem item= ListarDetalles.get(i);
+
+                     cadena += ""
+                     +" "+item.getNombre()+"       "+item.getCantidad()+"         "+Double.parseDouble(item.getCosto())+"\n";
+
+                    }
+
+                   ArrayList<String>ObtenerVentas = ventas.ObtenerVenta(idventa);
+
+                      cadena +="================================\n"
+                    + "Total: "+ObtenerVentas.get(0)+"\n"
+                    + "\n"
+                    + "\n"
+                    + "================================\n"
+                    + "GRACIAS POR SU PREFERENCIA..\n"
+                    + "***********:::::::::************"
+                    + "\n           "
+                    + "\n           "
+                    + "\n           "
+                    + "\n           "
+                    + "\n           "
+                    + "\n           ";
+
+
+
+             DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+        //Aqui selecciona tu impresora, el ejemplo tomará la impresora predeterminada.
+                PrintService service = PrintServiceLookup.lookupDefaultPrintService();
+                DocPrintJob pj = service.createPrintJob();
+                byte[] bytes = cadena.getBytes();
+                Doc doc = new SimpleDoc(bytes, flavor, null);
+                try {
+                    pj.print(doc, null);
+
+                } catch (PrintException e) {
+                }
+
+
+ 
+ 
+ }
+    
     
 
 
@@ -924,7 +1056,7 @@ txtbuscar.setText(txtbuscar.getText().toUpperCase());        // TODO add your ha
     private rojeru_san.RSLabelFecha rSLabelFecha1;
     private rojeru_san.RSLabelHora rSLabelHora1;
     public static javax.swing.JTable tblventas;
-    public static javax.swing.JTextField txtbuscar;
+    public static rojerusan.RSMetroTextFullPlaceHolder txtbuscar;
     public static javax.swing.JTextField txtpago;
     // End of variables declaration//GEN-END:variables
 }

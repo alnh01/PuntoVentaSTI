@@ -143,9 +143,38 @@ private Connection userConn;
         
         return rows; 
      }
+     
+     
+ public ArrayList<CCategorias> ObtenerCategoriasporCriterio(String criterio) {
+        ArrayList<CCategorias> ListarCategorias = new ArrayList<CCategorias>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            stmt = conn.prepareStatement("SELECT * FROM categoria WHERE idcategoria LIKE '%"+criterio+"%' OR nombre LIKE '%"+criterio+"%'");
+            rs = stmt.executeQuery();
 
-     
-     
+            while (rs.next()) {
+                String id = rs.getString("idcategoria");
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                int condicion= rs.getInt("condicion");
+         
+      
+                
+                CCategorias cate = new CCategorias(id, nombre,descripcion,condicion);
+                ListarCategorias.add(cate);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+        }
+        return ListarCategorias;
+    }
      
      
 }

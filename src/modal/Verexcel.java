@@ -188,17 +188,23 @@ if(cont  == 0){
                         time.stop();
                                            }else{
                            
+            
+           
+            
+            if(JTDatos.getValueAt(x, 0) == null){
+                
+            }else{ 
             codigo= (String) JTDatos.getValueAt(x, 0).toString().toUpperCase();
             name = (String) JTDatos.getValueAt(x, 1).toString().toUpperCase();
             Stock =  Double.parseDouble(JTDatos.getValueAt(x, 2).toString());
             pcompra =  Double.parseDouble(JTDatos.getValueAt(x, 3).toString());
             pventa = Double.parseDouble(JTDatos.getValueAt(x, 4).toString());
             Tipo =   JTDatos.getValueAt(x, 5).toString();
-            
+                        
 //            System.out.println("* "+codigo+" / "+name+" / "+Stock+" / "+pcompra+" / "+ pventa+" / "+" / "+Tipo);
-            File file = new File(System.getProperty("user.dir")+"/src/img1/nimages.png");
+         File file = new File(System.getProperty("user.dir")+"/src/img1/nimages.png");
          
-         CProductos prod =    product.obtenerporCodigoProdcuto(codigo);
+         CProductos prod =    product.obtenerporCodigoDeProducto(codigo);
                       
          
          
@@ -213,10 +219,8 @@ if(cont  == 0){
                product.insertar(productos);  
          }   
          }
-                 
-                 
-       
          }
+        }
                 
              } catch (SQLException ex) {
                  System.out.println("Error");

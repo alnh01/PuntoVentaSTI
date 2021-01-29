@@ -473,7 +473,7 @@ public class pnlReportes extends javax.swing.JPanel {
         
                 
                 try {
-                    JOptionPane.showMessageDialog(null,"PROCESANDO");
+                   
                     
                     userConn=Conexion.getConnection();
                     String path = System.getProperty("user.dir")+"/src/reportes/reportesclientes.jasper";

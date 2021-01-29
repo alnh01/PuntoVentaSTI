@@ -5,6 +5,7 @@
  */
 package modal;
 
+import Alerts.WarningAlert;
 import BD.Producto;
 import Controller.CProductos;
 import Controller.CUnidades;
@@ -18,6 +19,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -56,8 +58,10 @@ public class Productos extends javax.swing.JDialog {
      
         
       TableColumnModel columna=tblproductos.getColumnModel();
-      
-      columna.getColumn(1).setPreferredWidth(500);
+      columna.getColumn(0).setPreferredWidth(0);
+      columna.getColumn(0).setMaxWidth(0);
+      columna.getColumn(0).setMinWidth(0);
+      columna.getColumn(2).setPreferredWidth(500);
       
        CargarModeloTabla();
         this.setLocationRelativeTo(this);
@@ -75,21 +79,54 @@ public class Productos extends javax.swing.JDialog {
          Action ENTERAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
             
-            int filaseleccionada = tblproductos.getSelectedRow();
+                if(tblproductos.getRowCount() <= 0){
+                    WarningAlert war = new  WarningAlert(new JFrame(),true);
+                       war.msj1.setText("Atención °°°");
+                       war.msj2.setText("No hay ´producrto seleccionado");
+                       war.msj3.setText("");
+                       war.setVisible(true);
+                       if (war.hecho) {
+                            dispose();
+                            pnlPunto.txtbuscar.setText("");
+                            }
+
+                    
+                    
+                    
+                }else{
+                 CargarProductos();
+                }
+         
+      }
+        };  
+        
+           tblproductos.getInputMap(tblproductos.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(ENTER, "ENTER");
+           tblproductos.getActionMap().put("ENTER", ENTERAction);
+           
+        
+    }
+    
+    public void CargarProductos(){
+          int filaseleccionada = tblproductos.getSelectedRow();
              ArrayList Lista = new ArrayList();
             String codigo = tblproductos.getValueAt(filaseleccionada, 0).toString();
-            String nombre = tblproductos.getValueAt(filaseleccionada, 1).toString();
-            String precio = tblproductos.getValueAt(filaseleccionada, 2).toString();
-            String  stock = tblproductos.getValueAt(filaseleccionada, 3).toString();
+            String barras = tblproductos.getValueAt(filaseleccionada, 1).toString();
+            String nombre = tblproductos.getValueAt(filaseleccionada, 2).toString();
+            String precio = tblproductos.getValueAt(filaseleccionada, 3).toString();
+            String  stock = tblproductos.getValueAt(filaseleccionada, 4).toString();
+
             String cantidad = "1";
             String importe = precio;
             
       if(pnlPunto.tblventas.getRowCount() ==0){
                  
-            String [] datosProducto = {codigo, nombre, precio,cantidad,importe};
+            String [] datosProducto = {codigo,barras, nombre, precio,cantidad,importe};
             
             pnlPunto.modeloTabla.addRow(datosProducto);
             pnlPunto.cargarListenerModeloTabla();
+            pnlPunto.txtbuscar.setText("");
+            dispose();
+            
       }else{
           
       boolean encontrado = false;
@@ -102,7 +139,7 @@ public class Productos extends javax.swing.JDialog {
 
                     if( Lista.get(i).equals(codigo)){
                          encontrado  =true ;
-                         cantidadEXT  =  pnlPunto.tblventas.getValueAt(i, 3).toString();
+                         cantidadEXT  =  pnlPunto.tblventas.getValueAt(i, 4).toString();
                         index = i;
                         break;
 
@@ -116,39 +153,40 @@ public class Productos extends javax.swing.JDialog {
                     double cnt = Double.valueOf(cantidadEXT);
                     double cantAct = num + cnt ;
                     String cantidadActualizada = String.valueOf(cantAct);
-                   pnlPunto.modeloTabla.setValueAt(cantidadActualizada, index, 3);
-
-                    String precioVenta =pnlPunto.modeloTabla.getValueAt(index, 2).toString();
+                    pnlPunto.modeloTabla.setValueAt(cantidadActualizada, index, 4);
+                    
+                    String precioVenta =pnlPunto.modeloTabla.getValueAt(index, 3).toString();
                     double importeEXT = Double.parseDouble(cantidadActualizada) * Double.parseDouble(precioVenta);
                     String importeString = String.valueOf(importeEXT);
                     //            modeloTablaPunto.setValueAt(cantidad, index, 3);
-                    pnlPunto.modeloTabla.setValueAt(importeString, index, 4);
-
-                }else{
+                    pnlPunto.modeloTabla.setValueAt(importeString, index, 5);
+                   
+                   
+                    pnlPunto.txtbuscar.setText("");
+                    dispose();
+                    
+                  }else{
                
-           String [] datosProducto = {codigo, nombre, precio,cantidad,importe};
+           String [] datosProducto = {codigo,barras, nombre, precio,cantidad,importe};
            
             pnlPunto.modeloTabla.addRow(datosProducto);
              pnlPunto.cargarListenerModeloTabla();
-
+             
+             pnlPunto.txtbuscar.setText("");
+             dispose();
+           
                 }
 
           
     }
              
-      }
-        };  
-        
-           tblproductos.getInputMap(tblproductos.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(ENTER, "ENTER");
-           tblproductos.getActionMap().put("ENTER", ENTERAction);
-           
-        
     }
     
     
 
      private  void CargarColunmas(){
-        tabla.addColumn("Codigo");
+        tabla.addColumn("");
+        tabla.addColumn("Codigo Barras");
         tabla.addColumn("Nombre");
         tabla.addColumn("Precio");
         tabla.addColumn("Stock");
@@ -175,20 +213,23 @@ public class Productos extends javax.swing.JDialog {
             CProductos productos = ListarProductos.get(i);
             int id = productos.getIdProducto();
             double pv = productos.getPrecioVentaProducto();
-            String descripcion = productos.getCodigo();
+            String codigo = productos.getCodigo();
             double stock = productos.getStockProducto();
 
             tabla.setValueAt(id, i, 0);
-            tabla.setValueAt(productos, i,1);
-            tabla.setValueAt(pv, i, 2);
-            tabla.setValueAt(stock, i, 3);
+            tabla.setValueAt(codigo, i, 1);
+            tabla.setValueAt(productos, i,2);
+            tabla.setValueAt(pv, i, 3);
+            tabla.setValueAt(stock, i, 4);
       
-            
+           
 
         }
          
     }    
      
+    
+    
    
     /**
      * This method is called from within the constructor to initialize the form.

@@ -5,9 +5,12 @@
  */
 package paneles;
 
+import Alerts.ErrorAlert;
 import Alerts.Information;
 import Alerts.Success;
+import Alerts.SuccessAlert;
 import Alerts.Warning;
+import Alerts.WarningAlert;
 import BD.Clientes;
 import BD.GenerarRespaldo;
 import Controller.CClientes;
@@ -117,21 +120,21 @@ public class pnlVentas extends javax.swing.JPanel {
         tablaClientes = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtbuscarclientes = new javax.swing.JTextField();
         jPanelRound1 = new LIB.JPanelRound();
-        txtnombre = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txttelefono = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtemail = new javax.swing.JTextField();
-        txtdireccion = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnguardar = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtnombre = new rojeru_san.rsfield.RSTextFull();
+        txttelefono = new rojeru_san.rsfield.RSTextFull();
+        txtemail = new rojeru_san.rsfield.RSTextFull();
+        txtdireccion = new rojeru_san.rsfield.RSTextFull();
         jLabel7 = new javax.swing.JLabel();
+        txtbuscarclientes = new rojeru_san.rsfield.RSTextFull();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -172,30 +175,16 @@ public class pnlVentas extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("Listado Clientes");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 219, 30));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 219, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Buscar:");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, 30));
 
-        txtbuscarclientes.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtbuscarclientesKeyTyped(evt);
-            }
-        });
-        add(txtbuscarclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 160, 30));
-
         jPanelRound1.setBackground(new java.awt.Color(255, 255, 255));
         jPanelRound1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 6, true));
         jPanelRound1.setOpaque(true);
         jPanelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtnombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnombreActionPerformed(evt);
-            }
-        });
-        jPanelRound1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 360, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setText("Control Clientes");
@@ -207,24 +196,15 @@ public class pnlVentas extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Telefono :");
-        jPanelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 60, 30));
-
-        txttelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txttelefonoActionPerformed(evt);
-            }
-        });
-        jPanelRound1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 170, 30));
+        jPanelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 60, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Email :");
-        jPanelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 40, 30));
-        jPanelRound1.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 140, 30));
-        jPanelRound1.add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 360, 30));
+        jPanelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 40, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Dirección:");
-        jPanelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 30));
+        jPanelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, 30));
 
         btnguardar.setBackground(new java.awt.Color(102, 166, 54));
         btnguardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -236,7 +216,7 @@ public class pnlVentas extends javax.swing.JPanel {
                 btnguardarActionPerformed(evt);
             }
         });
-        jPanelRound1.add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 120, 40));
+        jPanelRound1.add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 120, 40));
 
         btneliminar.setBackground(new java.awt.Color(247, 94, 24));
         btneliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -248,7 +228,7 @@ public class pnlVentas extends javax.swing.JPanel {
                 btneliminarActionPerformed(evt);
             }
         });
-        jPanelRound1.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 120, 40));
+        jPanelRound1.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 120, 40));
 
         jButton1.setBackground(new java.awt.Color(81, 161, 194));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -260,7 +240,40 @@ public class pnlVentas extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanelRound1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 130, -1));
+        jPanelRound1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 130, -1));
+
+        txtnombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtnombre.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtnombre.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtnombre.setMayusculas(true);
+        txtnombre.setPlaceholder("Cliente");
+        jPanelRound1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 350, 40));
+
+        txttelefono.setForeground(new java.awt.Color(0, 0, 0));
+        txttelefono.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txttelefono.setBotonColor(new java.awt.Color(255, 102, 102));
+        txttelefono.setPlaceholder("Telefono");
+        txttelefono.setSoloNumeros(true);
+        txttelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttelefonoActionPerformed(evt);
+            }
+        });
+        jPanelRound1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 170, 40));
+
+        txtemail.setForeground(new java.awt.Color(0, 0, 0));
+        txtemail.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtemail.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtemail.setMayusculas(true);
+        txtemail.setPlaceholder("Email");
+        jPanelRound1.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 140, -1));
+
+        txtdireccion.setForeground(new java.awt.Color(0, 0, 0));
+        txtdireccion.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtdireccion.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtdireccion.setMayusculas(true);
+        txtdireccion.setPlaceholder("Direccion");
+        jPanelRound1.add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 350, -1));
 
         add(jPanelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 450, 270));
 
@@ -270,6 +283,16 @@ public class pnlVentas extends javax.swing.JPanel {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/customer.png"))); // NOI18N
         jLabel7.setText("Clientes");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 390, -1));
+
+        txtbuscarclientes.setForeground(new java.awt.Color(0, 0, 0));
+        txtbuscarclientes.setMayusculas(true);
+        txtbuscarclientes.setPlaceholder("Buscar");
+        txtbuscarclientes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbuscarclientesKeyReleased(evt);
+            }
+        });
+        add(txtbuscarclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
@@ -288,10 +311,11 @@ public class pnlVentas extends javax.swing.JPanel {
                
         if (cuentaFilasSeleccionadas == 1) {
              bdclt.actualizarProveedor(clienteseleccionado, nombre, direccion, telefono, email);
-             Success suc = new Success(new JFrame(),true );
-                  suc.titulos.setText("!HECHO¡");
-                  suc.textos.setText("SE HAN ACTUALIZADO LOS DATOS");
-                 suc.setVisible(true);
+                        SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN ACTUALIZADO LOS DATOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
             cargarModeloTabla();
             limpiardatos();
             
@@ -299,27 +323,34 @@ public class pnlVentas extends javax.swing.JPanel {
              CClientes clientes = new CClientes(0,nombre,"","",direccion,telefono,email);
             
              if (txtnombre.getText().isEmpty()) {
-                 Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("Verifique los datos");
-                info.setVisible(true);
+            ErrorAlert e = new ErrorAlert(new JFrame(), true);
+            e.msj1.setText("HAY UN PLOBLEMA ");
+            e.msj2.setText("EL NOMBRE NO PUEDE ESTAR VACIO");
+            e.msj3.setText("");
+            e.setVisible(true);
+            
             }else if(txtdireccion.getText().isEmpty()){
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("Verifique los datos");
-                info.setVisible(true);
-            }else if(txttelefono.getText().isEmpty() || txtemail.getText().isEmpty()){
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("Verifique los datos");
-                info.setVisible(true);
+            ErrorAlert e = new ErrorAlert(new JFrame(), true);
+            e.msj1.setText("HAY UN PLOBLEMA ");
+            e.msj2.setText("LA DIRECCION NO PUEDE ESTAR VACIA");
+            e.msj3.setText("");
+            e.setVisible(true);
+            }else if(txtemail.getText().isEmpty()){
+            ErrorAlert e = new ErrorAlert(new JFrame(), true);
+            e.msj1.setText("HAY UN PLOBLEMA ");
+            e.msj2.setText("EMAIL VACIO");
+            e.msj3.setText("");
+            e.setVisible(true);
             }else{
              
              bdclt.insert(clientes);
-                Success suc = new Success(new JFrame(),true );
-                suc.titulos.setText("!HECHO¡");
-                suc.textos.setText("SE HAN GUARDADO LOS CAMBIOS");
-                suc.setVisible(true);
+               
+            SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN GUARDADO LOS CAMBIOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
+                       
             cargarModeloTabla();
             limpiardatos();
                     }
@@ -351,21 +382,27 @@ public class pnlVentas extends javax.swing.JPanel {
             
                int cuentaFilasSeleccionadas = tablaClientes.getSelectedRowCount();
             if (cuentaFilasSeleccionadas == 0) {
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("Debe seleccionar alguna fila");
-                info.setVisible(true);
+            ErrorAlert e = new ErrorAlert(new JFrame(), true);
+            e.msj1.setText("HAY UN PLOBLEMA ");
+            e.msj2.setText("DEBE SELECCIONAR UN FILA");
+            e.msj3.setText("");
+            e.setVisible(true);
             }else{
-             Warning warning = new Warning(new Frame(),true);
-                warning.jLabel1.setText("Advertencia!!!");
-                warning.textos.setText("Esta seguro que deseas eliminar ?");
-                warning.setVisible(true);
-                     String dato = warning.valor.toString();
-                      System.out.println(dato);  
-                        if (dato.equals("Aceptar")) {
+                    WarningAlert w = new WarningAlert(new JFrame(), true);
+                w.msj1.setText("ESTAS SEGURO°°°");
+                w.msj2.setText("¡DESEAS ELIMINARLO?");
+                w.msj3.setText("");
+                w.setVisible(true);
+                      
+                 if (w.hecho) {
             bdclt.eliminarcliente(clienteseleccionado);
             cargarModeloTabla();
             limpiardatos();
+            SuccessAlert succ  = new SuccessAlert(new Frame(), true);
+                succ.msj1.setText("CORRECTO !!!");
+                succ.msj2.setText("SE HA ELIMINADO");
+                succ.msj3.setText("");
+                succ.setVisible(true);
                         }
             }
             
@@ -374,34 +411,38 @@ public class pnlVentas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btneliminarActionPerformed
 
-    private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txttelefonoActionPerformed
-
-    private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombreActionPerformed
-
     private void tablaClientesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaClientesKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaClientesKeyTyped
 
-    private void txtbuscarclientesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarclientesKeyTyped
-    txtbuscarclientes.addKeyListener(new KeyAdapter() {
-            public void keyReleased(final KeyEvent e) {
-                String cadena = (txtbuscarclientes.getText());
-                txtbuscarclientes.setText(cadena);
-                repaint();
-                filtroBusqueda(txtbuscarclientes);
-            }
-        });
-        trsFiltro = new TableRowSorter(tablaClientes.getModel());
-        tablaClientes.setRowSorter(trsFiltro);        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbuscarclientesKeyTyped
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 limpiardatos();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttelefonoActionPerformed
+
+    private void txtbuscarclientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarclientesKeyReleased
+     limpiarTabla();
+         String criterio = txtbuscarclientes.getText();
+       ArrayList<CClientes>ListarClientes = bdclt.ObtenerClientesporCriterio(criterio);
+      int numerosUsusarios = ListarClientes.size();
+      modeloTablaClientes.setNumRows(numerosUsusarios);
+        for (int i = 0; i < numerosUsusarios; i++) {
+            CClientes cliente = ListarClientes.get(i);
+            String nombre = cliente.getNombre();
+            String direccion = cliente.getDireccion();
+            String telefono = cliente.getTelefono();
+            String email = cliente.getEmail();
+            
+            
+            modeloTablaClientes.setValueAt(cliente, i, 0);
+            modeloTablaClientes.setValueAt(direccion, i, 1);
+            modeloTablaClientes.setValueAt(telefono, i, 2);
+            modeloTablaClientes.setValueAt(email, i, 3);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbuscarclientesKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -419,10 +460,10 @@ limpiardatos();        // TODO add your handling code here:
     private LIB.JPanelRound jPanelRound1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaClientes;
-    private javax.swing.JTextField txtbuscarclientes;
-    private javax.swing.JTextField txtdireccion;
-    private javax.swing.JTextField txtemail;
-    private javax.swing.JTextField txtnombre;
-    private javax.swing.JTextField txttelefono;
+    private rojeru_san.rsfield.RSTextFull txtbuscarclientes;
+    private rojeru_san.rsfield.RSTextFull txtdireccion;
+    private rojeru_san.rsfield.RSTextFull txtemail;
+    private rojeru_san.rsfield.RSTextFull txtnombre;
+    private rojeru_san.rsfield.RSTextFull txttelefono;
     // End of variables declaration//GEN-END:variables
 }

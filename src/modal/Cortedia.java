@@ -264,7 +264,7 @@ public class Cortedia extends javax.swing.JDialog {
         txtTotal.setBorder(null);
         jPanel2.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 120, 40));
 
-        fSButtonMD1.setBackground(new java.awt.Color(102, 255, 102));
+        fSButtonMD1.setBackground(new java.awt.Color(153, 255, 51));
         fSButtonMD1.setForeground(new java.awt.Color(0, 0, 0));
         fSButtonMD1.setText("CORTE");
         fSButtonMD1.setColorNormal(new java.awt.Color(102, 102, 255));

@@ -5,9 +5,12 @@
  */
 package paneles;
 
+import Alerts.ErrorAlert;
 import Alerts.Information;
 import Alerts.Success;
+import Alerts.SuccessAlert;
 import Alerts.Warning;
+import Alerts.WarningAlert;
 import BD.Categorias;
 import BD.Producto;
 import BD.Unidades;
@@ -20,16 +23,16 @@ import java.awt.Frame;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
+
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -46,7 +49,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import modal.Verexcel;
+import javax.swing.table.TableColumnModel;
+
 
 /**
  *
@@ -83,7 +87,12 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         cargarModeloCat();
         cargarModeloUni();
         CargarColunmas();
+       if( pnlAlmacen.click){
+         CargarModeloTabla();
+         } 
         CargarModeloTabla();
+         TableColumnModel columna=tblProdutos.getColumnModel();
+       columna.getColumn(0).setPreferredWidth(700);
         
   
         
@@ -146,7 +155,6 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         
      private  void CargarColunmas(){
         modeloTablaProductos.addColumn("Nombre");
-        modeloTablaProductos.addColumn("Descripcion");
         modeloTablaProductos.addColumn("Stock");
         modeloTablaProductos.addColumn("Codigo");
         }
@@ -160,15 +168,15 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         for (int i = 0; i < numerosProductos; i++) {
             CProductos productos = ListarProductos.get(i);
             String nombre = productos.getNomProducto();
-            String codigo = productos.getDescProducto();
-            String descripcion = productos.getCodigo();
+            String desc = productos.getDescProducto();
+            String codigo = productos.getCodigo();
             double stock = productos.getStockProducto();
             
             
             modeloTablaProductos.setValueAt(productos, i, 0);
-            modeloTablaProductos.setValueAt(codigo, i, 1);
-            modeloTablaProductos.setValueAt(stock, i, 2);
-            modeloTablaProductos.setValueAt(descripcion, i, 3);
+            modeloTablaProductos.setValueAt(stock, i, 1);
+            modeloTablaProductos.setValueAt(codigo, i, 2);
+        
            
 
             
@@ -210,8 +218,6 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
-        jLabel10 = new javax.swing.JLabel();
-        txtbuscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanelRound1 = new LIB.JPanelRound();
@@ -220,25 +226,26 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         lblImagenArticulo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtnombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cmbcategorias = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
-        txtstock = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         cmbunidades = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
-        txtpreciocompra = new javax.swing.JTextField();
-        txtprecioventa = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtdescripcion = new javax.swing.JTextField();
-        txtcodigo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btneliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtnombre = new rojeru_san.rsfield.RSTextFull();
+        txtstock = new rojeru_san.rsfield.RSTextFull();
+        txtpreciocompra = new rojeru_san.rsfield.RSTextFull();
+        txtprecioventa = new rojeru_san.rsfield.RSTextFull();
+        txtcodigo = new rojeru_san.rsfield.RSTextFull();
+        txtdescripcion = new rojeru_san.rsfield.RSTextFull();
+        txtbuscar = new rojerusan.RSMetroTextFullPlaceHolder();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -278,17 +285,6 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tblProdutos);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 550, 260));
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setText("Buscar :");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 60, 29));
-
-        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtbuscarKeyTyped(evt);
-            }
-        });
-        jPanel3.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 195, 29));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Listado de Productos");
@@ -356,13 +352,6 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jLabel2.setText("Nombre del Articulo *");
         jPanelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 170, 30));
 
-        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtnombreKeyReleased(evt);
-            }
-        });
-        jPanelRound1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 310, 30));
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Categoria:");
         jPanelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 90, 30));
@@ -373,19 +362,6 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Stock *");
         jPanelRound1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 50, 30));
-
-        txtstock.setText("0.0");
-        txtstock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtstockActionPerformed(evt);
-            }
-        });
-        txtstock.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtstockKeyTyped(evt);
-            }
-        });
-        jPanelRound1.add(txtstock, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 130, 30));
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -399,22 +375,6 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         jLabel9.setText("Precio Venta *");
         jPanelRound1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 100, 30));
 
-        txtpreciocompra.setText("0.0");
-        txtpreciocompra.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtpreciocompraKeyTyped(evt);
-            }
-        });
-        jPanelRound1.add(txtpreciocompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 150, 30));
-
-        txtprecioventa.setText("0.0");
-        txtprecioventa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtprecioventaKeyTyped(evt);
-            }
-        });
-        jPanelRound1.add(txtprecioventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 160, 30));
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Unidad:");
         jPanelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 70, 30));
@@ -425,30 +385,11 @@ public class pnlProductos extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Descripcion *");
-        jPanelRound1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 110, 30));
-
-        txtdescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtdescripcionKeyReleased(evt);
-            }
-        });
-        jPanelRound1.add(txtdescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 270, 30));
-
-        txtcodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcodigoActionPerformed(evt);
-            }
-        });
-        txtcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtcodigoKeyReleased(evt);
-            }
-        });
-        jPanelRound1.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 150, 30));
+        jPanelRound1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 110, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Código *");
-        jPanelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 60, 30));
+        jPanelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 60, 30));
 
         btneliminar.setBackground(new java.awt.Color(247, 94, 24));
         btneliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -486,7 +427,61 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         });
         jPanelRound1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 130, 40));
 
+        txtnombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtnombre.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtnombre.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtnombre.setMayusculas(true);
+        txtnombre.setPlaceholder("Nombre");
+        jPanelRound1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 320, -1));
+
+        txtstock.setForeground(new java.awt.Color(0, 0, 0));
+        txtstock.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtstock.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtstock.setDoubleBuffered(true);
+        txtstock.setPlaceholder("0.0");
+        txtstock.setSoloNumeros(true);
+        jPanelRound1.add(txtstock, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 140, -1));
+
+        txtpreciocompra.setForeground(new java.awt.Color(0, 0, 0));
+        txtpreciocompra.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtpreciocompra.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtpreciocompra.setPlaceholder("0.0");
+        txtpreciocompra.setSoloNumeros(true);
+        jPanelRound1.add(txtpreciocompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 130, -1));
+
+        txtprecioventa.setForeground(new java.awt.Color(0, 0, 0));
+        txtprecioventa.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtprecioventa.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtprecioventa.setPlaceholder("0.0");
+        txtprecioventa.setSoloNumeros(true);
+        jPanelRound1.add(txtprecioventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 160, -1));
+
+        txtcodigo.setForeground(new java.awt.Color(0, 0, 0));
+        txtcodigo.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtcodigo.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtcodigo.setPlaceholder("Codigo");
+        jPanelRound1.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 150, -1));
+
+        txtdescripcion.setForeground(new java.awt.Color(0, 0, 0));
+        txtdescripcion.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtdescripcion.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtdescripcion.setMayusculas(true);
+        txtdescripcion.setPlaceholder("Descripcion");
+        jPanelRound1.add(txtdescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 310, -1));
+
         jPanel3.add(jPanelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 490, 540));
+
+        txtbuscar.setForeground(new java.awt.Color(0, 0, 0));
+        txtbuscar.setBorderColor(new java.awt.Color(102, 102, 255));
+        txtbuscar.setBotonColor(new java.awt.Color(102, 0, 255));
+        txtbuscar.setMayusculas(true);
+        txtbuscar.setPlaceholder("Ingresa busqueda ...");
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyReleased(evt);
+            }
+        });
+        jPanel3.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 430, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1080, 560));
 
@@ -554,14 +549,11 @@ public class pnlProductos extends javax.swing.JInternalFrame {
         product.actualizar(productoseleccionado, nombre, descripcion, stock, imgArticleFile, unidadaid, precio_compra, previo_venta,categoriaid, codigo);
             limpiar();
             CargarModeloTabla(); 
-         
-                      Success suc = new Success(new JFrame(),true );
-
-                        suc.titulos.setText("!HECHO¡");
-                       suc.textos.setText("SE HAN ACTUALIZADO LOS DATOS");
-//                    sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
-//                    sa.msj1.setText("");
-                      suc.setVisible(true);
+            SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN ACTUALIZADO LOS DATOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
            
         }else{
          
@@ -569,46 +561,50 @@ public class pnlProductos extends javax.swing.JInternalFrame {
             CUnidades unidad = (CUnidades)cmbunidades.getSelectedItem();
              int idcategoria = Integer.parseInt(categoria.getIdcategoria());
             
-            if(opcionc.equals("Selecciona opcion") || opcionu.equals("Selecciona opcion") ){    
-            //JOptionPane.showMessageDialog(null, "Debe seleccionar una Categoria o Unidad o Alguna fila para editar");
-                   Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Debe seleccionar una Categoria \n o Unidad ");
-                info.setVisible(true);
+            if(opcionc.equals("Selecciona opcion") || opcionu.equals("Selecciona opcion") ){
+                
+                ErrorAlert e = new ErrorAlert(new JFrame(), true);
+                    e.msj1.setText("HAY UN PLOBLEMA ");
+                    e.msj2.setText("LE FALTA SELECCIONAR UNA CATEGORIA \n O UNIDAD");
+                    e.msj3.setText("");
+                    e.setVisible(true);
+
+                
             }else if(opcionc.equals("Selecciona opcion")){
-            //JOptionPane.showMessageDialog(null, "Debe seleccionar una Categoria o Alguna fila para editar");
-                   Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Debe seleccionar una Categoria o Unidad ");
-                info.setVisible(true);
+             ErrorAlert e = new ErrorAlert(new JFrame(), true);
+                    e.msj1.setText("HAY UN PLOBLEMA ");
+                    e.msj2.setText("LE FALTA  SELECCIONAR UNA CATEGORIA \n O UNIDAD");
+                    e.msj3.setText("");
+                    e.setVisible(true);
             }else if(opcionu.equals("Selecciona opcion")){
           //  JOptionPane.showMessageDialog(null, "Debe seleccionar Unidad o Alguna fila para editar");  
-                   Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Debe seleccionar una Categoria o Unidad ");
-                info.setVisible(true);
+                  ErrorAlert e = new ErrorAlert(new JFrame(), true);
+                    e.msj1.setText("HAY UN PLOBLEMA ");
+                    e.msj2.setText("LE FALTA  SELECCIONAR UNA CATEGORIA \n O UNIDAD");
+                    e.msj3.setText("");
+                    e.setVisible(true);
             }else if(nombre.equals("")){
           //  JOptionPane.showMessageDialog(rootPane, "El campo nombre no puede estar vacio");
-                   Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Debe seleccionar una Categoria o Unidad");
-                info.setVisible(true);
+                ErrorAlert e = new ErrorAlert(new JFrame(), true);
+                    e.msj1.setText("HAY UN PLOBLEMA ");
+                    e.msj2.setText("LE FALTA SELECCIONAR UNA CATEGORIA \n O UNIDAD");
+                    e.msj3.setText("");
+                    e.setVisible(true);
             }else{
             
             
           if (imgArticleFile == null){
-            JOptionPane.showMessageDialog(null, "No haseleccionada una imagen");
+//            JOptionPane.showMessageDialog(null, "No has eleccionada una imagen");
             File file = new File(System.getProperty("user.dir")+"/src/img1/nimages.png");
             CProductos productos = new CProductos( 0,  nombre, descripcion,  stock, file ,unidad.getIdunidad(),  precio_compra, previo_venta,idcategoria,codigo,"","","");
             product.insertar(productos);
-           // JOptionPane.showMessageDialog(null, "Registro realizado");
-                    Success suc = new Success(new JFrame(),true );
-
-                       suc.titulos.setText("!HECHO¡");
-                       suc.textos.setText("SE HAN GUARDADO LOS CAMBIOS");
-//                    sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
-//                    sa.msj1.setText("");
-                      suc.setVisible(true);
+            
+            SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN GUARDADO LOS CAMBIOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
+            
             limpiar();
             CargarModeloTabla();
             }else{
@@ -617,13 +613,12 @@ public class pnlProductos extends javax.swing.JInternalFrame {
             //JOptionPane.showMessageDialog(null, "Registro realizado");
             limpiar();
             CargarModeloTabla();
-               Success suc = new Success(new JFrame(),true );
-
-                       suc.titulos.setText("!HECHO¡");
-                       suc.textos.setText("SE HAN GUARDADO LOS CAMBIOS");
-//                    sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
-//                    sa.msj1.setText("");
-                      suc.setVisible(true);
+            
+             SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN GUARDADO LOS CAMBIOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
             }  
             }
             
@@ -643,26 +638,36 @@ try {
             
              int cuentaFilasSeleccionadas = tblProdutos.getSelectedRowCount();
             if (cuentaFilasSeleccionadas == 0) {
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Debe serleccionar alguna fila");
-                info.setVisible(true);
+                ErrorAlert e = new ErrorAlert(new JFrame(), true);
+            e.msj1.setText("HAY UN PLOBLEMA ");
+            e.msj2.setText("DEBE SELECCIONAR UNA FILA");
+            e.msj3.setText("");
+            e.setVisible(true);
             }else{
+                     
+                
+                WarningAlert w = new WarningAlert(new JFrame(), true);
+                w.msj1.setText("ESTAS SEGURO°°°");
+                w.msj2.setText("¡DESEAS ELIMINARLO?");
+                w.msj3.setText("");
+                w.setVisible(true);
+
+            if (w.hecho) {
+ ///---->   
                 product.eliminar(productoseleccionado);
-                      Warning warning = new Warning(new Frame(),true);
-                warning.jLabel1.setText("Advertencia!!!");
-                warning.textos.setText("Esta seguro que deseas eliminar ?");
-                warning.setVisible(true);
-                     String dato = warning.valor.toString();
-                      System.out.println(dato);  
-                        if (dato.equals("Aceptar")) {
-                limpiar();
-                CargarModeloTabla();
+///limpiar 
+                 limpiar();///->>>
+                 ///cargardatos a tabla
+                CargarModeloTabla();///->>>
+                SuccessAlert succ  = new SuccessAlert(new Frame(), true);
+                succ.msj1.setText("CORRECTO !!!");
+                succ.msj2.setText("SE HA ELIMINADO");
+                succ.msj3.setText("");
+                succ.setVisible(true);
             }
-                  Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Producto Eliminado");
-                info.setVisible(true);
+            
+                
+                
             }
           
         } catch (SQLException ex) {
@@ -704,56 +709,6 @@ File imgArticleFile;
         
     }//GEN-LAST:event_lblImagenArticuloMousePressed
 
-    private void txtprecioventaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecioventaKeyTyped
-        char validar = evt.getKeyChar();
-        if(Character.isLetter(validar)){
-            getToolkit().beep();
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Ingresa Solo numeros");
-        }
-    }//GEN-LAST:event_txtprecioventaKeyTyped
-
-    private void txtstockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtstockKeyTyped
-        char validar = evt.getKeyChar();
-        if(Character.isLetter(validar)){
-            getToolkit().beep();
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Ingresa Solo numeros");
-        }
-
-      
-    }//GEN-LAST:event_txtstockKeyTyped
-
-    private void txtpreciocompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpreciocompraKeyTyped
-      char validar = evt.getKeyChar();
-        if(Character.isLetter(validar)){
-            getToolkit().beep();
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Ingresa Solo numeros");
-        }
-    }//GEN-LAST:event_txtpreciocompraKeyTyped
-
-    private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcodigoActionPerformed
-
-    private void txtstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtstockActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtstockActionPerformed
-
-    private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
-        txtbuscar.addKeyListener(new KeyAdapter() {
-            public void keyReleased(final KeyEvent e) {
-                String cadena = (txtbuscar.getText());
-                txtbuscar.setText(cadena);
-                repaint();
-                filtroBusqueda(txtbuscar);
-            }
-        });
-        trsFiltro = new TableRowSorter(tblProdutos.getModel());
-        tblProdutos.setRowSorter(trsFiltro);
-    }//GEN-LAST:event_txtbuscarKeyTyped
-
     private void NcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NcategoriaActionPerformed
     JTextField nombre = new JTextField("");
     JTextArea descripcion = new JTextArea("");
@@ -770,15 +725,15 @@ File imgArticleFile;
         
         try {
               if (nombre.getText().equals("") || descripcion.getText().equals("") ){
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("No pueden estar vacios los campos");
-                info.setVisible(true);
-               
+                ErrorAlert e = new ErrorAlert(new JFrame(), true);
+                    e.msj1.setText("HAY UN PLOBLEMA ");
+                    e.msj2.setText("LOS CAMPOS NO PUEDEN ESTAR VACIOS");
+                    e.msj3.setText("");
+                    e.setVisible(true);     
             JOptionPane.showConfirmDialog(null, panel, "Registro de Categoria",
         JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             }else{
-            CCategorias catego = new CCategorias("0",nombre.getText(),descripcion.getText(),1);
+            CCategorias catego = new CCategorias("0",nombre.getText().toUpperCase(),descripcion.getText().toUpperCase(),1);
             categoria.insert(catego);
             cmbcategorias.removeAllItems();
             cargarModeloCat();
@@ -814,7 +769,7 @@ public void  limpiarProveedor(){
             JOptionPane.showConfirmDialog(null, panel, "Registro de Unidad",
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
              }else{
-            CUnidades unida = new CUnidades(0,nombre.getText());
+            CUnidades unida = new CUnidades(0,nombre.getText().toUpperCase());
            unidad.insert(unida);
            cmbunidades.removeAllItems();
            cargarModeloUni();
@@ -835,17 +790,44 @@ public void  limpiarProveedor(){
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txtnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyReleased
-    txtnombre.setText(txtnombre.getText().toUpperCase());          // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombreKeyReleased
-
-    private void txtdescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyReleased
-    txtdescripcion.setText(txtdescripcion.getText().toUpperCase());          // TODO add your handling code here:
-    }//GEN-LAST:event_txtdescripcionKeyReleased
-
-    private void txtcodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyReleased
- txtcodigo.setText(txtcodigo.getText().toUpperCase());          // TODO add your handling code here:
-    }//GEN-LAST:event_txtcodigoKeyReleased
+    private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
+// txtbuscar.addKeyListener(new KeyAdapter() {
+//            public void keyReleased(final KeyEvent e) {
+//                String cadena = (txtbuscar.getText());
+//                txtbuscar.setText(cadena);
+//                repaint();
+//                filtroBusqueda(txtbuscar);
+//            }
+//        });
+//        trsFiltro = new TableRowSorter(tblProdutos.getModel());
+//        tblProdutos.setRowSorter(trsFiltro);        // TODO add your handling code here:
+        
+    String cadena  = txtbuscar.getText();
+    
+    ArrayList<CProductos> ListarProductos = product.ObtenerCategoriasCriterio(cadena);
+    int numeroProductos = ListarProductos.size();
+    modeloTablaProductos.setNumRows(numeroProductos);
+    
+        for (int i = 0; i < numeroProductos ; i++) {
+          CProductos producto = ListarProductos.get(i); 
+            
+            String nombre = producto.getNomProducto();
+            String desc = producto.getDescProducto();
+            String codigo = producto.getCodigo();
+            double stock = producto.getStockProducto();
+            modeloCategorias.setSelectedItem(producto.getCategorra());
+                modeloUnidades.setSelectedItem(producto.getUnidad());
+            
+            modeloTablaProductos.setValueAt(producto, i, 0);
+            modeloTablaProductos.setValueAt(stock, i, 1);
+            modeloTablaProductos.setValueAt(codigo, i, 2);
+          
+        }
+    
+        
+    
+    
+    }//GEN-LAST:event_txtbuscarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -858,7 +840,6 @@ public void  limpiarProveedor(){
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -875,12 +856,12 @@ public void  limpiarProveedor(){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblImagenArticulo;
     private javax.swing.JTable tblProdutos;
-    private javax.swing.JTextField txtbuscar;
-    private javax.swing.JTextField txtcodigo;
-    private javax.swing.JTextField txtdescripcion;
-    private javax.swing.JTextField txtnombre;
-    private javax.swing.JTextField txtpreciocompra;
-    private javax.swing.JTextField txtprecioventa;
-    private javax.swing.JTextField txtstock;
+    private rojerusan.RSMetroTextFullPlaceHolder txtbuscar;
+    private rojeru_san.rsfield.RSTextFull txtcodigo;
+    private rojeru_san.rsfield.RSTextFull txtdescripcion;
+    private rojeru_san.rsfield.RSTextFull txtnombre;
+    private rojeru_san.rsfield.RSTextFull txtpreciocompra;
+    private rojeru_san.rsfield.RSTextFull txtprecioventa;
+    private rojeru_san.rsfield.RSTextFull txtstock;
     // End of variables declaration//GEN-END:variables
 }

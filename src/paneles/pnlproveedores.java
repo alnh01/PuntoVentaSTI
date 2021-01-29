@@ -5,9 +5,12 @@
  */
 package paneles;
 
+import Alerts.ErrorAlert;
 import Alerts.Information;
 import Alerts.Success;
+import Alerts.SuccessAlert;
 import Alerts.Warning;
+import Alerts.WarningAlert;
 import BD.Proveedores;
 import Controller.CProveedores;
 import Controller.CUsuarios;
@@ -119,20 +122,20 @@ CProveedores  proveedorselecionado = null ;
         tablaProveedores = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtbusqueda = new javax.swing.JTextField();
         jPanelRound1 = new LIB.JPanelRound();
         jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtnombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtdireccion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txttelefono = new javax.swing.JTextField();
-        txtemail = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnagregar = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtnombre = new rojeru_san.rsfield.RSTextFull();
+        txtdireccion = new rojeru_san.rsfield.RSTextFull();
+        txttelefono = new rojeru_san.rsfield.RSTextFull();
+        txtemail = new rojeru_san.rsfield.RSTextFull();
+        txtbusqueda = new rojeru_san.rsfield.RSTextFull();
 
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(null);
@@ -180,13 +183,6 @@ CProveedores  proveedorselecionado = null ;
         jLabel6.setText("Listado de Proveedores");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 210, -1));
 
-        txtbusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtbusquedaKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtbusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 150, 30));
-
         jPanelRound1.setBackground(new java.awt.Color(255, 255, 255));
         jPanelRound1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
         jPanelRound1.setOpaque(true);
@@ -198,37 +194,19 @@ CProveedores  proveedorselecionado = null ;
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nombre *");
-        jPanelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-
-        txtnombre.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        txtnombre.setForeground(new java.awt.Color(102, 153, 255));
-        txtnombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnombreActionPerformed(evt);
-            }
-        });
-        jPanelRound1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 180, -1));
+        jPanelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Direccion*");
         jPanelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
-        txtdireccion.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        jPanelRound1.add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 180, -1));
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Telenono *");
-        jPanelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 70, -1));
-
-        txttelefono.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        jPanelRound1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 180, -1));
-
-        txtemail.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
-        jPanelRound1.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 180, -1));
+        jPanelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 80, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Email *");
-        jPanelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 50, 30));
+        jPanelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 50, 30));
 
         btnagregar.setBackground(new java.awt.Color(102, 166, 54));
         btnagregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -240,7 +218,7 @@ CProveedores  proveedorselecionado = null ;
                 btnagregarActionPerformed(evt);
             }
         });
-        jPanelRound1.add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 120, 40));
+        jPanelRound1.add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 120, 40));
 
         btneliminar.setBackground(new java.awt.Color(247, 94, 24));
         btneliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -252,7 +230,7 @@ CProveedores  proveedorselecionado = null ;
                 btneliminarActionPerformed(evt);
             }
         });
-        jPanelRound1.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 110, 40));
+        jPanelRound1.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 110, 40));
 
         jButton1.setBackground(new java.awt.Color(81, 161, 194));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -264,9 +242,46 @@ CProveedores  proveedorselecionado = null ;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanelRound1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 120, 40));
+        jPanelRound1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 120, 40));
 
-        jPanel1.add(jPanelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, 290, 320));
+        txtnombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtnombre.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtnombre.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtnombre.setMayusculas(true);
+        txtnombre.setPlaceholder("Proveedor");
+        jPanelRound1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+
+        txtdireccion.setForeground(new java.awt.Color(0, 0, 0));
+        txtdireccion.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtdireccion.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtdireccion.setMayusculas(true);
+        txtdireccion.setPlaceholder("Direccion");
+        jPanelRound1.add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 330, -1));
+
+        txttelefono.setForeground(new java.awt.Color(0, 0, 0));
+        txttelefono.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txttelefono.setBotonColor(new java.awt.Color(255, 102, 102));
+        txttelefono.setPlaceholder("Telefono");
+        txttelefono.setSoloNumeros(true);
+        jPanelRound1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+
+        txtemail.setForeground(new java.awt.Color(0, 0, 0));
+        txtemail.setBordeColorFocus(new java.awt.Color(153, 153, 255));
+        txtemail.setBotonColor(new java.awt.Color(255, 102, 102));
+        txtemail.setMayusculas(true);
+        txtemail.setPlaceholder("Email");
+        jPanelRound1.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
+
+        jPanel1.add(jPanelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 430, 320));
+
+        txtbusqueda.setMayusculas(true);
+        txtbusqueda.setPlaceholder("Buscar");
+        txtbusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbusquedaKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtbusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, -1));
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1090, 590);
@@ -280,36 +295,29 @@ CProveedores  proveedorselecionado = null ;
         String telefono = txttelefono.getText();
         String email = txtemail.getText();
         String  direccion = txtdireccion.getText(); 
-        Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        Matcher mather = pattern.matcher(email);
+   
         if (nombre.equals("") || telefono.equals("") || email.equals("") || direccion.equals("")){
-            Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Verifique los datos");
-                info.setVisible(true);
+            ErrorAlert e = new ErrorAlert(new JFrame(), true);
+            e.msj1.setText("HAY UN PLOBLEMA ");
+            e.msj2.setText("VERIFIQUE SUS DATOS");
+            e.msj3.setText("");
+            e.setVisible(true);
+
      //   JOptionPane.showMessageDialog(null, "Verifique sus datos");
         }else{
         //validar email
-      if (mather.find() == true) {
-       // JOptionPane.showMessageDialog(null,"El email ingresado es válido.");
-        Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("El email no es valido");
-                info.setVisible(true);
-        
-        } else {
+  
         int cuentaFilasSeleccionadas = tablaProveedores.getSelectedRowCount();
         if (cuentaFilasSeleccionadas == 1) { 
          //funcion actualizar
              bdprv.actualizarProveedor(proveedorselecionado, nombre, telefono, email,direccion);
              ///funcion actualiza
              //mostra alert
-             Success suc = new Success(new JFrame(),true );
-                       suc.titulos.setText("!HECHO¡");
-                       suc.textos.setText("SE HAN GUARDADO LOS CAMBIOS");
-                      suc.setVisible(true);
+             SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN GUARDADO LOS CAMBIOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
 //-->
         //<---- limpiar
             limpiar();
@@ -325,10 +333,11 @@ CProveedores  proveedorselecionado = null ;
         bdprv.registrar_Proveedor(prove);
         //--->
         //<---Mostrar alert
-            Success suc = new Success(new JFrame(),true );
-             suc.titulos.setText("!HECHO¡");
-             suc.textos.setText("SE HAN ACTUALIZADO LOS DATOS");
-            suc.setVisible(true);
+              SuccessAlert suc = new SuccessAlert(new JFrame(),true );
+                       suc.msj1.setText("!HECHO¡");
+                       suc.msj2.setText("SE HAN ACTUALIZADO LOS DATOS");
+                       suc.msj3.setText("");
+                       suc.setVisible(true);
             //---->
         //<----cargarmodelo
             CargarModeloTabla();
@@ -337,7 +346,7 @@ CProveedores  proveedorselecionado = null ;
         limpiar();
 //---->       
         }
-        }
+        
                }    
     } catch (SQLException ex) {
         Logger.getLogger(pnlproveedores.class.getName()).log(Level.SEVERE, null, ex);
@@ -350,34 +359,42 @@ CProveedores  proveedorselecionado = null ;
              int cuentaFilasSeleccionadas = tablaProveedores.getSelectedRowCount();
             if (cuentaFilasSeleccionadas == 0) {
              // JOptionPane.showMessageDialog(null, "Debe serleccionar alguna fila");
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Debe seleccionar alguna fila");
-                info.setVisible(true);
+              ErrorAlert e = new ErrorAlert(new JFrame(), true);
+            e.msj1.setText("HAY UN PLOBLEMA ");
+            e.msj2.setText("DEBE SELECCIONAR UNA FILA");
+            e.msj3.setText("");
+            e.setVisible(true);
+
             }else{
                 //<--- funcion eiminar
                 bdprv.EliminiarProveedor(proveedorselecionado);
                 //--->
                 //<----llamar alert
-               Warning warning = new Warning(new Frame(),true);
-                warning.jLabel1.setText("Advertencia!!!");
-                warning.textos.setText("Esta seguro que deseas eliminar ?");
-                warning.setVisible(true);
-                     String dato = warning.valor.toString();
-                      System.out.println(dato);  
-                        if (dato.equals("Aceptar")) {
+              
+                WarningAlert w = new WarningAlert(new JFrame(), true);
+                w.msj1.setText("ESTAS SEGURO°°°");
+                w.msj2.setText("¡DESEAS ELIMINARLO?");
+                w.msj3.setText("");
+                w.setVisible(true);
+
+                        if (w.hecho) {
  ///---->
 ///limpiar 
                  limpiar();///->>>
                  ///cargardatos a tabla
                 CargarModeloTabla();///->>>
-                        }
-                        
-                 Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("Informacion !!!");
-                info.textos.setText("Proveedor Eliminado");
-                info.setVisible(true);
+                 SuccessAlert succ  = new SuccessAlert(new Frame(), true);
+                succ.msj1.setText("CORRECTO !!!");
+                succ.msj2.setText("SE HA ELIMINADO");
+                succ.msj3.setText("");
+                succ.setVisible(true);
             }
+            
+            
+            
+            }
+                        
+                
             
           
         } catch (SQLException ex) {
@@ -385,27 +402,29 @@ CProveedores  proveedorselecionado = null ;
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btneliminarActionPerformed
 
-    private void txtbusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedaKeyTyped
- txtbusqueda.addKeyListener(new KeyAdapter() {
-            public void keyReleased(final KeyEvent e) {
-                String cadena = (txtbusqueda.getText());
-                txtbusqueda.setText(cadena);
-                repaint();
-                filtroBusqueda(txtbusqueda);
-            }
-        });
-        trsFiltro = new TableRowSorter(tablaProveedores.getModel());
-        tablaProveedores.setRowSorter(trsFiltro);        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbusquedaKeyTyped
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 limpiar();
 tablaProveedores.clearSelection ();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombreActionPerformed
+    private void txtbusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedaKeyReleased
+        limpiarTabla();
+       String criterio = txtbusqueda.getText();
+       ArrayList<CProveedores>ListarProveedores = bdprv.ObtenerProveedoresporCriterio(criterio);
+      int numerosProveedpres = ListarProveedores.size();
+      modelotablaProveedores.setNumRows(numerosProveedpres);
+        for (int i = 0; i < numerosProveedpres; i++) {
+            CProveedores proveedor = ListarProveedores.get(i);
+            String nombre = proveedor.getNombre();
+            String email = proveedor.getEmail();
+            String direccion = proveedor.getDireccion();
+            String telefono = proveedor.getTelefono();        
+            modelotablaProveedores.setValueAt(proveedor, i, 0);
+            modelotablaProveedores.setValueAt(direccion, i, 1);
+            modelotablaProveedores.setValueAt(telefono, i, 2);
+            modelotablaProveedores.setValueAt(email, i, 3);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbusquedaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -424,10 +443,10 @@ tablaProveedores.clearSelection ();// TODO add your handling code here:
     private LIB.JPanelRound jPanelRound1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaProveedores;
-    private javax.swing.JTextField txtbusqueda;
-    private javax.swing.JTextField txtdireccion;
-    private javax.swing.JTextField txtemail;
-    private javax.swing.JTextField txtnombre;
-    private javax.swing.JTextField txttelefono;
+    private rojeru_san.rsfield.RSTextFull txtbusqueda;
+    private rojeru_san.rsfield.RSTextFull txtdireccion;
+    private rojeru_san.rsfield.RSTextFull txtemail;
+    private rojeru_san.rsfield.RSTextFull txtnombre;
+    private rojeru_san.rsfield.RSTextFull txttelefono;
     // End of variables declaration//GEN-END:variables
 }

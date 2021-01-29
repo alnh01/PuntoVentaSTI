@@ -5,6 +5,7 @@
  */
 package BD;
 
+import Alerts.ErrorAlert;
 import Conexion.Conexion;
 import Controller.CUsuarios;
 import ds.desktop.notify.DesktopNotify;
@@ -14,10 +15,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import paneles.pnlPunto;
-import principal.Login;
+
 import principal.Principal;
 import principal.Session;
 
@@ -48,13 +50,17 @@ public class login {
             stmt = conn.prepareStatement(SSQL);
             rs = stmt.executeQuery();
             if (rs.next() == false) {
-            JOptionPane.showMessageDialog(null, "El Usuario no Existe", "", JOptionPane.ERROR_MESSAGE);
+              ErrorAlert e = new ErrorAlert(new JFrame(), true);
+              e.msj1.setText("HAY UN PLOBLEMA ");
+              e.msj2.setText("USUARIO NO EXISTE");
+              e.msj3.setText("");
+              e.setVisible(true);
             Session usl = new Session();
             usl.setVisible(true);
             } else {
                 
                      id_usuario = rs.getInt("idusuario");
-                     System.out.println(id_usuario);
+                    
                     String nombre = rs.getString("nombre");
                     String login = rs.getString("login");
                     String clave = rs.getString("clave");
@@ -64,7 +70,7 @@ public class login {
                 
                 prin = new Principal();
                
-                  prin.txtusuario.setText("" +usuarios.getNombre());
+                  prin.txtusuario.setText("" +usuarios.getLogin());
                   prin.txtcodigo.setText(" " + usuarios.getId_usuario());
                   pnlPunto.txtbuscar.requestFocus();
                  int idusuario=id_usuario;
@@ -115,7 +121,13 @@ public class login {
                 
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);
+             ErrorAlert e = new ErrorAlert(new JFrame(), true);
+              e.msj1.setText("YA HAY UNA APLICACION DEL MISMO PROGRAMA.");
+              e.msj2.setText("POR FAVOR CIERRELA ");
+              e.msj3.setText("Y VUELVA A INTENTAR");
+              e.setVisible(true);
+            
+            System.exit(0);
         } finally {
             Conexion.close(rs);
             Conexion.close(stmt);

@@ -5,6 +5,7 @@
  */
 package BD;
 
+import Alerts.ErrorAlert;
 import Conexion.Conexion;
 import Controller.CProductos;
 import java.io.File;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import paneles.pnlPunto;
 
 public class Producto {
@@ -33,7 +35,12 @@ public class Producto {
      private final String SQL_DELETE = "DELETE articulo  WHERE idarticulo=?";
      private final String SQL_UPDATE_STOCK = "UPDATE articulo set STOCK = ?  WHERE idarticulo=? ";
      private final String SQL_SELECT_STOCK = "SELECT stock  FROM articulo where idarticulo = ?  ";
-     private final String SQL_TRUNCATE = "TRUNCATE table  articulo";
+     private final String SQL_TRUNCATE = "TRUNCATE table  articulo  RESTART IDENTITY";
+     private final String SQL_TRUNCATE_DVENTA = "TRUNCATE table  detalle_venta  RESTART IDENTITY";
+     private final String SQL_TRUNCATE_VENTA = "TRUNCATE table  venta  RESTART IDENTITY";
+
+
+     
      private final String SQL_BUSCAR_REPETIDO = "SELECT * FROM articulo WHERE codigo = ? ";
      
      
@@ -129,7 +136,7 @@ public class Producto {
     }
 
  
-  public ArrayList<CProductos> obtenerProductosPorCriterio(String criterio) throws SQLException{
+  public ArrayList<CProductos> obtenerProductosPorCriterio(String criterio) {
     
       
       ArrayList<CProductos> ListarProductos = new ArrayList<CProductos>();
@@ -149,6 +156,7 @@ public class Producto {
             while (rs.next()) {
                 
                  int id = rs.getInt("idarticulo");
+                 System.out.println(id);
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
                 double stock = rs.getDouble("stock");
@@ -162,7 +170,9 @@ public class Producto {
                 CProductos producto = new CProductos(id,nombre,descripcion,stock, null,unidad, precioCompra,precioVenta,idCategoria,codigo,"","",condicion);
                 ListarProductos.add(producto);                
             }
-        } finally {
+        } catch (SQLException ex) {
+             Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+         } finally {
             Conexion.close(stmt);
             if (this.userConn == null) {
                 Conexion.close(conn);
@@ -172,7 +182,7 @@ public class Producto {
     }
   
   
-  public ArrayList<CProductos> obtenerPorCodigo(String criterio) throws SQLException{
+  public ArrayList<CProductos> obtenerPorCodigo(String criterio){
     
       
       ArrayList<CProductos> ListarProductos = new ArrayList<CProductos>();
@@ -205,7 +215,9 @@ public class Producto {
                 CProductos producto = new CProductos(id,nombre,descripcion,stock, null,unidad, precioCompra,precioVenta,idCategoria,codigo,"","",condicion);
                 ListarProductos.add(producto);                
             }
-        } finally {
+        } catch (SQLException ex) {
+             Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+         } finally {
             Conexion.close(stmt);
             if (this.userConn == null) {
                 Conexion.close(conn);
@@ -233,12 +245,17 @@ public class Producto {
              rs = stmt.executeQuery();
             
          
-                if (!rs.next()) {
-                
-               
-                }else{
-                    
+             if (!rs.next()) {
+                 
+                ErrorAlert e = new ErrorAlert(new JFrame(), true);
+                e.msj1.setText("HAY UN PLOBLEMA ");
+                e.msj2.setText("EL CODIGO INGRESADO NO EXITE!!");
+                e.msj3.setText("");
+                e.setVisible(true);
+             }else{
+//                    
                 int id = rs.getInt("idarticulo");
+                System.out.println(id);
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
                 double stock = rs.getDouble("stock");
@@ -256,7 +273,7 @@ public class Producto {
 //                pnlPunto pnlpn = new pnlPunto();
 //                pnlpn.anadirProductoAVenta(producto);
                 
-                }
+      }
                             
 //            
         } finally {
@@ -444,9 +461,46 @@ public class Producto {
                 Conexion.close(conn);
             }
         }
-     
-     
  }
+  
+  
+  public void limpiarDetallesVenta(){
+       
+      Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_TRUNCATE_DVENTA);
+            rows = stmt.executeUpdate();
+        } catch (SQLException ex) {
+             Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+         } finally {
+            Conexion.close(stmt);
+            if (this.userConn == null) {
+                Conexion.close(conn);
+            }
+        }
+  }
+   public void limpiarVenta(){
+       
+      Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_TRUNCATE_VENTA);
+            rows = stmt.executeUpdate();
+        } catch (SQLException ex) {
+             Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+         } finally {
+            Conexion.close(stmt);
+            if (this.userConn == null) {
+                Conexion.close(conn);
+            }
+        }
+  }
+  
   
   
   public boolean VerificarCodigos(String codigo) throws SQLException{
@@ -477,6 +531,103 @@ public class Producto {
        return bandera;
     }
   
-  
+  public ArrayList<CProductos> ObtenerCategoriasCriterio(String criterio) {
+        ArrayList<CProductos> ListarProductos = new ArrayList<CProductos>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            stmt = conn.prepareStatement("SELECT ar.*,ca.nombre as categoria ,un.nombre as unidad FROM  articulo ar INNER join categoria ca on ar.idcategoria = ca.idcategoria inner JOIN unidad_medida un  on un.idunidad = ar.idunidad  WHERE ar.idarticulo LIKE '%"+criterio+"%' OR ar.nombre LIKE '%"+criterio+"%' OR ar.codigo LIKE '%"+criterio+"%'");
+            rs = stmt.executeQuery();
 
+            while (rs.next()) {
+                
+     int idproducto =rs.getInt("idarticulo");
+     String nomProducto =rs.getString("nombre");     
+     String descProducto=rs.getString("descripcion");
+     double stockProducto=rs.getDouble("stock");
+     File fotoProducto;
+     int idunidadProducto =rs.getInt("idunidad") ;
+     double precioCompraProducto=rs.getDouble("precio_compra");
+     double precioVentaProducto= rs.getDouble("precio_venta");
+     int idCategoria = rs.getInt("idcategoria");
+     String codigo = rs.getString("codigo");
+     String categoria  = rs.getString("categoria");
+     String unidad = rs.getString("unidad");
+     String condicion = rs.getString("condicion");
+                
+     CProductos productos = new CProductos( idproducto,  nomProducto,  descProducto,  stockProducto,null, idunidadProducto,  precioCompraProducto,  precioVentaProducto,  idCategoria,  codigo,categoria,unidad,condicion);
+      ListarProductos.add(productos);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+        }
+        return ListarProductos;
+    }
+  
+    
+     public CProductos  obtenerporCodigoDeProducto(String criterio) throws SQLException{
+    
+      ArrayList<CProductos> ListarProductos = new ArrayList<CProductos>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int rows = 0;
+        CProductos producto = null;
+       
+        try {
+           
+            conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+            
+            stmt = conn.prepareStatement("SELECT  * FROM articulo WHERE  codigo = '"+criterio+"'");
+            
+            
+             rs = stmt.executeQuery();
+            
+         
+             if (!rs.next()) {
+                 
+                
+                 
+             }else{
+//                    
+                int id = rs.getInt("idarticulo");
+                System.out.println(id);
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                double stock = rs.getDouble("stock");
+                int unidad = rs.getInt("idunidad");
+                double precioCompra = rs.getDouble("precio_compra");
+                double precioVenta = rs.getDouble("precio_venta");
+                String codigo = rs.getString("codigo");
+                int idCategoria = rs.getInt("idcategoria");
+                String condicion = rs.getString("condicion");
+                
+                 producto = new CProductos(id,nombre,descripcion,stock, null,unidad, precioCompra,precioVenta,idCategoria,codigo,"","",condicion);
+//                ListarProductos.add(producto);     
+                
+                  
+//                pnlPunto pnlpn = new pnlPunto();
+//                pnlpn.anadirProductoAVenta(producto);
+                
+      }
+                            
+//            
+        } finally {
+            Conexion.close(stmt);
+            if (this.userConn == null) {
+                Conexion.close(conn);
+            }
+        }
+       return  producto;
+    }
+  
+  
+  
+  
 }

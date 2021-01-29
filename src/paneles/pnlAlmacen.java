@@ -5,10 +5,14 @@
  */
 package paneles;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
 public class pnlAlmacen extends javax.swing.JPanel {
 
+    public static boolean click = false;
     /**
      * Creates new form pnlHome
      */
@@ -25,15 +29,23 @@ public class pnlAlmacen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        contenedorModulosAlmacen = new javax.swing.JDesktopPane();
+        contenedorModulosAlmacen = new javax.swing.JDesktopPane(){
+            ImageIcon icon = new ImageIcon(getClass().getResource("/img1/almacen.png"));
+            Image image =icon.getImage();
+            public void paintComponent(Graphics g){ g.drawImage(image,250,50,this);
+            }
+        };
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         fSButtonMD1 = new LIB.FSButtonMD();
         fSButtonMD2 = new LIB.FSButtonMD();
+        rSButtonHover1 = new rojerusan.RSButtonHover();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1090, 634));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        contenedorModulosAlmacen.setBackground(new java.awt.Color(244, 244, 244));
 
         javax.swing.GroupLayout contenedorModulosAlmacenLayout = new javax.swing.GroupLayout(contenedorModulosAlmacen);
         contenedorModulosAlmacen.setLayout(contenedorModulosAlmacenLayout);
@@ -57,6 +69,7 @@ public class pnlAlmacen extends javax.swing.JPanel {
         jLabel7.setText("ALMACEN");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
+        fSButtonMD1.setForeground(new java.awt.Color(0, 0, 0));
         fSButtonMD1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/list.png"))); // NOI18N
         fSButtonMD1.setText("Categorias");
         fSButtonMD1.setColorNormal(new java.awt.Color(144, 209, 0));
@@ -70,6 +83,7 @@ public class pnlAlmacen extends javax.swing.JPanel {
         });
         jPanel1.add(fSButtonMD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, -1, 50));
 
+        fSButtonMD2.setForeground(new java.awt.Color(0, 0, 0));
         fSButtonMD2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/product.png"))); // NOI18N
         fSButtonMD2.setText("Articulos");
         fSButtonMD2.setColorNormal(new java.awt.Color(255, 124, 31));
@@ -82,10 +96,24 @@ public class pnlAlmacen extends javax.swing.JPanel {
         });
         jPanel1.add(fSButtonMD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, -1, 50));
 
+        rSButtonHover1.setBackground(new java.awt.Color(204, 255, 153));
+        rSButtonHover1.setForeground(new java.awt.Color(0, 0, 0));
+        rSButtonHover1.setText("Cancelacion Venta");
+        rSButtonHover1.setColorHover(new java.awt.Color(0, 204, 0));
+        rSButtonHover1.setColorText(new java.awt.Color(0, 0, 0));
+        rSButtonHover1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rSButtonHover1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonHover1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rSButtonHover1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, -1, 50));
+
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 70));
     }// </editor-fold>//GEN-END:initComponents
 pnlCategorias  pnlCategorias;
 pnlProductos pnlArticulos;
+pnlCancelacionVentas pnLCanC;
     private void fSButtonMD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fSButtonMD1ActionPerformed
    if(pnlCategorias == null){  
         pnlCategorias = new pnlCategorias();
@@ -109,6 +137,8 @@ pnlProductos pnlArticulos;
             contenedorModulosAlmacen.getDesktopManager().maximizeFrame(pnlArticulos);
             pnlArticulos.setVisible(true);
             
+            click = true;
+            
 
              }else{
            contenedorModulosAlmacen.getDesktopManager().maximizeFrame(pnlArticulos);
@@ -118,6 +148,22 @@ pnlProductos pnlArticulos;
         }   // TODO add your handling code here:
     }//GEN-LAST:event_fSButtonMD2ActionPerformed
 
+    private void rSButtonHover1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover1ActionPerformed
+if(pnLCanC == null){  
+        pnLCanC = new pnlCancelacionVentas();
+            contenedorModulosAlmacen.add(pnLCanC);
+            contenedorModulosAlmacen.getDesktopManager().maximizeFrame(pnLCanC);
+            pnLCanC.setVisible(true);
+            
+
+             }else{
+           contenedorModulosAlmacen.getDesktopManager().maximizeFrame(pnLCanC);
+            
+            
+
+        }   // TODO add your         // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonHover1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane contenedorModulosAlmacen;
@@ -125,5 +171,6 @@ pnlProductos pnlArticulos;
     private LIB.FSButtonMD fSButtonMD2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private rojerusan.RSButtonHover rSButtonHover1;
     // End of variables declaration//GEN-END:variables
 }

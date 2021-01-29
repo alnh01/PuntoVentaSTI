@@ -5,6 +5,7 @@
  */
 package principal;
 
+import Alerts.ErrorAlert;
 import Alerts.Information;
 import BD.login;
 import ds.desktop.notify.DesktopNotify;
@@ -14,6 +15,8 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.net.ServerSocket;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 import javax.swing.JOptionPane;
 
@@ -32,6 +35,8 @@ public class Session extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         txtusuario.requestFocus();
+        setIconImage(new ImageIcon(getClass().getResource("/img1/chip.png")).getImage());
+
 
     }
 
@@ -49,8 +54,8 @@ public class Session extends javax.swing.JFrame {
         fSButtonMD1 = new LIB.FSButtonMD();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtusuario = new jcmouse.materialdesign.TextInput();
         txtcontrasena = new LIB.FSPasswordFieldMD();
+        txtusuario = new rojeru_san.rsfield.RSTextMaterial();
         fSGradientPanel1 = new LIB.FSGradientPanel();
         jEImagePanel1 = new LIB.JEImagePanel();
         jLabel2 = new javax.swing.JLabel();
@@ -99,11 +104,6 @@ public class Session extends javax.swing.JFrame {
         });
         jPanelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 40));
 
-        txtusuario.setColorPrimary(new java.awt.Color(183, 193, 133));
-        txtusuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        txtusuario.setHint("Username");
-        jPanelRound1.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 230, -1));
-
         txtcontrasena.setForeground(new java.awt.Color(0, 0, 0));
         txtcontrasena.setBordeColorFocus(new java.awt.Color(183, 193, 133));
         txtcontrasena.setBordeColorNoFocus(new java.awt.Color(153, 153, 153));
@@ -124,7 +124,15 @@ public class Session extends javax.swing.JFrame {
                 txtcontrasenaKeyReleased(evt);
             }
         });
-        jPanelRound1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 220, -1));
+        jPanelRound1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 240, -1));
+
+        txtusuario.setForeground(new java.awt.Color(0, 0, 0));
+        txtusuario.setColorMaterial(new java.awt.Color(95, 204, 240));
+        txtusuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtusuario.setMayusculas(true);
+        txtusuario.setPlaceholder("Usuario");
+        txtusuario.setSelectionColor(new java.awt.Color(153, 255, 153));
+        jPanelRound1.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 240, -1));
 
         getContentPane().add(jPanelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 11, 300, 440));
 
@@ -229,10 +237,11 @@ public class Session extends javax.swing.JFrame {
         String Pass = txtcontrasena.getText();
 //        
             if(Usuario.equals("") || Pass.equals("") ){
-                Information info  = new Information(new Frame(), true);
-                info.jLabel1.setText("iformacion !!!");
-                info.textos.setText("Verifique los datos");
-                info.setVisible(true);
+               ErrorAlert e = new ErrorAlert(new JFrame(), true);
+                e.msj1.setText("HAY UN PLOBLEMA ");
+                e.msj2.setText("LOS CAMPOS NO PUEDEN ESTAR VACIOS");
+                e.msj3.setText("");
+                e.setVisible(true);
             }else{
                 BD.login lo = new BD.login();
                 lo.validar_ingreso(Usuario, Pass);
@@ -306,6 +315,6 @@ public class Session extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private LIB.JPanelRound jPanelRound1;
     private LIB.FSPasswordFieldMD txtcontrasena;
-    private jcmouse.materialdesign.TextInput txtusuario;
+    private rojeru_san.rsfield.RSTextMaterial txtusuario;
     // End of variables declaration//GEN-END:variables
 }

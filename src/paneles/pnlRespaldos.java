@@ -40,6 +40,7 @@ import modal.CargandoRestore;
 import necesario.RSFileChooser;
 import principal.Principal;
 import Alerts.Backup;
+import BD.Ingreso;
 import BD.LimpiarTablas;
 import BD.Producto;
 import java.nio.file.Files;
@@ -59,6 +60,7 @@ import principal.Session;
 public class pnlRespaldos extends javax.swing.JPanel {
 
    Producto product = new Producto();
+    Ingreso ing = new Ingreso();
        
        
     public pnlRespaldos() {
@@ -205,6 +207,10 @@ int ventanaYesNotCancel = JOptionPane.showConfirmDialog(null, "¿Quieres borrar 
     	   try {
             
             product.LimpiarTabla();
+            product.limpiarDetallesVenta();
+            product.limpiarVenta();
+            ing.LimpiarTabla();
+            ing.LimpiarTablaDetalle();
             
             JOptionPane.showMessageDialog(null, "Datos Borrados");
         } catch (SQLException ex) {

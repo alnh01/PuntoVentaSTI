@@ -26,7 +26,9 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import static paneles.pnlRespaldos.pr;
 import principal.Principal;
+import principal.Session;
 import rsbuttom.AWTUtilities;
 
 /**
@@ -113,6 +115,7 @@ public class CambiarUsuario extends javax.swing.JDialog {
         jLabel1.setText("Cambiar nombre de Usuario:");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 260, 50));
 
+        txtnuevouser.setMayusculas(true);
         txtnuevouser.setPlaceholder("Nuevo Nombre");
         jPanel2.add(txtnuevouser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
@@ -170,10 +173,15 @@ public class CambiarUsuario extends javax.swing.JDialog {
           }else{
               System.out.println("no esta vacion");
                  usr.cambiarusuario(usuario, idprin);
-            Success suc = new Success(new JFrame(),true );
+                      
+        Success suc = new Success(new JFrame(),true );
         suc.titulos.setText("!HECHO¡");
         suc.textos.setText("SE HAN GUARDADO LOS CAMBIOS");
         suc.setVisible(true);
+        this.dispose();  
+        pr.dispose();
+        new Session().setVisible(true);
+       
           }
        
       } catch (SQLException ex) {
@@ -183,6 +191,11 @@ public class CambiarUsuario extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnactualizarActionPerformed
 
+      public static Principal pr = null;
+
+    public static void ventana(Principal p) {
+        pr = p;
+    }
 
     
     
